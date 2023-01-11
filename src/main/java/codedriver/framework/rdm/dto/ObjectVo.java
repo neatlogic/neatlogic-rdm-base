@@ -1,14 +1,20 @@
 /*
- * Copyright(c) 2022 TechSure Co., Ltd. All Rights Reserved.
+ * Copyright(c) 2023 TechSure Co., Ltd. All Rights Reserved.
  * 本内容仅限于深圳市赞悦科技有限公司内部传阅，禁止外泄以及用于其他的商业项目。
  */
 
 package codedriver.framework.rdm.dto;
 
+import codedriver.framework.asynchronization.threadlocal.TenantContext;
 import codedriver.framework.common.constvalue.ApiParamType;
+import codedriver.framework.rdm.enums.ObjectType;
 import codedriver.framework.restful.annotation.EntityField;
+import codedriver.framework.util.SnowflakeUtil;
+import com.alibaba.fastjson.annotation.JSONField;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 issue包括需求、任务、测试计划、测试用例、缺陷等
@@ -20,17 +26,51 @@ public class ObjectVo {
     private Long projectId;
     @EntityField(name = "类型", type = ApiParamType.ENUM, member = ObjectVo.class)
     private String type;
-    @EntityField(name = "创建日期", type = ApiParamType.LONG)
-    private Date fcd;
-    @EntityField(name = "创建人", type = ApiParamType.STRING)
-    private String fcu;
-    @EntityField(name = "修改日期", type = ApiParamType.LONG)
-    private Date lcd;
-    @EntityField(name = "修改人", type = ApiParamType.STRING)
-    private String lcu;
+    @EntityField(name = "排序", type = ApiParamType.INTEGER)
+    private int sort;
+    @EntityField(name = "名称", type = ApiParamType.STRING)
+    private String name;
+    @EntityField(name = "属性列表", type = ApiParamType.JSONARRAY)
+    private List<ObjectAttrVo> attrList;
+
+    @JSONField(serialize = false)
+    public String getTableName() {
+        return TenantContext.get().getDataDbName() + ".`rdm_object_" + this.getId() + "`";
+    }
+
+    public void addObjectAttr(ObjectAttrVo objectAttrVo) {
+        if (this.attrList == null) {
+            this.attrList = new ArrayList<>();
+        }
+        if (!this.attrList.contains(objectAttrVo)) {
+            this.attrList.add(objectAttrVo);
+        }
+    }
 
     public Long getId() {
+        if (id == null) {
+            id = SnowflakeUtil.uniqueLong();
+        }
         return id;
+    }
+
+    public String getName() {
+        if (StringUtils.isBlank(name) && StringUtils.isNotBlank(type)) {
+            name = ObjectType.getLabel(type);
+        }
+        return name;
+    }
+
+    public List<ObjectAttrVo> getAttrList() {
+        return attrList;
+    }
+
+    public void setAttrList(List<ObjectAttrVo> attrList) {
+        this.attrList = attrList;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setId(Long id) {
@@ -53,35 +93,11 @@ public class ObjectVo {
         this.type = type;
     }
 
-    public Date getFcd() {
-        return fcd;
+    public int getSort() {
+        return sort;
     }
 
-    public void setFcd(Date fcd) {
-        this.fcd = fcd;
-    }
-
-    public String getFcu() {
-        return fcu;
-    }
-
-    public void setFcu(String fcu) {
-        this.fcu = fcu;
-    }
-
-    public Date getLcd() {
-        return lcd;
-    }
-
-    public void setLcd(Date lcd) {
-        this.lcd = lcd;
-    }
-
-    public String getLcu() {
-        return lcu;
-    }
-
-    public void setLcu(String lcu) {
-        this.lcu = lcu;
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 }
