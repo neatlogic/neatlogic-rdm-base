@@ -7,9 +7,11 @@ package codedriver.framework.rdm.dto;
 
 import codedriver.framework.common.constvalue.ApiParamType;
 import codedriver.framework.common.dto.BaseEditorVo;
+import codedriver.framework.rdm.enums.ProjectUserType;
 import codedriver.framework.restful.annotation.EntityField;
 import codedriver.framework.util.SnowflakeUtil;
 import com.alibaba.fastjson.annotation.JSONField;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +48,10 @@ public class ProjectVo extends BaseEditorVo {
     private List<String> startDateRange;
     @JSONField(serialize = false)
     private List<String> endDateRange;
+    @EntityField(name = "项目成员用户id列表", type = ApiParamType.JSONARRAY)
+    private List<String> memberIdList;
+    @EntityField(name = "项目负责人id列表", type = ApiParamType.JSONARRAY)
+    private List<String> leaderIdList;
 
 
     public Long getId() {
@@ -57,6 +63,35 @@ public class ProjectVo extends BaseEditorVo {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<String> getMemberIdList() {
+        if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(memberIdList)) {
+            memberIdList = new ArrayList<>();
+            for (ProjectUserVo userVo : userList) {
+                if (userVo.getUserType().equals(ProjectUserType.MEMBER.getValue())) {
+                    memberIdList.add("user#" + userVo.getUserId());
+                }
+            }
+        }
+        return memberIdList;
+    }
+
+    public List<String> getLeaderIdList() {
+        if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(leaderIdList)) {
+            leaderIdList = new ArrayList<>();
+            for (ProjectUserVo userVo : userList) {
+                if (userVo.getUserType().equals(ProjectUserType.LEADER.getValue())) {
+                    leaderIdList.add("user#" + userVo.getUserId());
+                }
+            }
+        }
+        return leaderIdList;
+    }
+
+
+    public void setMemberIdList(List<String> memberIdList) {
+        this.memberIdList = memberIdList;
     }
 
     public String getType() {

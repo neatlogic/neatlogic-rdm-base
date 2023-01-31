@@ -16,6 +16,8 @@ public class ProjectUserVo {
     private String userName;
     @EntityField(name = "用户类型", type = ApiParamType.ENUM, member = ProjectUserType.class)
     private String userType;
+    @EntityField(name = "项目id", type = ApiParamType.LONG)
+    private Long projectId;
 
     public String getUserId() {
         return userId;
@@ -39,5 +41,13 @@ public class ProjectUserVo {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 }
