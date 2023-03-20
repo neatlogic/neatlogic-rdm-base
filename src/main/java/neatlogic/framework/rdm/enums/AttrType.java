@@ -18,23 +18,24 @@ package neatlogic.framework.rdm.enums;
 
 import neatlogic.framework.common.constvalue.IEnum;
 import com.alibaba.fastjson.JSONObject;
+import neatlogic.framework.util.I18nUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public enum AttrType implements IEnum<JSONObject> {
-    TEXT("text", "文本", 1),
-    TEXTAREA("textarea", "文本框", 1),
-    SELECT("select", "下拉选择", 1),
-    DATE("date", "日期", 1),
-    DATETIME("datetime", "日期时间", 1),
-    TIME("time", "时间", 1),
-    DATETIMERANGE("datetimerange", "日期范围", 1),
-    FILE("file", "附件", 1),
-    STATUS("status", "状态", 0),
-    PRIORITY("priority", "优先级", 0),
-    USER("user", "用户", 1),
-    TAG("tag", "标签", 0);
+    TEXT("text", "enum.rdm.attrtype.text", 1),
+    TEXTAREA("textarea", "enum.rdm.attrtype.textarea", 1),
+    SELECT("select", "enum.rdm.attrtype.select", 1),
+    DATE("date", "enum.rdm.attrtype.date", 1),
+    DATETIME("datetime", "enum.rdm.attrtype.datetime", 1),
+    TIME("time", "enum.rdm.attrtype.time", 1),
+    DATETIMERANGE("datetimerange", "enum.rdm.attrtype.datetimerange", 1),
+    FILE("file", "enum.rdm.attrtype.file", 1),
+    STATUS("status", "enum.rdm.attrtype.status", 0),
+    PRIORITY("priority", "enum.rdm.attrtype.priority", 0),
+    USER("user", "enum.rdm.attrtype.user", 1),
+    TAG("tag", "enum.rdm.attrtype.tag", 0);
 
     private final String name;
     private final String label;
@@ -56,7 +57,7 @@ public enum AttrType implements IEnum<JSONObject> {
     }
 
     public String getLabel() {
-        return label;
+        return I18nUtils.getMessage(label);
     }
 
 
