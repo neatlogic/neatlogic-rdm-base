@@ -16,8 +16,11 @@
 
 package neatlogic.framework.rdm.enums;
 
+import neatlogic.framework.util.I18nUtils;
+
 public enum ProjectUserType {
-    MEMBER("member", "项目成员"), LEADER("leader", "项目负责人");
+    MEMBER("member", "enum.rdm.projectusertype.member"),
+    LEADER("leader", "enum.rdm.projectusertype.leader");
 
     private final String value;
     private final String text;
@@ -32,7 +35,7 @@ public enum ProjectUserType {
     }
 
     public String getText() {
-        return text;
+        return I18nUtils.getMessage(text);
     }
 
 
