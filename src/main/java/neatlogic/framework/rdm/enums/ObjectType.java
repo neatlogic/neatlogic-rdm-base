@@ -16,26 +16,26 @@
 
 package neatlogic.framework.rdm.enums;
 
-import neatlogic.framework.common.constvalue.IEnum;
 import com.alibaba.fastjson.JSONObject;
-import neatlogic.framework.util.I18nUtils;
+import neatlogic.framework.common.constvalue.IEnum;
+import neatlogic.framework.util.I18n;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public enum ObjectType implements IEnum<JSONObject> {
-    REQUEST("request", "enum.rdm.objecttype.request", new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    TASK("task", "enum.rdm.objecttype.task", new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    BUG("bug", "enum.rdm.objecttype.bug", new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    TESTPLAN("testplan", "enum.rdm.objecttype.testplan", new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    TESTCASE("testcase", "enum.rdm.objecttype.testcase", new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.CREATE_USER, PrivateAttr.WORKER});
+    REQUEST("request", new I18n("enum.rdm.objecttype.request"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
+    TASK("task", new I18n("enum.rdm.objecttype.task"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
+    BUG("bug", new I18n("enum.rdm.objecttype.bug"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
+    TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
+    TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.CREATE_USER, PrivateAttr.WORKER});
 
     private final String name;
-    private final String label;
+    private final I18n label;
 
     private final PrivateAttr[] attrList;
 
-    ObjectType(String _value, String _text, PrivateAttr[] _attrList) {
+    ObjectType(String _value, I18n _text, PrivateAttr[] _attrList) {
         this.name = _value;
         this.label = _text;
         this.attrList = _attrList;
@@ -46,7 +46,7 @@ public enum ObjectType implements IEnum<JSONObject> {
     }
 
     public String getLabel() {
-        return I18nUtils.getMessage(label);
+        return label.toString();
     }
 
     public PrivateAttr[] getAttrList() {

@@ -16,33 +16,35 @@
 
 package neatlogic.framework.rdm.enums;
 
-import neatlogic.framework.common.constvalue.IEnum;
 import com.alibaba.fastjson.JSONObject;
-import neatlogic.framework.util.I18nUtils;
+import neatlogic.framework.common.constvalue.IEnum;
+import neatlogic.framework.util.I18n;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public enum AttrType implements IEnum<JSONObject> {
-    TEXT("text", "enum.rdm.attrtype.text", 1),
-    TEXTAREA("textarea", "enum.rdm.attrtype.textarea", 1),
-    SELECT("select", "enum.rdm.attrtype.select", 1),
-    DATE("date", "enum.rdm.attrtype.date", 1),
-    DATETIME("datetime", "enum.rdm.attrtype.datetime", 1),
-    TIME("time", "enum.rdm.attrtype.time", 1),
-    DATETIMERANGE("datetimerange", "enum.rdm.attrtype.datetimerange", 1),
-    FILE("file", "enum.rdm.attrtype.file", 1),
-    STATUS("status", "enum.rdm.attrtype.status", 0),
-    PRIORITY("priority", "enum.rdm.attrtype.priority", 0),
-    USER("user", "enum.rdm.attrtype.user", 1),
-    TAG("tag", "enum.rdm.attrtype.tag", 0);
+    TEXT("text", new I18n("enum.rdm.attrtype.text"), 1),
+    TEXTAREA("textarea", new I18n("enum.rdm.attrtype.textarea"), 1),
+    SELECT("select", new I18n("enum.rdm.attrtype.select"), 1),
+    DATE("date", new I18n("enum.rdm.attrtype.date"), 1),
+    DATETIME("datetime", new I18n("enum.rdm.attrtype.datetime"), 1),
+    TIME("time", new I18n("enum.rdm.attrtype.time"), 1),
+    //DATETIMERANGE("datetimerange", new I18n("enum.rdm.attrtype.datetimerange"), 1),
+    FILE("file", new I18n("enum.rdm.attrtype.file"), 1),
+    STATUS("status", new I18n("enum.rdm.attrtype.status"), 0),
+    PRIORITY("priority", new I18n("enum.rdm.attrtype.priority"), 0),
+    USER("user", new I18n("enum.rdm.attrtype.user"), 1),
+    TAG("tag", new I18n("enum.rdm.attrtype.tag"), 0);
 
     private final String name;
-    private final String label;
+    //private final String label;
+
+    private final I18n label;
 
     private final Integer allowCustom;
 
-    AttrType(String _value, String _text, Integer _allowCustom) {
+    AttrType(String _value, I18n _text, Integer _allowCustom) {
         this.name = _value;
         this.label = _text;
         this.allowCustom = _allowCustom;
@@ -57,7 +59,7 @@ public enum AttrType implements IEnum<JSONObject> {
     }
 
     public String getLabel() {
-        return I18nUtils.getMessage(label);
+        return label.toString();
     }
 
 
