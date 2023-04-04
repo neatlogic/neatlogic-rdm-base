@@ -21,6 +21,6 @@ import neatlogic.framework.exception.core.ApiRuntimeException;
 public class ObjectAttrNameIsExistsException extends ApiRuntimeException {
 
     public ObjectAttrNameIsExistsException(String name) {
-        super("属性“" + name + "”已存在，请修改唯一标识");
+        super("exception.rdm.objectattrnameisexistsexception", name);
     }
 }

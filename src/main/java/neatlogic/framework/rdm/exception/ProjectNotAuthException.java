@@ -21,6 +21,6 @@ import neatlogic.framework.exception.core.ApiRuntimeException;
 public class ProjectNotAuthException extends ApiRuntimeException {
 
     public ProjectNotAuthException(String projectName) {
-        super("您没有修改项目“" + projectName + "”的权限");
+        super("exception.rdm.projectnotauthexception", projectName);
     }
 }

@@ -21,6 +21,6 @@ import neatlogic.framework.exception.core.ApiRuntimeException;
 public class ObjectAttrNotFoundException extends ApiRuntimeException {
 
     public ObjectAttrNotFoundException(Long id) {
-        super("属性“" + id + "”不存在");
+        super("exception.rdm.objectattrnotfoundexception", id);
     }
 }

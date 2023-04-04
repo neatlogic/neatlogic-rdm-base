@@ -20,7 +20,7 @@ import neatlogic.framework.exception.core.ApiRuntimeException;
 
 public class CreateObjectSchemaException extends ApiRuntimeException {
     public CreateObjectSchemaException(String name) {
-        super("创建对象“" + name + "”数据表失败");
+        super("exception.rdm.createobjectschemaexception", name);
     }
 
 }

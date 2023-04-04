@@ -22,6 +22,6 @@ import neatlogic.framework.rdm.dto.ObjectAttrVo;
 public class ObjectAttrDeleteException extends ApiRuntimeException {
 
     public ObjectAttrDeleteException(ObjectAttrVo objectAttrVo) {
-        super("属性“" + objectAttrVo.getLabel() + "”是系统属性，不能删除");
+        super("exception.rdm.objectattrdeleteexception", objectAttrVo.getLabel());
     }
 }
