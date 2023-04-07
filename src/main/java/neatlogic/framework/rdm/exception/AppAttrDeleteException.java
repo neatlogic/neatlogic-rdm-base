@@ -22,6 +22,6 @@ import neatlogic.framework.rdm.dto.AppAttrVo;
 public class AppAttrDeleteException extends ApiRuntimeException {
 
     public AppAttrDeleteException(AppAttrVo objectAttrVo) {
-        super("exception.rdm.objectattrdeleteexception", objectAttrVo.getLabel());
+        super("exception.rdm.appattrdeleteexception", objectAttrVo.getLabel());
     }
 }
