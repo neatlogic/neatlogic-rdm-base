@@ -23,19 +23,19 @@ import neatlogic.framework.util.I18n;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum ObjectType implements IEnum<JSONObject> {
-    REQUEST("request", new I18n("enum.rdm.objecttype.request"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    TASK("task", new I18n("enum.rdm.objecttype.task"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    BUG("bug", new I18n("enum.rdm.objecttype.bug"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.STATUS, PrivateAttr.TAG, PrivateAttr.CREATE_USER, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), new PrivateAttr[]{PrivateAttr.NAME, PrivateAttr.CREATE_USER, PrivateAttr.WORKER});
+public enum AppType implements IEnum<JSONObject> {
+    REQUEST("request", new I18n("enum.rdm.objecttype.request"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),
+    TASK("task", new I18n("enum.rdm.objecttype.task"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),
+    BUG("bug", new I18n("enum.rdm.objecttype.bug"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY,}),
+    TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),
+    TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), new PrivateAttr[]{});
 
     private final String name;
     private final I18n label;
 
     private final PrivateAttr[] attrList;
 
-    ObjectType(String _value, I18n _text, PrivateAttr[] _attrList) {
+    AppType(String _value, I18n _text, PrivateAttr[] _attrList) {
         this.name = _value;
         this.label = _text;
         this.attrList = _attrList;
@@ -54,7 +54,7 @@ public enum ObjectType implements IEnum<JSONObject> {
     }
 
     public static PrivateAttr[] getAttrList(String name) {
-        for (ObjectType s : ObjectType.values()) {
+        for (AppType s : AppType.values()) {
             if (s.getName().equals(name)) {
                 return s.getAttrList();
             }
@@ -63,7 +63,7 @@ public enum ObjectType implements IEnum<JSONObject> {
     }
 
     public static String getLabel(String name) {
-        for (ObjectType s : ObjectType.values()) {
+        for (AppType s : AppType.values()) {
             if (s.getName().equals(name)) {
                 return s.getLabel();
             }
@@ -74,7 +74,7 @@ public enum ObjectType implements IEnum<JSONObject> {
     @Override
     public List<JSONObject> getValueTextList() {
         List<JSONObject> array = new ArrayList<>();
-        for (ObjectType objectType : ObjectType.values()) {
+        for (AppType objectType : AppType.values()) {
             array.add(new JSONObject() {
                 {
                     this.put("value", objectType.getName());

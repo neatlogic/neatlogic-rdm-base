@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package neatlogic.framework.rdm.dto;
+package neatlogic.framework.rdm.exception;
 
-public class ObjectTypeVo {
-    private String name;
-    private String label;
+import neatlogic.framework.exception.core.ApiRuntimeException;
 
+public class AppAttrNameIsExistsException extends ApiRuntimeException {
+
+    public AppAttrNameIsExistsException(String name) {
+        super("exception.rdm.appattrnameisexistsexception", name);
+    }
 }

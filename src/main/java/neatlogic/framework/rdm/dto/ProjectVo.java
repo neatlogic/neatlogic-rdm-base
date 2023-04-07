@@ -51,8 +51,8 @@ public class ProjectVo extends BaseEditorVo {
     private Integer progress;
     @EntityField(name = "用户列表", type = ApiParamType.JSONARRAY)
     private List<ProjectUserVo> userList;
-    @EntityField(name = "对象列表", type = ApiParamType.JSONARRAY)
-    private List<ObjectVo> objectList;
+    @EntityField(name = "应用列表", type = ApiParamType.JSONARRAY)
+    private List<AppVo> appList;
     @EntityField(name = "开始日期-结束日期", type = ApiParamType.JSONARRAY)
     private List<String> dateRange;
     @JSONField(serialize = false)
@@ -113,12 +113,12 @@ public class ProjectVo extends BaseEditorVo {
         this.type = type;
     }
 
-    public List<ObjectVo> getObjectList() {
-        return objectList;
+    public List<AppVo> getAppList() {
+        return appList;
     }
 
-    public void setObjectList(List<ObjectVo> objectList) {
-        this.objectList = objectList;
+    public void setAppList(List<AppVo> appList) {
+        this.appList = appList;
     }
 
     public List<String> getDateRange() {

@@ -17,11 +17,11 @@
 package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
-import neatlogic.framework.rdm.enums.ObjectType;
+import neatlogic.framework.rdm.enums.AppType;
 import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.lang3.StringUtils;
 
-public class ProjectTemplateObjectTypeVo {
+public class ProjectTemplateAppTypeVo {
     @EntityField(name = "名称", type = ApiParamType.STRING)
     private String label;
     @EntityField(name = "唯一标识", type = ApiParamType.STRING)
@@ -31,7 +31,7 @@ public class ProjectTemplateObjectTypeVo {
 
     public String getLabel() {
         if (StringUtils.isBlank(label) && StringUtils.isNotBlank(name)) {
-            label = ObjectType.getLabel(name);
+            label = AppType.getLabel(name);
         }
         return label;
     }

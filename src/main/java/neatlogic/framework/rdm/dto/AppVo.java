@@ -18,7 +18,7 @@ package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
-import neatlogic.framework.rdm.enums.ObjectType;
+import neatlogic.framework.rdm.enums.AppType;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import com.alibaba.fastjson.annotation.JSONField;
@@ -30,31 +30,31 @@ import java.util.List;
 /*
 issue包括需求、任务、测试计划、测试用例、缺陷等
  */
-public class ObjectVo {
+public class AppVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
     @EntityField(name = "项目id", type = ApiParamType.LONG)
     private Long projectId;
-    @EntityField(name = "类型", type = ApiParamType.ENUM, member = ObjectVo.class)
+    @EntityField(name = "类型", type = ApiParamType.ENUM, member = AppVo.class)
     private String type;
     @EntityField(name = "排序", type = ApiParamType.INTEGER)
     private int sort;
     @EntityField(name = "名称", type = ApiParamType.STRING)
     private String name;
     @EntityField(name = "属性列表", type = ApiParamType.JSONARRAY)
-    private List<ObjectAttrVo> attrList;
+    private List<AppAttrVo> attrList;
 
     @JSONField(serialize = false)
     public String getTableName() {
         return TenantContext.get().getDataDbName() + ".`rdm_object_" + this.getId() + "`";
     }
 
-    public void addObjectAttr(ObjectAttrVo objectAttrVo) {
+    public void addAppAttr(AppAttrVo appAttrVo) {
         if (this.attrList == null) {
             this.attrList = new ArrayList<>();
         }
-        if (!this.attrList.contains(objectAttrVo)) {
-            this.attrList.add(objectAttrVo);
+        if (!this.attrList.contains(appAttrVo)) {
+            this.attrList.add(appAttrVo);
         }
     }
 
@@ -67,16 +67,16 @@ public class ObjectVo {
 
     public String getName() {
         if (StringUtils.isBlank(name) && StringUtils.isNotBlank(type)) {
-            name = ObjectType.getLabel(type);
+            name = AppType.getLabel(type);
         }
         return name;
     }
 
-    public List<ObjectAttrVo> getAttrList() {
+    public List<AppAttrVo> getAttrList() {
         return attrList;
     }
 
-    public void setAttrList(List<ObjectAttrVo> attrList) {
+    public void setAttrList(List<AppAttrVo> attrList) {
         this.attrList = attrList;
     }
 

@@ -17,11 +17,11 @@
 package neatlogic.framework.rdm.exception;
 
 import neatlogic.framework.exception.core.ApiRuntimeException;
-import neatlogic.framework.rdm.dto.ObjectAttrVo;
+import neatlogic.framework.rdm.dto.AppAttrVo;
 
-public class ObjectAttrDeleteException extends ApiRuntimeException {
+public class AppAttrDeleteException extends ApiRuntimeException {
 
-    public ObjectAttrDeleteException(ObjectAttrVo objectAttrVo) {
+    public AppAttrDeleteException(AppAttrVo objectAttrVo) {
         super("exception.rdm.objectattrdeleteexception", objectAttrVo.getLabel());
     }
 }
