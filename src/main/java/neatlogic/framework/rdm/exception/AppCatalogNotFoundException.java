@@ -18,9 +18,9 @@ package neatlogic.framework.rdm.exception;
 
 import neatlogic.framework.exception.core.ApiRuntimeException;
 
-public class ObjectAttrNameIsExistsException extends ApiRuntimeException {
+public class AppCatalogNotFoundException extends ApiRuntimeException {
 
-    public ObjectAttrNameIsExistsException(String name) {
-        super("属性“" + name + "”已存在，请修改唯一标识");
+    public AppCatalogNotFoundException(Long id) {
+        super("目录“" + id + "”不存在");
     }
 }

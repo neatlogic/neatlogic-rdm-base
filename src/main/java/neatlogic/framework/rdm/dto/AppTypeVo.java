@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package neatlogic.framework.rdm.exception;
+package neatlogic.framework.rdm.dto;
 
-import neatlogic.framework.exception.core.ApiRuntimeException;
+public class AppTypeVo {
+    private String name;
+    private String label;
 
-public class ObjectAttrNotFoundException extends ApiRuntimeException {
-
-    public ObjectAttrNotFoundException(Long id) {
-        super("属性“" + id + "”不存在");
-    }
 }

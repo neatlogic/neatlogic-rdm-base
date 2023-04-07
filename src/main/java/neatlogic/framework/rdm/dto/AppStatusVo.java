@@ -18,12 +18,13 @@ package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.SnowflakeUtil;
 
-public class ObjectStatusVo {
+public class AppStatusVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "对象id", type = ApiParamType.LONG)
-    private Long objectId;
+    @EntityField(name = "应用id", type = ApiParamType.LONG)
+    private Long appId;
     @EntityField(name = "唯一标识", type = ApiParamType.STRING)
     private String name;
     @EntityField(name = "名称", type = ApiParamType.STRING)
@@ -40,6 +41,9 @@ public class ObjectStatusVo {
     private String description;
 
     public Long getId() {
+        if (id == null) {
+            id = SnowflakeUtil.uniqueLong();
+        }
         return id;
     }
 
@@ -47,12 +51,12 @@ public class ObjectStatusVo {
         this.id = id;
     }
 
-    public Long getObjectId() {
-        return objectId;
+    public Long getAppId() {
+        return appId;
     }
 
-    public void setObjectId(Long objectId) {
-        this.objectId = objectId;
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 
     public String getName() {

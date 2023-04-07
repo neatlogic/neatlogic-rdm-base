@@ -28,8 +28,8 @@ public class ProjectTemplateVo {
     private String name;
     @EntityField(name = "是否激活", type = ApiParamType.INTEGER)
     private Integer isActive;
-    @EntityField(name = "对象类型列表", type = ApiParamType.JSONARRAY)
-    private List<ProjectTemplateObjectTypeVo> objectTypeList;
+    @EntityField(name = "应用类型列表", type = ApiParamType.JSONARRAY)
+    private List<ProjectTemplateAppTypeVo> appTypeList;
 
     public Long getId() {
         return id;
@@ -55,11 +55,11 @@ public class ProjectTemplateVo {
         this.isActive = isActive;
     }
 
-    public List<ProjectTemplateObjectTypeVo> getObjectTypeList() {
-        return objectTypeList;
+    public List<ProjectTemplateAppTypeVo> getAppTypeList() {
+        return appTypeList;
     }
 
-    public void setObjectTypeList(List<ProjectTemplateObjectTypeVo> objectTypeList) {
-        this.objectTypeList = objectTypeList;
+    public void setAppTypeList(List<ProjectTemplateAppTypeVo> appTypeList) {
+        this.appTypeList = appTypeList;
     }
 }

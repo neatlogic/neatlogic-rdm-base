@@ -28,11 +28,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
-public class ObjectAttrVo {
+public class AppAttrVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "对象id", type = ApiParamType.LONG)
-    private Long objectId;
+    @EntityField(name = "应用id", type = ApiParamType.LONG)
+    private Long appId;
     @EntityField(name = "类型", type = ApiParamType.STRING)
     private String type;
     @EntityField(name = "类型名称", type = ApiParamType.STRING)
@@ -58,14 +58,14 @@ public class ObjectAttrVo {
 
     @JSONField(serialize = false)
     public String getProjectTableName() {
-        return TenantContext.get().getDataDbName() + ".`rdm_object_" + this.getObjectId() + "`";
+        return TenantContext.get().getDataDbName() + ".`rdm_object_" + this.getAppId() + "`";
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ObjectAttrVo that = (ObjectAttrVo) o;
+        AppAttrVo that = (AppAttrVo) o;
         return getId().equals(that.getId());
     }
 
@@ -85,12 +85,12 @@ public class ObjectAttrVo {
         this.id = id;
     }
 
-    public Long getObjectId() {
-        return objectId;
+    public Long getAppId() {
+        return appId;
     }
 
-    public void setObjectId(Long objectId) {
-        this.objectId = objectId;
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 
     public String getType() {

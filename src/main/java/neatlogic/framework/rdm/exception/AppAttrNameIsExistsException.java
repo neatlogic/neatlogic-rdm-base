@@ -17,11 +17,10 @@
 package neatlogic.framework.rdm.exception;
 
 import neatlogic.framework.exception.core.ApiRuntimeException;
-import neatlogic.framework.rdm.dto.ObjectAttrVo;
 
-public class ObjectAttrDeleteException extends ApiRuntimeException {
+public class AppAttrNameIsExistsException extends ApiRuntimeException {
 
-    public ObjectAttrDeleteException(ObjectAttrVo objectAttrVo) {
-        super("属性“" + objectAttrVo.getLabel() + "”是系统属性，不能删除");
+    public AppAttrNameIsExistsException(String name) {
+        super("属性“" + name + "”已存在，请修改唯一标识");
     }
 }

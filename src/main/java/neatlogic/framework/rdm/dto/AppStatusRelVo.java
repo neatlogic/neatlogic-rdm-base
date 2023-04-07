@@ -20,15 +20,15 @@ import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 
-public class ObjectStatusRelVo {
+public class AppStatusRelVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
     @EntityField(name = "上一状态id", type = ApiParamType.LONG)
     private Long fromStatusId;
     @EntityField(name = "下一状态id", type = ApiParamType.LONG)
     private Long toStatusId;
-    @EntityField(name = "项目id", type = ApiParamType.LONG)
-    private Long objectId;
+    @EntityField(name = "应用id", type = ApiParamType.LONG)
+    private Long appId;
 
     public Long getId() {
         if (id == null) {
@@ -57,11 +57,11 @@ public class ObjectStatusRelVo {
         this.toStatusId = toStatusId;
     }
 
-    public Long getObjectId() {
-        return objectId;
+    public Long getAppId() {
+        return appId;
     }
 
-    public void setObjectId(Long objectId) {
-        this.objectId = objectId;
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 }

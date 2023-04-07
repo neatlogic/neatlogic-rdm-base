@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package neatlogic.framework.rdm.dto;
+package neatlogic.framework.rdm.exception;
 
-public class ObjectTypeVo {
-    private String name;
-    private String label;
+import neatlogic.framework.exception.core.ApiRuntimeException;
+import neatlogic.framework.rdm.dto.AppAttrVo;
 
+public class AppAttrDeleteException extends ApiRuntimeException {
+
+    public AppAttrDeleteException(AppAttrVo objectAttrVo) {
+        super("属性“" + objectAttrVo.getLabel() + "”是系统属性，不能删除");
+    }
 }
