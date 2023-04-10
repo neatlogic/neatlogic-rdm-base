@@ -20,14 +20,21 @@ import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.SnowflakeUtil;
 
 import java.util.List;
 
 public class IssueVo extends BasePageVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "对象id", type = ApiParamType.LONG)
-    private Long objectId;
+    @EntityField(name = "名称", type = ApiParamType.STRING)
+    private String name;
+    @EntityField(name = "目录id", type = ApiParamType.LONG)
+    private Long catalogId;
+    @EntityField(name = "目录名称", type = ApiParamType.STRING)
+    private String catalogName;
+    @EntityField(name = "应用id", type = ApiParamType.LONG)
+    private Long appId;
     @EntityField(name = "项目id", type = ApiParamType.LONG)
     private Long projectId;
     @EntityField(name = "创建者", type = ApiParamType.STRING)
@@ -42,6 +49,10 @@ public class IssueVo extends BasePageVo {
     private Long status;
     @EntityField(name = "状态名称", type = ApiParamType.STRING)
     private String statusName;
+    @EntityField(name = "内容", type = ApiParamType.STRING)
+    private String content;
+    @JSONField(serialize = false)
+    private Long contentId;
 
     @JSONField(serialize = false)
     private List<String> startTimeRange;
@@ -50,6 +61,9 @@ public class IssueVo extends BasePageVo {
 
 
     public Long getId() {
+        if (id == null) {
+            id = SnowflakeUtil.uniqueLong();
+        }
         return id;
     }
 
@@ -57,12 +71,36 @@ public class IssueVo extends BasePageVo {
         this.id = id;
     }
 
-    public Long getObjectId() {
-        return objectId;
+    public String getName() {
+        return name;
     }
 
-    public void setObjectId(Long objectId) {
-        this.objectId = objectId;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getCatalogId() {
+        return catalogId;
+    }
+
+    public void setCatalogId(Long catalogId) {
+        this.catalogId = catalogId;
+    }
+
+    public String getCatalogName() {
+        return catalogName;
+    }
+
+    public void setCatalogName(String catalogName) {
+        this.catalogName = catalogName;
+    }
+
+    public Long getAppId() {
+        return appId;
+    }
+
+    public void setAppId(Long appId) {
+        this.appId = appId;
     }
 
     public Long getProjectId() {
@@ -119,5 +157,21 @@ public class IssueVo extends BasePageVo {
 
     public void setStatusName(String statusName) {
         this.statusName = statusName;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Long getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
     }
 }
