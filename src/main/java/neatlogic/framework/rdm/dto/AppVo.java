@@ -46,7 +46,7 @@ public class AppVo {
 
     @JSONField(serialize = false)
     public String getTableName() {
-        return TenantContext.get().getDataDbName() + ".`rdm_object_" + this.getId() + "`";
+        return TenantContext.get().getDataDbName() + ".`rdm_app_" + this.getId() + "`";
     }
 
     public void addAppAttr(AppAttrVo appAttrVo) {

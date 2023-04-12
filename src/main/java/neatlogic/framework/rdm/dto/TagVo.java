@@ -19,6 +19,8 @@ package neatlogic.framework.rdm.dto;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.SnowflakeUtil;
+import org.apache.commons.lang3.StringUtils;
 
 public class TagVo extends BasePageVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
@@ -26,7 +28,20 @@ public class TagVo extends BasePageVo {
     @EntityField(name = "名称", type = ApiParamType.STRING)
     private String name;
 
+    public TagVo(String tag) {
+        if (StringUtils.isNotBlank(tag)) {
+            this.name = tag.trim();
+        }
+    }
+
+    public TagVo() {
+
+    }
+
     public Long getId() {
+        if (id == null) {
+            id = SnowflakeUtil.uniqueLong();
+        }
         return id;
     }
 

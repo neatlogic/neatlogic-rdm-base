@@ -16,13 +16,13 @@
 
 package neatlogic.framework.rdm.dto;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.rdm.enums.AttrType;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -57,8 +57,8 @@ public class AppAttrVo {
     private String configStr;
 
     @JSONField(serialize = false)
-    public String getProjectTableName() {
-        return TenantContext.get().getDataDbName() + ".`rdm_object_" + this.getAppId() + "`";
+    public String getTableName() {
+        return TenantContext.get().getDataDbName() + ".`rdm_app_" + this.getAppId() + "`";
     }
 
     @Override
@@ -123,6 +123,7 @@ public class AppAttrVo {
         }
         return typeText;
     }
+
 
     public void setTypeText(String typeText) {
         this.typeText = typeText;

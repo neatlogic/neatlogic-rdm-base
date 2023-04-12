@@ -24,34 +24,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AttrType implements IEnum<JSONObject> {
-    TEXT("text", new I18n("enum.rdm.attrtype.text"), 1),
-    TEXTAREA("textarea", new I18n("enum.rdm.attrtype.textarea"), 1),
-    SELECT("select", new I18n("enum.rdm.attrtype.select"), 1),
-    DATE("date", new I18n("enum.rdm.attrtype.date"), 1),
-    DATETIME("datetime", new I18n("enum.rdm.attrtype.datetime"), 1),
-    TIME("time", new I18n("enum.rdm.attrtype.time"), 1),
-    //DATETIMERANGE("datetimerange", new I18n("enum.rdm.attrtype.datetimerange"), 1),
-    FILE("file", new I18n("enum.rdm.attrtype.file"), 1),
-    STATUS("status", new I18n("enum.rdm.attrtype.status"), 0),
-    PRIORITY("priority", new I18n("enum.rdm.attrtype.priority"), 0),
-    USER("user", new I18n("enum.rdm.attrtype.user"), 1),
-    TAG("tag", new I18n("enum.rdm.attrtype.tag"), 0);
+    TEXT("text", new I18n("enum.rdm.attrtype.text"), false, false), TEXTAREA("textarea", new I18n("enum.rdm.attrtype.textarea"), false, false), SELECT("select", new I18n("enum.rdm.attrtype.select"), false, true), DATE("date", new I18n("enum.rdm.attrtype.date"), false, false), DATETIME("datetime", new I18n("enum.rdm.attrtype.datetime"), false, false), TIME("time", new I18n("enum.rdm.attrtype.time"), false, false), FILE("file", new I18n("enum.rdm.attrtype.file"), false, false), PRIORITY("priority", new I18n("enum.rdm.attrtype.priority"), true, false), TAG("tag", new I18n("enum.rdm.attrtype.tag"), true, false);
 
     private final String name;
     //private final String label;
 
     private final I18n label;
 
-    private final Integer allowCustom;
+    private final boolean isPrivate;
 
-    AttrType(String _value, I18n _text, Integer _allowCustom) {
+    private final boolean isArray;
+
+    AttrType(String _value, I18n _text, Boolean _isPrivate, Boolean _isArray) {
         this.name = _value;
         this.label = _text;
-        this.allowCustom = _allowCustom;
+        this.isPrivate = _isPrivate;
+        this.isArray = _isArray;
     }
 
-    public Integer getAllowCustom() {
-        return allowCustom;
+
+    public boolean isPrivate() {
+        return isPrivate;
     }
 
     public String getName() {
@@ -62,6 +55,9 @@ public enum AttrType implements IEnum<JSONObject> {
         return label.toString();
     }
 
+    public boolean isArray() {
+        return isArray;
+    }
 
     public static String getLabel(String name) {
         for (AttrType s : AttrType.values()) {
@@ -70,6 +66,15 @@ public enum AttrType implements IEnum<JSONObject> {
             }
         }
         return "";
+    }
+
+    public static boolean getIsArray(String name) {
+        for (AttrType s : AttrType.values()) {
+            if (s.getName().equals(name)) {
+                return s.isArray();
+            }
+        }
+        return false;
     }
 
     @Override
