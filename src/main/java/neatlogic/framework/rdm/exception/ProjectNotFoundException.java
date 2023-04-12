@@ -21,6 +21,6 @@ import neatlogic.framework.exception.core.ApiRuntimeException;
 public class ProjectNotFoundException extends ApiRuntimeException {
 
     public ProjectNotFoundException(Long projectId) {
-        super("项目“" + projectId + "”不存在");
+        super("exception.rdm.projectnotfoundexception", projectId);
     }
 }

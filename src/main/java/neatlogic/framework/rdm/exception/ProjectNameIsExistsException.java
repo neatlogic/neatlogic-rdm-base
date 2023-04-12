@@ -21,6 +21,6 @@ import neatlogic.framework.exception.core.ApiRuntimeException;
 public class ProjectNameIsExistsException extends ApiRuntimeException {
 
     public ProjectNameIsExistsException(String name) {
-        super("项目名称“" + name + "”已存在");
+        super("exception.rdm.projectnameisexistsexception", name);
     }
 }
