@@ -16,11 +16,12 @@
 
 package neatlogic.framework.rdm.dto;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
+import neatlogic.framework.common.constvalue.GroupSearch;
 import neatlogic.framework.common.dto.BasePageVo;
+import neatlogic.framework.dto.UserVo;
 import neatlogic.framework.fulltextindex.utils.FullTextIndexUtil;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
@@ -69,7 +70,7 @@ public class IssueVo extends BasePageVo {
     @EntityField(name = "用户id列表", type = ApiParamType.JSONARRAY)
     private List<String> userIdList;
     @EntityField(name = "用户信息列表", type = ApiParamType.JSONARRAY)
-    private JSONArray userList;
+    private List<UserVo> userList;
     @EntityField(name = "标签列表", type = ApiParamType.JSONARRAY)
     private List<String> tagList;
 
@@ -83,6 +84,12 @@ public class IssueVo extends BasePageVo {
     private List<String> endTimeRange;
 
     public List<String> getUserIdList() {
+        if (userIdList == null && userList != null) {
+            userIdList = new ArrayList<>();
+            for (UserVo userVo : userList) {
+                userIdList.add(GroupSearch.USER.getValuePlugin() + userVo.getUserId());
+            }
+        }
         return userIdList;
     }
 
@@ -171,11 +178,11 @@ public class IssueVo extends BasePageVo {
         this.userIdList = userIdList;
     }
 
-    public JSONArray getUserList() {
+    public List<UserVo> getUserList() {
         return userList;
     }
 
-    public void setUserList(JSONArray userList) {
+    public void setUserList(List<UserVo> userList) {
         this.userList = userList;
     }
 
