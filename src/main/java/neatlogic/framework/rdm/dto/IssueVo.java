@@ -63,8 +63,11 @@ public class IssueVo extends BasePageVo {
     private Long status;
     @EntityField(name = "状态颜色", type = ApiParamType.STRING)
     private String statusColor;
-    @EntityField(name = "状态名称", type = ApiParamType.STRING)
+    @EntityField(name = "状态唯一标识", type = ApiParamType.STRING)
     private String statusName;
+
+    @EntityField(name = "状态名称", type = ApiParamType.STRING)
+    private String statusLabel;
     @EntityField(name = "内容", type = ApiParamType.STRING)
     private String content;
     @EntityField(name = "用户id列表", type = ApiParamType.JSONARRAY)
@@ -76,12 +79,22 @@ public class IssueVo extends BasePageVo {
 
     @EntityField(name = "属性列表", type = ApiParamType.JSONARRAY)
     private List<IssueAttrVo> attrList;
+    @JSONField(serialize = false)//自定义属性搜索条件
+    private List<IssueAttrVo> attrFilterList;
     private HashMap<Long, ?> attrMap;
 
     @JSONField(serialize = false)
     private List<String> startTimeRange;
     @JSONField(serialize = false)
     private List<String> endTimeRange;
+
+    public List<IssueAttrVo> getAttrFilterList() {
+        return attrFilterList;
+    }
+
+    public void setAttrFilterList(List<IssueAttrVo> attrFilterList) {
+        this.attrFilterList = attrFilterList;
+    }
 
     public List<String> getUserIdList() {
         if (userIdList == null && userList != null) {
@@ -135,6 +148,14 @@ public class IssueVo extends BasePageVo {
         return idList;
     }
 
+    public String getStatusLabel() {
+        return statusLabel;
+    }
+
+    public void setStatusLabel(String statusLabel) {
+        this.statusLabel = statusLabel;
+    }
+
     public void setIdList(List<Long> idList) {
         this.idList = idList;
     }
@@ -157,6 +178,7 @@ public class IssueVo extends BasePageVo {
             attrList.add(attrVo);
         }
     }
+
 
     public List<IssueAttrVo> getAttrList() {
         return attrList;

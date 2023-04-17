@@ -33,6 +33,7 @@ public enum AppType implements IEnum<JSONObject> {
     private final String name;
     private final I18n label;
 
+
     private final PrivateAttr[] attrList;
 
     AppType(String _value, I18n _text, PrivateAttr[] _attrList) {

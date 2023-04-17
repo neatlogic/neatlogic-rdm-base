@@ -16,35 +16,28 @@
 
 package neatlogic.framework.rdm.enums;
 
-import neatlogic.framework.util.I18nUtils;
-
 public enum PrivateAttr {
-    PRIORITY("priority", "enum.rdm.privateattr.priority", 0, AttrType.PRIORITY),
-    TAG("tag", "enum.rdm.privateattr.tag", 0, AttrType.TAG);
+    PRIORITY(AttrType.PRIORITY),
+    TAG(AttrType.TAG);
 
-    private final String name;
-    private final String label;
     private final AttrType type;
 
-    private final Integer isRequired;
 
-    PrivateAttr(String _value, String _text, Integer _isRequired, AttrType _type) {
-        this.name = _value;
-        this.label = _text;
+    PrivateAttr(AttrType _type) {
+
         this.type = _type;
-        this.isRequired = _isRequired;
     }
 
     public String getName() {
-        return name;
+        return type.getName();
     }
 
     public String getLabel() {
-        return I18nUtils.getMessage(label);
+        return type.getLabel();
     }
 
     public String getType() {
-        return type.getName();
+        return type.getType();
     }
 
     public static String getType(String name) {

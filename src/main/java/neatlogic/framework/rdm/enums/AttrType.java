@@ -24,24 +24,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AttrType implements IEnum<JSONObject> {
-    TEXT("text", new I18n("enum.rdm.attrtype.text"), false, false), TEXTAREA("textarea", new I18n("enum.rdm.attrtype.textarea"), false, false), SELECT("select", new I18n("enum.rdm.attrtype.select"), false, true), DATE("date", new I18n("enum.rdm.attrtype.date"), false, false), DATETIME("datetime", new I18n("enum.rdm.attrtype.datetime"), false, false), TIME("time", new I18n("enum.rdm.attrtype.time"), false, false), FILE("file", new I18n("enum.rdm.attrtype.file"), false, false), PRIORITY("priority", new I18n("enum.rdm.attrtype.priority"), true, false), TAG("tag", new I18n("enum.rdm.attrtype.tag"), true, false);
+    TEXT("text", "text", new I18n("enum.rdm.attrtype.text"), false, false),
+    TEXTAREA("textarea", "textarea", new I18n("enum.rdm.attrtype.textarea"), false, false),
+    SELECT("select", "select", new I18n("enum.rdm.attrtype.select"), false, true),
+    DATE("date", "date", new I18n("enum.rdm.attrtype.date"), false, false),
+    DATETIME("datetime", "datetime", new I18n("enum.rdm.attrtype.datetime"), false, false),
+    TIME("time", "time", new I18n("enum.rdm.attrtype.time"), false, false),
+    FILE("file", "file", new I18n("enum.rdm.attrtype.file"), false, false),
+    PRIORITY("priority", "priority", new I18n("enum.rdm.attrtype.priority"), true, false),
+    TAG("tag", "tagList", new I18n("enum.rdm.attrtype.tag"), true, true);
 
     private final String name;
     //private final String label;
-
+    private final String type;
     private final I18n label;
 
     private final boolean isPrivate;
 
     private final boolean isArray;
 
-    AttrType(String _value, I18n _text, Boolean _isPrivate, Boolean _isArray) {
+    AttrType(String _type, String _value, I18n _text, Boolean _isPrivate, Boolean _isArray) {
+        this.type = _type;
         this.name = _value;
         this.label = _text;
         this.isPrivate = _isPrivate;
         this.isArray = _isArray;
     }
 
+    public String getType() {
+        return type;
+    }
 
     public boolean isPrivate() {
         return isPrivate;
