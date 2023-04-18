@@ -22,6 +22,7 @@ import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.constvalue.GroupSearch;
 import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.dto.UserVo;
+import neatlogic.framework.file.dto.FileVo;
 import neatlogic.framework.fulltextindex.utils.FullTextIndexUtil;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
@@ -82,6 +83,8 @@ public class IssueVo extends BasePageVo {
     @JSONField(serialize = false)//自定义属性搜索条件
     private List<IssueAttrVo> attrFilterList;
     private HashMap<Long, ?> attrMap;
+    @EntityField(name = "附件列表", type = ApiParamType.JSONARRAY)
+    private List<FileVo> fileList;
 
     @JSONField(serialize = false)
     private List<String> startTimeRange;
@@ -94,6 +97,14 @@ public class IssueVo extends BasePageVo {
 
     public void setAttrFilterList(List<IssueAttrVo> attrFilterList) {
         this.attrFilterList = attrFilterList;
+    }
+
+    public List<FileVo> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(List<FileVo> fileList) {
+        this.fileList = fileList;
     }
 
     public List<String> getUserIdList() {
