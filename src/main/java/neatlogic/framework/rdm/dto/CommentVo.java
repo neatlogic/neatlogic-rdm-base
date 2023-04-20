@@ -62,6 +62,7 @@ public class CommentVo extends BaseEditorVo {
         this.status = status;
     }
 
+
     public String getContent() {
         return content;
     }
