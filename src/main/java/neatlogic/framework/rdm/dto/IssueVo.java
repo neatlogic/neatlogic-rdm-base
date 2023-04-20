@@ -58,6 +58,8 @@ public class IssueVo extends BasePageVo {
     private Date createDate;
     @EntityField(name = "优先级", type = ApiParamType.LONG)
     private Long priority;
+    @EntityField(name = "评论数量", type = ApiParamType.INTEGER)
+    private int commentCount;
     @EntityField(name = "优先级名称", type = ApiParamType.STRING)
     private String priorityName;
     @EntityField(name = "状态", type = ApiParamType.LONG)
@@ -66,6 +68,8 @@ public class IssueVo extends BasePageVo {
     private String statusColor;
     @EntityField(name = "状态唯一标识", type = ApiParamType.STRING)
     private String statusName;
+    @EntityField(name = "评论", type = ApiParamType.STRING)
+    private String comment;
 
     @EntityField(name = "状态名称", type = ApiParamType.STRING)
     private String statusLabel;
@@ -101,6 +105,22 @@ public class IssueVo extends BasePageVo {
 
     public List<FileVo> getFileList() {
         return fileList;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public void setFileList(List<FileVo> fileList) {
