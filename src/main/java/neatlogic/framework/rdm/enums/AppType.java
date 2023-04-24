@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AppType implements IEnum<JSONObject> {
-    REQUEST("request", new I18n("enum.rdm.objecttype.request"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),
+    REQUEST("request", new I18n("enum.rdm.objecttype.request"), new PrivateAttr[]{PrivateAttr.CATALOG, PrivateAttr.WORKER, PrivateAttr.TAG, PrivateAttr.PRIORITY}),
     TASK("task", new I18n("enum.rdm.objecttype.task"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),
     BUG("bug", new I18n("enum.rdm.objecttype.bug"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY,}),
     TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),

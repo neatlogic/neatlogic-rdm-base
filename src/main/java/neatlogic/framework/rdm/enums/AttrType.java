@@ -32,7 +32,9 @@ public enum AttrType implements IEnum<JSONObject> {
     TIME("time", "time", new I18n("enum.rdm.attrtype.time"), false, false),
     FILE("file", "file", new I18n("enum.rdm.attrtype.file"), false, false),
     PRIORITY("priority", "priority", new I18n("enum.rdm.attrtype.priority"), true, false),
-    TAG("tag", "tagList", new I18n("enum.rdm.attrtype.tag"), true, true);
+    TAG("tag", "tagList", new I18n("enum.rdm.attrtype.tag"), true, true),
+    WORKER("worker", "userIdList", new I18n("enum.rdm.attrtype.worker"), true, true),
+    CATALOG("catalog", "catalog", new I18n("enum.rdm.attrtype.catalog"), true, false);
 
     private final String name;
     //private final String label;

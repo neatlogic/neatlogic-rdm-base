@@ -17,6 +17,8 @@
 package neatlogic.framework.rdm.enums;
 
 public enum PrivateAttr {
+    CATALOG(AttrType.CATALOG),
+    WORKER(AttrType.WORKER),
     PRIORITY(AttrType.PRIORITY),
     TAG(AttrType.TAG);
 

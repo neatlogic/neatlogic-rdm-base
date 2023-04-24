@@ -20,6 +20,8 @@ import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 
+import java.util.Objects;
+
 public class AppStatusVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
@@ -45,6 +47,19 @@ public class AppStatusVo {
             id = SnowflakeUtil.uniqueLong();
         }
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AppStatusVo that = (AppStatusVo) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public void setId(Long id) {
