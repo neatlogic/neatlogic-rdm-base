@@ -84,6 +84,8 @@ public class IssueVo extends BasePageVo {
 
     @EntityField(name = "属性列表", type = ApiParamType.JSONARRAY)
     private List<IssueAttrVo> attrList;
+    @JSONField(serialize = false)
+    private List<AppAttrVo> appAttrList;//搜索时生成字段
     @JSONField(serialize = false)//自定义属性搜索条件
     private List<IssueAttrVo> attrFilterList;
     private HashMap<Long, ?> attrMap;
@@ -115,9 +117,18 @@ public class IssueVo extends BasePageVo {
         this.commentCount = commentCount;
     }
 
+    public List<AppAttrVo> getAppAttrList() {
+        return appAttrList;
+    }
+
+    public void setAppAttrList(List<AppAttrVo> appAttrList) {
+        this.appAttrList = appAttrList;
+    }
+
     public String getComment() {
         return comment;
     }
+
 
     public void setComment(String comment) {
         this.comment = comment;
@@ -131,7 +142,7 @@ public class IssueVo extends BasePageVo {
         if (userIdList == null && userList != null) {
             userIdList = new ArrayList<>();
             for (UserVo userVo : userList) {
-                userIdList.add(GroupSearch.USER.getValuePlugin() + userVo.getUserId());
+                userIdList.add(GroupSearch.USER.getValuePlugin() + userVo.getUuid());
             }
         }
         return userIdList;
@@ -207,6 +218,15 @@ public class IssueVo extends BasePageVo {
         }
         if (!attrList.contains(attrVo)) {
             attrList.add(attrVo);
+        }
+    }
+
+    public void addAppAttr(AppAttrVo attrVo) {
+        if (this.appAttrList == null) {
+            this.appAttrList = new ArrayList<>();
+        }
+        if (!appAttrList.contains(attrVo)) {
+            appAttrList.add(attrVo);
         }
     }
 

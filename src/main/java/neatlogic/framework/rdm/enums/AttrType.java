@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AttrType implements IEnum<JSONObject> {
+    NUMBER("number", "number", new I18n("enum.rdm.attrtype.number"), false, false),
     TEXT("text", "text", new I18n("enum.rdm.attrtype.text"), false, false),
     TEXTAREA("textarea", "textarea", new I18n("enum.rdm.attrtype.textarea"), false, false),
     SELECT("select", "select", new I18n("enum.rdm.attrtype.select"), false, true),
@@ -45,9 +46,9 @@ public enum AttrType implements IEnum<JSONObject> {
 
     private final boolean isArray;
 
-    AttrType(String _type, String _value, I18n _text, Boolean _isPrivate, Boolean _isArray) {
+    AttrType(String _type, String _name, I18n _text, Boolean _isPrivate, Boolean _isArray) {
         this.type = _type;
-        this.name = _value;
+        this.name = _name;
         this.label = _text;
         this.isPrivate = _isPrivate;
         this.isArray = _isArray;

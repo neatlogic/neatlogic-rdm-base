@@ -20,10 +20,13 @@ import com.alibaba.fastjson.JSONArray;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.rdm.enums.AttrType;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.HtmlUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class IssueAttrVo {
     @EntityField(name = "属性id", type = ApiParamType.LONG)
@@ -36,16 +39,115 @@ public class IssueAttrVo {
     private JSONArray valueList;
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IssueAttrVo that = (IssueAttrVo) o;
-        return Objects.equals(attrId, that.attrId);
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (!(other instanceof IssueAttrVo)) {
+            return false;
+        }
+        final IssueAttrVo attr = (IssueAttrVo) other;
+        try {
+            if (getAttrId().equals(attr.getAttrId())) {
+                if (CollectionUtils.isNotEmpty(getValueList()) && CollectionUtils.isNotEmpty(attr.getValueList())) {
+                    if (this.getValueList().size() == attr.getValueList().size()) {
+                        for (int i = 0; i < this.getValueList().size(); i++) {
+                            boolean isExists = false;
+                            String v = this.getValueList().getString(i);
+                            for (int j = 0; j < attr.getValueList().size(); j++) {
+                                String v2 = attr.getValueList().getString(j);
+                                switch (this.getAttrType()) {
+                                    case "number":
+                                        try {
+                                            if (Double.parseDouble(v) == Double.parseDouble(v2)) {
+                                                isExists = true;
+                                                break;
+                                            }
+                                        } catch (Exception ignored) {
+
+                                        }
+                                        break;
+                                    case "date": {
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                        try {
+                                            if (sdf.parse(v).equals(sdf.parse(v2))) {
+                                                isExists = true;
+                                                break;
+                                            }
+                                        } catch (Exception ignored) {
+
+                                        }
+                                        break;
+                                    }
+                                    case "datetime": {
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                        try {
+                                            if (sdf.parse(v).equals(sdf.parse(v2))) {
+                                                isExists = true;
+                                                break;
+                                            }
+                                        } catch (Exception ignored) {
+
+                                        }
+                                        break;
+                                    }
+                                    case "time": {
+                                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                                        try {
+                                            if (sdf.parse(v).equals(sdf.parse(v2))) {
+                                                isExists = true;
+                                                break;
+                                            }
+                                        } catch (Exception ignored) {
+
+                                        }
+                                        break;
+                                    }
+                                    default:
+                                        if (v.equalsIgnoreCase(v2)) {
+                                            isExists = true;
+                                        } else if (HtmlUtil.encodeHtml(v).equalsIgnoreCase(v2)) {
+                                            isExists = true;
+                                        }
+                                        break;
+                                }
+                            }
+                            if (!isExists) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return CollectionUtils.isEmpty(this.getValueList())
+                            && CollectionUtils.isEmpty(attr.getValueList());
+                }
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(attrId);
+        String key = "";
+        if (getAttrId() != null) {
+            key += getAttrId() + "_";
+        }
+        if (CollectionUtils.isNotEmpty(getValueList())) {
+            key += getValueList().size() + "_";
+            // 根据内容排序生成新数组
+            List<String> sortedList = getValueList().stream().map(Object::toString).sorted().collect(Collectors.toList());
+            key += String.join(",", sortedList);
+        }
+        return key.hashCode();
     }
 
     public IssueAttrVo() {
