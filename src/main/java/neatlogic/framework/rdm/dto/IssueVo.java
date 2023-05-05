@@ -36,6 +36,8 @@ public class IssueVo extends BasePageVo {
     private List<Long> idList;
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
+    @EntityField(name = "父任务id", type = ApiParamType.LONG)
+    private Long parentId;
     @EntityField(name = "名称", type = ApiParamType.STRING)
     private String name;
     @EntityField(name = "目录id", type = ApiParamType.LONG)
@@ -96,6 +98,14 @@ public class IssueVo extends BasePageVo {
     private List<String> startTimeRange;
     @JSONField(serialize = false)
     private List<String> endTimeRange;
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
 
     public List<IssueAttrVo> getAttrFilterList() {
         return attrFilterList;
