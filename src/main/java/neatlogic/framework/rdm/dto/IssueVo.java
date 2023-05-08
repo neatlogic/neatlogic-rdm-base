@@ -36,8 +36,10 @@ public class IssueVo extends BasePageVo {
     private List<Long> idList;
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "父任务id", type = ApiParamType.LONG)
-    private Long parentId;
+    @EntityField(name = "来源任务id", type = ApiParamType.LONG)
+    private Long fromId;
+    @EntityField(name = "目标任务id", type = ApiParamType.LONG)
+    private Long toId;
     @EntityField(name = "名称", type = ApiParamType.STRING)
     private String name;
     @EntityField(name = "目录id", type = ApiParamType.LONG)
@@ -98,13 +100,26 @@ public class IssueVo extends BasePageVo {
     private List<String> startTimeRange;
     @JSONField(serialize = false)
     private List<String> endTimeRange;
+    @EntityField(name = "关联任务列表", type = ApiParamType.JSONARRAY)
+    private List<IssueRelVo> issueRelList;
+    @EntityField(name = "修改历史数量", type = ApiParamType.INTEGER)
+    private int auditCount;
 
-    public Long getParentId() {
-        return parentId;
+
+    public Long getFromId() {
+        return fromId;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setFromId(Long fromId) {
+        this.fromId = fromId;
+    }
+
+    public Long getToId() {
+        return toId;
+    }
+
+    public void setToId(Long toId) {
+        this.toId = toId;
     }
 
     public List<IssueAttrVo> getAttrFilterList() {
@@ -387,5 +402,21 @@ public class IssueVo extends BasePageVo {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public List<IssueRelVo> getIssueRelList() {
+        return issueRelList;
+    }
+
+    public void setIssueRelList(List<IssueRelVo> issueRelList) {
+        this.issueRelList = issueRelList;
+    }
+
+    public int getAuditCount() {
+        return auditCount;
+    }
+
+    public void setAuditCount(int auditCount) {
+        this.auditCount = auditCount;
     }
 }

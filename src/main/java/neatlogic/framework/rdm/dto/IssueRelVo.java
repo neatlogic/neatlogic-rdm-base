@@ -18,6 +18,7 @@ package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BasePageVo;
+import neatlogic.framework.rdm.enums.IssueRelDirection;
 import neatlogic.framework.restful.annotation.EntityField;
 
 public class IssueRelVo extends BasePageVo {
@@ -29,16 +30,25 @@ public class IssueRelVo extends BasePageVo {
     private Long toAppId;
     @EntityField(name = "目标任务id", type = ApiParamType.LONG)
     private Long toIssueId;
+    @EntityField(name = "来源应用类型", type = ApiParamType.STRING)
+    private String fromAppType;
+    @EntityField(name = "目标应用类型", type = ApiParamType.STRING)
+    private String toAppType;
+    @EntityField(name = "关联方向", type = ApiParamType.ENUM, member = IssueRelDirection.class)
+    private String direction;
+    @EntityField(name = "关联类型", type = ApiParamType.STRING)
+    private String relType;
 
     public IssueRelVo() {
 
     }
 
-    public IssueRelVo(Long fromAppId, Long fromIssueId, Long toAppId, Long toIssueId) {
+    public IssueRelVo(Long fromAppId, Long fromIssueId, Long toAppId, Long toIssueId, String relType) {
         this.fromAppId = fromAppId;
         this.fromIssueId = fromIssueId;
         this.toAppId = toAppId;
         this.toIssueId = toIssueId;
+        this.relType = relType;
     }
 
     public Long getFromAppId() {
@@ -71,5 +81,37 @@ public class IssueRelVo extends BasePageVo {
 
     public void setToIssueId(Long toIssueId) {
         this.toIssueId = toIssueId;
+    }
+
+    public String getFromAppType() {
+        return fromAppType;
+    }
+
+    public void setFromAppType(String fromAppType) {
+        this.fromAppType = fromAppType;
+    }
+
+    public String getToAppType() {
+        return toAppType;
+    }
+
+    public void setToAppType(String toAppType) {
+        this.toAppType = toAppType;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public String getRelType() {
+        return relType;
+    }
+
+    public void setRelType(String relType) {
+        this.relType = relType;
     }
 }
