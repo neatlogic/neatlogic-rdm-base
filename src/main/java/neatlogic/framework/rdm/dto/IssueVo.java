@@ -40,6 +40,8 @@ public class IssueVo extends BasePageVo {
     private Long fromId;
     @EntityField(name = "目标任务id", type = ApiParamType.LONG)
     private Long toId;
+    @EntityField(name = "父任务id", type = ApiParamType.LONG)
+    private Long parentId;
     @EntityField(name = "名称", type = ApiParamType.STRING)
     private String name;
     @EntityField(name = "目录id", type = ApiParamType.LONG)
@@ -74,6 +76,8 @@ public class IssueVo extends BasePageVo {
     private String statusName;
     @EntityField(name = "评论", type = ApiParamType.STRING)
     private String comment;
+    @EntityField(name = "子任务数量", type = ApiParamType.INTEGER)
+    private int childrenCount;
 
     @EntityField(name = "状态名称", type = ApiParamType.STRING)
     private String statusLabel;
@@ -140,6 +144,14 @@ public class IssueVo extends BasePageVo {
 
     public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
+    }
+
+    public int getChildrenCount() {
+        return childrenCount;
+    }
+
+    public void setChildrenCount(int childrenCount) {
+        this.childrenCount = childrenCount;
     }
 
     public List<AppAttrVo> getAppAttrList() {
@@ -225,6 +237,14 @@ public class IssueVo extends BasePageVo {
 
     public void setIdList(List<Long> idList) {
         this.idList = idList;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public IssueAttrVo getAttr(Long attrId) {
