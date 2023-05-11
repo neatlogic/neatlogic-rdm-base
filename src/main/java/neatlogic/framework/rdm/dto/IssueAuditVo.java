@@ -28,6 +28,7 @@ import neatlogic.framework.util.SnowflakeUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
+import java.util.List;
 
 public class IssueAuditVo extends BasePageVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
@@ -65,19 +66,19 @@ public class IssueAuditVo extends BasePageVo {
         this.issueId = issueId;
         this.attrName = attrName;
         this.inputUser = UserContext.get().getUserUuid();
-        if (!(oldValue instanceof JSONArray)) {
+        if (!(oldValue instanceof List)) {
             this.oldValue = new JSONArray() {{
                 this.add(oldValue);
             }};
         } else {
-            this.oldValue = (JSONArray) oldValue;
+            this.oldValue = JSONArray.parseArray(JSONArray.toJSONString(oldValue));
         }
-        if (!(newValue instanceof JSONArray)) {
+        if (!(newValue instanceof List)) {
             this.newValue = new JSONArray() {{
                 this.add(newValue);
             }};
         } else {
-            this.newValue = (JSONArray) newValue;
+            this.newValue = JSONArray.parseArray(JSONArray.toJSONString(newValue));
         }
         if (InputFromContext.get() != null) {
             this.inputFrom = InputFromContext.get().getInputFrom();

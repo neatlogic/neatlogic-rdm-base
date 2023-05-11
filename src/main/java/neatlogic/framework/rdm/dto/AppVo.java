@@ -41,6 +41,8 @@ public class AppVo {
     private int sort;
     @EntityField(name = "名称", type = ApiParamType.STRING)
     private String name;
+    @EntityField(name = "颜色", type = ApiParamType.STRING)
+    private String color;
     @EntityField(name = "属性列表", type = ApiParamType.JSONARRAY)
     private List<AppAttrVo> attrList;
 
@@ -70,6 +72,17 @@ public class AppVo {
             name = AppType.getLabel(type);
         }
         return name;
+    }
+
+    public String getColor() {
+        if (StringUtils.isBlank(color) && StringUtils.isNotBlank(type)) {
+            color = AppType.getColor(type);
+        }
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public List<AppAttrVo> getAttrList() {

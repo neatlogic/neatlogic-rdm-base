@@ -18,9 +18,9 @@ package neatlogic.framework.rdm.exception;
 
 import neatlogic.framework.exception.core.ApiRuntimeException;
 
-public class AppCatalogNotFoundException extends ApiRuntimeException {
+public class CatalogNameIsExistsException extends ApiRuntimeException {
 
-    public AppCatalogNotFoundException(Long id) {
-        super("目录“" + id + "”不存在");
+    public CatalogNameIsExistsException(String name) {
+        super("目录名称" + name + "已存在");
     }
 }

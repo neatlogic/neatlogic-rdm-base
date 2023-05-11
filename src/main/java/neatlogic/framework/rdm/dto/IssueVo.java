@@ -30,6 +30,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class IssueVo extends BasePageVo {
     @JSONField(serialize = false)//作为搜索条件使用
@@ -136,6 +137,14 @@ public class IssueVo extends BasePageVo {
 
     public List<FileVo> getFileList() {
         return fileList;
+    }
+
+    //此属性只是为了对比
+    public List<Long> getFileIdList() {
+        if (CollectionUtils.isNotEmpty(this.fileList)) {
+            return this.fileList.stream().map(FileVo::getId).sorted(Long::compareTo).collect(Collectors.toList());
+        }
+        return null;
     }
 
     public int getCommentCount() {

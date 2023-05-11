@@ -18,9 +18,9 @@ package neatlogic.framework.rdm.exception;
 
 import neatlogic.framework.exception.core.ApiRuntimeException;
 
-public class AppCatalogNameIsExistsException extends ApiRuntimeException {
+public class CatalogHasChildrenException extends ApiRuntimeException {
 
-    public AppCatalogNameIsExistsException(String name) {
-        super("目录名称" + name + "已存在");
+    public CatalogHasChildrenException() {
+        super("目录包含子节点");
     }
 }

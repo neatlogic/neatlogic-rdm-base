@@ -39,12 +39,12 @@ public class AppCatalogVo {
     private Integer rht;
     @EntityField(name = "是否展开", type = ApiParamType.BOOLEAN)
     private boolean expand;
-    @EntityField(name = "子节点数量", type = ApiParamType.INTEGER)
-    private Integer childrenCount;
+    @EntityField(name = "是否被关联", type = ApiParamType.INTEGER)
+    private int isInUsed;
     @JSONField(serialize = false)//是否包含父节点
     private Boolean hasParent;
-    @JSONField(serialize = false)//是否需要计算子节点数量
-    private Boolean needChildrenCount;
+    @JSONField(serialize = false)//是否需要计算是否被关联
+    private Boolean needCheckIsInUsed;
 
 
     public void setHasParent(Boolean hasParent) {
@@ -55,23 +55,16 @@ public class AppCatalogVo {
         return hasParent;
     }
 
-    public Boolean getNeedChildrenCount() {
-        return needChildrenCount;
-    }
-
-    public Integer getChildrenCount() {
-        return childrenCount;
-    }
-
-    public void setChildrenCount(Integer childrenCount) {
-        this.childrenCount = childrenCount;
-    }
-
-    public void setNeedChildrenCount(Boolean needChildrenCount) {
-        this.needChildrenCount = needChildrenCount;
-    }
 
     private List<AppCatalogVo> children;
+
+    public Boolean getNeedCheckIsInUsed() {
+        return needCheckIsInUsed;
+    }
+
+    public void setNeedCheckIsInUsed(Boolean needCheckIsInUsed) {
+        this.needCheckIsInUsed = needCheckIsInUsed;
+    }
 
     public void addChild(AppCatalogVo appCatalogVo) {
         if (children == null) {
@@ -86,6 +79,14 @@ public class AppCatalogVo {
 
     public void setAppId(Long appId) {
         this.appId = appId;
+    }
+
+    public int getIsInUsed() {
+        return isInUsed;
+    }
+
+    public void setIsInUsed(int isInUsed) {
+        this.isInUsed = isInUsed;
     }
 
     public Long getId() {

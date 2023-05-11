@@ -24,21 +24,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AppType implements IEnum<JSONObject> {
-    REQUEST("request", new I18n("enum.rdm.objecttype.request"), new PrivateAttr[]{PrivateAttr.CATALOG, PrivateAttr.WORKER, PrivateAttr.TAG, PrivateAttr.PRIORITY}),
-    TASK("task", new I18n("enum.rdm.objecttype.task"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    BUG("bug", new I18n("enum.rdm.objecttype.bug"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
-    TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),
-    TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), new PrivateAttr[]{});
+    STORY("story", new I18n("enum.rdm.objecttype.request"), "#1670f0", new PrivateAttr[]{PrivateAttr.CATALOG, PrivateAttr.WORKER, PrivateAttr.TAG, PrivateAttr.PRIORITY}),
+    TASK("task", new I18n("enum.rdm.objecttype.task"), "#25b864", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
+    BUG("bug", new I18n("enum.rdm.objecttype.bug"), "#f33b3b", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
+    TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), "", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),
+    TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), "", new PrivateAttr[]{});
 
     private final String name;
     private final I18n label;
 
-
+    private final String color;
     private final PrivateAttr[] attrList;
 
-    AppType(String _value, I18n _text, PrivateAttr[] _attrList) {
+    AppType(String _value, I18n _text, String _color, PrivateAttr[] _attrList) {
         this.name = _value;
         this.label = _text;
+        this.color = _color;
         this.attrList = _attrList;
     }
 
@@ -48,6 +49,10 @@ public enum AppType implements IEnum<JSONObject> {
 
     public String getLabel() {
         return label.toString();
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public PrivateAttr[] getAttrList() {
@@ -67,6 +72,15 @@ public enum AppType implements IEnum<JSONObject> {
         for (AppType s : AppType.values()) {
             if (s.getName().equals(name)) {
                 return s.getLabel();
+            }
+        }
+        return "";
+    }
+
+    public static String getColor(String name) {
+        for (AppType s : AppType.values()) {
+            if (s.getName().equals(name)) {
+                return s.getColor();
             }
         }
         return "";
