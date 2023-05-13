@@ -120,19 +120,39 @@ public class IssueAuditVo extends BasePageVo {
         this.issueId = issueId;
         this.attrId = attrId;
         this.inputUser = UserContext.get().getUserUuid();
-        if (!(oldValue instanceof JSONArray)) {
-            this.oldValue = new JSONArray() {{
-                this.add(oldValue);
-            }};
-        } else {
-            this.oldValue = (JSONArray) oldValue;
+        if (oldValue != null) {
+            if (oldValue instanceof JSONArray) {
+                this.oldValue = (JSONArray) oldValue;
+            } else if (oldValue instanceof List) {
+                try {
+                    this.oldValue = JSONArray.parseArray(JSONArray.toJSONString(oldValue));
+                } catch (Exception ex) {
+                    this.oldValue = new JSONArray() {{
+                        this.add(oldValue);
+                    }};
+                }
+            } else {
+                this.oldValue = new JSONArray() {{
+                    this.add(oldValue);
+                }};
+            }
         }
-        if (!(newValue instanceof JSONArray)) {
-            this.newValue = new JSONArray() {{
-                this.add(newValue);
-            }};
-        } else {
-            this.newValue = (JSONArray) newValue;
+        if (newValue != null) {
+            if (newValue instanceof JSONArray) {
+                this.newValue = (JSONArray) newValue;
+            } else if (newValue instanceof List) {
+                try {
+                    this.newValue = JSONArray.parseArray(JSONArray.toJSONString(newValue));
+                } catch (Exception ex) {
+                    this.newValue = new JSONArray() {{
+                        this.add(newValue);
+                    }};
+                }
+            } else {
+                this.newValue = new JSONArray() {{
+                    this.add(newValue);
+                }};
+            }
         }
         if (InputFromContext.get() != null) {
             this.inputFrom = InputFromContext.get().getInputFrom();

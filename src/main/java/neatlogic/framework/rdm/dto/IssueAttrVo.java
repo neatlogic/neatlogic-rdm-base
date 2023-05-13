@@ -17,14 +17,16 @@
 package neatlogic.framework.rdm.dto;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.common.constvalue.ApiParamType;
+import neatlogic.framework.rdm.attrhandler.code.AttrHandlerFactory;
+import neatlogic.framework.rdm.attrhandler.code.IAttrValueHandler;
 import neatlogic.framework.rdm.enums.AttrType;
 import neatlogic.framework.restful.annotation.EntityField;
-import neatlogic.framework.util.HtmlUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,8 @@ public class IssueAttrVo {
     private Long issueId;
     @EntityField(name = "属性值", type = ApiParamType.JSONARRAY)
     private JSONArray valueList;
+    @EntityField(name = "配置", type = ApiParamType.JSONOBJECT)
+    private JSONObject config;
 
     @Override
     public boolean equals(Object other) {
@@ -52,7 +56,8 @@ public class IssueAttrVo {
         final IssueAttrVo attr = (IssueAttrVo) other;
         try {
             if (getAttrId().equals(attr.getAttrId())) {
-                if (CollectionUtils.isNotEmpty(getValueList()) && CollectionUtils.isNotEmpty(attr.getValueList())) {
+                return this.getValue().equals(attr.getValue());
+                /*if (CollectionUtils.isNotEmpty(getValueList()) && CollectionUtils.isNotEmpty(attr.getValueList())) {
                     if (this.getValueList().size() == attr.getValueList().size()) {
                         for (int i = 0; i < this.getValueList().size(); i++) {
                             boolean isExists = false;
@@ -126,7 +131,7 @@ public class IssueAttrVo {
                 } else {
                     return CollectionUtils.isEmpty(this.getValueList())
                             && CollectionUtils.isEmpty(attr.getValueList());
-                }
+                }*/
             } else {
                 return false;
             }
@@ -158,30 +163,47 @@ public class IssueAttrVo {
         return attrType;
     }
 
-    public void setAttrType(String attrType) {
+    public IssueAttrVo setAttrType(String attrType) {
         this.attrType = attrType;
+        return this;
     }
 
-    public IssueAttrVo(Long attrId, String attrType) {
-        this.attrId = attrId;
-        this.attrType = attrType;
-    }
 
-    public IssueAttrVo(Long attrId, Long issueId, String attrType) {
+    public IssueAttrVo(Long attrId, Long issueId, String attrType, JSONObject config) {
         this.attrId = attrId;
         this.issueId = issueId;
         this.attrType = attrType;
+        this.config = config;
+    }
+
+    public JSONObject getConfig() {
+        return config;
+    }
+
+    public IssueAttrVo setConfig(JSONObject config) {
+        this.config = config;
+        return this;
     }
 
     public String getValue() {
         if (CollectionUtils.isNotEmpty(valueList) && StringUtils.isNotBlank(attrType)) {
+            JSONArray newValueList = JSONArray.parseArray(JSONArray.toJSONString(valueList));
+            newValueList.sort(Comparator.comparing(Object::toString));
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(attrType);
+            if (handler != null) {
+                for (int i = 0; i < newValueList.size(); i++) {
+                    Object value = newValueList.get(i);
+                    Object newValue = handler.format(value, this.config);
+                    newValueList.set(i, newValue);
+                }
+            }
             if (AttrType.getIsArray(attrType)) {
-                return valueList.toString();
+                return newValueList.toString();
             } else {
-                if (valueList.size() > 1) {
-                    return valueList.toString();
-                } else if (valueList.size() == 1) {
-                    return valueList.getString(0);
+                if (newValueList.size() > 1) {
+                    return newValueList.toString();
+                } else if (newValueList.size() == 1) {
+                    return newValueList.getString(0);
                 }
             }
         }
