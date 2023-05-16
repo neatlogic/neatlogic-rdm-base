@@ -47,6 +47,8 @@ public class IssueVo extends BasePageVo {
     private String name;
     @EntityField(name = "目录id", type = ApiParamType.LONG)
     private Long catalog;
+    @JSONField(serialize = false)//搜索条件专用，显示模式
+    private String mode;
     @JSONField(serialize = false)
     private Integer catalogLft;
     @JSONField(serialize = false)
@@ -110,6 +112,13 @@ public class IssueVo extends BasePageVo {
     @EntityField(name = "修改历史数量", type = ApiParamType.INTEGER)
     private int auditCount;
 
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
 
     public Long getFromId() {
         return fromId;
