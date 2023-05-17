@@ -24,31 +24,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AppType implements IEnum<JSONObject> {
-    STORY("story", new I18n("enum.rdm.objecttype.request"), "#1670f0", new PrivateAttr[]{PrivateAttr.CATALOG, PrivateAttr.WORKER, PrivateAttr.TAG, PrivateAttr.PRIORITY}),
+    ITERATION("iteration", "迭代", "#1670f0", null),
+    STORY("story", new I18n("enum.rdm.objecttype.request"), "#1670f0", new PrivateAttr[]{PrivateAttr.ITERATION, PrivateAttr.CATALOG, PrivateAttr.WORKER, PrivateAttr.TAG, PrivateAttr.PRIORITY}),
     TASK("task", new I18n("enum.rdm.objecttype.task"), "#25b864", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
     BUG("bug", new I18n("enum.rdm.objecttype.bug"), "#f33b3b", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY, PrivateAttr.WORKER}),
     TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), "", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}),
     TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), "", new PrivateAttr[]{});
 
     private final String name;
-    private final I18n label;
-
+    private I18n label = null;
+    private String labelText;
     private final String color;
     private final PrivateAttr[] attrList;
 
-    AppType(String _value, I18n _text, String _color, PrivateAttr[] _attrList) {
-        this.name = _value;
-        this.label = _text;
-        this.color = _color;
-        this.attrList = _attrList;
+
+    AppType(String name, String label, String color, PrivateAttr[] attrList) {
+        this.name = name;
+        this.labelText = label;
+        this.color = color;
+        this.attrList = attrList;
+    }
+
+    AppType(String name, I18n label, String color, PrivateAttr[] attrList) {
+        this.name = name;
+        this.label = label;
+        this.color = color;
+        this.attrList = attrList;
     }
 
     public String getName() {
         return name;
     }
 
+
     public String getLabel() {
-        return label.toString();
+        return label != null ? label.toString() : labelText;
     }
 
     public String getColor() {
@@ -85,6 +95,7 @@ public enum AppType implements IEnum<JSONObject> {
         }
         return "";
     }
+
 
     @Override
     public List<JSONObject> getValueTextList() {

@@ -20,26 +20,31 @@ public enum PrivateAttr {
     CATALOG(AttrType.CATALOG),
     WORKER(AttrType.WORKER),
     PRIORITY(AttrType.PRIORITY),
+
+    ITERATION(AttrType.ITERATION),
     TAG(AttrType.TAG);
 
     private final AttrType type;
 
 
     PrivateAttr(AttrType _type) {
-
         this.type = _type;
     }
 
     public String getName() {
-        return type.getName();
+        return this.type.getName();
     }
 
     public String getLabel() {
-        return type.getLabel();
+        return this.type.getLabel();
     }
 
     public String getType() {
-        return type.getType();
+        return this.type.getType();
+    }
+
+    public String getBelong() {
+        return this.type.getBelong();
     }
 
     public static String getType(String name) {

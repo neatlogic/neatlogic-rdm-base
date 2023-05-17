@@ -55,6 +55,8 @@ public class AppAttrVo {
     private Integer isActive;
     @JSONField(serialize = false)
     private String configStr;
+    @EntityField(name = "属性所属应用类型", type = ApiParamType.STRING)
+    private String appType;
 
     @JSONField(serialize = false)
     public String getTableName() {
@@ -122,6 +124,13 @@ public class AppAttrVo {
             typeText = AttrType.getLabel(type);
         }
         return typeText;
+    }
+
+    public String getAppType() {
+        if (StringUtils.isNotBlank(type) && StringUtils.isBlank(appType)) {
+            appType = AttrType.getBelong(type);
+        }
+        return appType;
     }
 
 

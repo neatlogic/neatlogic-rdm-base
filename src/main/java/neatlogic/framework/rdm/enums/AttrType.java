@@ -24,35 +24,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum AttrType implements IEnum<JSONObject> {
-    NUMBER("number", "number", new I18n("enum.rdm.attrtype.number"), false, false),
-    TEXT("text", "text", new I18n("enum.rdm.attrtype.text"), false, false),
-    TEXTAREA("textarea", "textarea", new I18n("enum.rdm.attrtype.textarea"), false, false),
-    SELECT("select", "select", new I18n("enum.rdm.attrtype.select"), false, true),
-    DATE("date", "date", new I18n("enum.rdm.attrtype.date"), false, false),
-    DATETIME("datetime", "datetime", new I18n("enum.rdm.attrtype.datetime"), false, false),
-    TIME("time", "time", new I18n("enum.rdm.attrtype.time"), false, false),
-    FILE("file", "file", new I18n("enum.rdm.attrtype.file"), false, true),
-    PRIORITY("priority", "priority", new I18n("enum.rdm.attrtype.priority"), true, false),
-    UESR("user", "user", new I18n("enum.rdm.attrtype.user"), false, true),
-    TAG("tag", "tagList", new I18n("enum.rdm.attrtype.tag"), true, true),
-    WORKER("worker", "userIdList", new I18n("enum.rdm.attrtype.worker"), true, true),
-    CATALOG("catalog", "catalog", new I18n("enum.rdm.attrtype.catalog"), true, false);
+    NUMBER("number", "number", new I18n("enum.rdm.attrtype.number"), false, false, null),
+    TEXT("text", "text", new I18n("enum.rdm.attrtype.text"), false, false, null),
+    TEXTAREA("textarea", "textarea", new I18n("enum.rdm.attrtype.textarea"), false, false, null),
+    SELECT("select", "select", new I18n("enum.rdm.attrtype.select"), false, true, null),
+    DATE("date", "date", new I18n("enum.rdm.attrtype.date"), false, false, null),
+    DATETIME("datetime", "datetime", new I18n("enum.rdm.attrtype.datetime"), false, false, null),
+    TIME("time", "time", new I18n("enum.rdm.attrtype.time"), false, false, null),
+    FILE("file", "file", new I18n("enum.rdm.attrtype.file"), false, true, null),
+    PRIORITY("priority", "priority", new I18n("enum.rdm.attrtype.priority"), true, false, null),
+    UESR("user", "user", new I18n("enum.rdm.attrtype.user"), false, true, null),
+    TAG("tag", "tagList", new I18n("enum.rdm.attrtype.tag"), true, true, null),
+    WORKER("worker", "userIdList", new I18n("enum.rdm.attrtype.worker"), true, true, null),
+    CATALOG("catalog", "catalog", new I18n("enum.rdm.attrtype.catalog"), true, false, null),
+    ITERATION("iteration", "iteration", "迭代", true, false, "iteration");
 
     private final String name;
     //private final String label;
     private final String type;
     private final I18n label;
 
+    private final String labelText;
+
     private final boolean isPrivate;
 
     private final boolean isArray;
 
-    AttrType(String _type, String _name, I18n _text, Boolean _isPrivate, Boolean _isArray) {
-        this.type = _type;
-        this.name = _name;
-        this.label = _text;
-        this.isPrivate = _isPrivate;
-        this.isArray = _isArray;
+    private final String belong;
+
+    AttrType(String type, String name, I18n text, Boolean isPrivate, Boolean isArray, String belong) {
+        this.type = type;
+        this.name = name;
+        this.label = text;
+        this.isPrivate = isPrivate;
+        this.isArray = isArray;
+        this.labelText = null;
+        this.belong = belong;
+    }
+
+    AttrType(String type, String name, String text, Boolean isPrivate, Boolean isArray, String belong) {
+        this.type = type;
+        this.name = name;
+        this.labelText = text;
+        this.isPrivate = isPrivate;
+        this.isArray = isArray;
+        this.label = null;
+        this.belong = belong;
     }
 
     public String getType() {
@@ -68,7 +85,7 @@ public enum AttrType implements IEnum<JSONObject> {
     }
 
     public String getLabel() {
-        return label.toString();
+        return label != null ? label.toString() : labelText;
     }
 
     public boolean isArray() {
@@ -103,6 +120,19 @@ public enum AttrType implements IEnum<JSONObject> {
             resultList.add(jsonObj);
         }
         return resultList;
+    }
+
+    public String getBelong() {
+        return belong;
+    }
+
+    public static String getBelong(String name) {
+        for (AttrType s : AttrType.values()) {
+            if (s.getType().equals(name)) {
+                return s.getBelong();
+            }
+        }
+        return null;
     }
 
     @Override
