@@ -24,6 +24,7 @@ import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.dto.UserVo;
 import neatlogic.framework.file.dto.FileVo;
 import neatlogic.framework.fulltextindex.utils.FullTextIndexUtil;
+import neatlogic.framework.rdm.enums.AppType;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -47,6 +48,11 @@ public class IssueVo extends BasePageVo {
     private String name;
     @EntityField(name = "目录id", type = ApiParamType.LONG)
     private Long catalog;
+    @EntityField(name = "迭代id", type = ApiParamType.LONG)
+    private Long iteration;
+
+    @EntityField(name = "迭代名称", type = ApiParamType.STRING)
+    private String iterationName;
     @JSONField(serialize = false)//搜索条件专用，显示模式
     private String mode;
     @JSONField(serialize = false)
@@ -57,6 +63,12 @@ public class IssueVo extends BasePageVo {
     private String catalogName;
     @EntityField(name = "应用id", type = ApiParamType.LONG)
     private Long appId;
+
+    @EntityField(name = "应用类型", type = ApiParamType.LONG)
+    private String appType;
+
+    @EntityField(name = "应用颜色", type = ApiParamType.LONG)
+    private String appColor;
     @EntityField(name = "项目id", type = ApiParamType.LONG)
     private Long projectId;
     @EntityField(name = "创建者", type = ApiParamType.STRING)
@@ -67,10 +79,12 @@ public class IssueVo extends BasePageVo {
     private Date createDate;
     @EntityField(name = "优先级", type = ApiParamType.LONG)
     private Long priority;
-    @EntityField(name = "评论数量", type = ApiParamType.INTEGER)
-    private int commentCount;
+
     @EntityField(name = "优先级名称", type = ApiParamType.STRING)
     private String priorityName;
+    @EntityField(name = "评论数量", type = ApiParamType.INTEGER)
+    private int commentCount;
+
     @EntityField(name = "状态", type = ApiParamType.LONG)
     private Long status;
     @EntityField(name = "状态颜色", type = ApiParamType.STRING)
@@ -128,12 +142,36 @@ public class IssueVo extends BasePageVo {
         this.fromId = fromId;
     }
 
+    public String getAppType() {
+        return appType;
+    }
+
+    public void setAppType(String appType) {
+        this.appType = appType;
+    }
+
+    public String getAppColor() {
+        if (StringUtils.isBlank(appColor) && StringUtils.isNotBlank(appType)) {
+            appColor = AppType.getColor(appType);
+        }
+        return appColor;
+    }
+
+
     public Long getToId() {
         return toId;
     }
 
     public void setToId(Long toId) {
         this.toId = toId;
+    }
+
+    public String getIterationName() {
+        return iterationName;
+    }
+
+    public void setIterationName(String iterationName) {
+        this.iterationName = iterationName;
     }
 
     public List<IssueAttrVo> getAttrFilterList() {
@@ -293,6 +331,13 @@ public class IssueVo extends BasePageVo {
         }
     }
 
+    public Long getIteration() {
+        return iteration;
+    }
+
+    public void setIteration(Long iteration) {
+        this.iteration = iteration;
+    }
 
     public List<IssueAttrVo> getAttrList() {
         return attrList;

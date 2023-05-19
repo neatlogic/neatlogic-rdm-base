@@ -16,7 +16,6 @@
 
 package neatlogic.framework.rdm.dto;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BasePageVo;
@@ -27,22 +26,68 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class IterationVo extends BasePageVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
+    @EntityField(name = "项目id", type = ApiParamType.LONG)
+    private Long projectId;
     @EntityField(name = "名称", type = ApiParamType.STRING)
     private String name;
     @EntityField(name = "说明", type = ApiParamType.STRING)
     private String description;
+    @EntityField(name = "任务总数", type = ApiParamType.INTEGER)
+    private int issueCount;
+    @EntityField(name = "已完成任务总数", type = ApiParamType.INTEGER)
+    private int doneIssueCount;
+    @EntityField(name = "是否开启", type = ApiParamType.INTEGER)
+    private int isOpen;
     @JSONField(serialize = false)
-    private JSONArray dateRange;
+    private List<String> dateRange;
+
+    @JSONField(serialize = false)//搜索专用
+    private List<String> startDateRange;
+    @JSONField(serialize = false)//搜索专用
+    private List<String> endDateRange;
 
     @EntityField(name = "开始日期", type = ApiParamType.LONG)
     private Date startDate;
 
     @EntityField(name = "结束日期", type = ApiParamType.LONG)
     private Date endDate;
+
+    public int getIssueCount() {
+        return issueCount;
+    }
+
+    public int getIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(int isOpen) {
+        this.isOpen = isOpen;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public void setIssueCount(int issueCount) {
+        this.issueCount = issueCount;
+    }
+
+    public int getDoneIssueCount() {
+        return doneIssueCount;
+    }
+
+    public void setDoneIssueCount(int doneIssueCount) {
+        this.doneIssueCount = doneIssueCount;
+    }
 
     public Long getId() {
         if (id == null) {
@@ -59,11 +104,11 @@ public class IterationVo extends BasePageVo {
         return name;
     }
 
-    public JSONArray getDateRange() {
+    public List<String> getDateRange() {
         return dateRange;
     }
 
-    public void setDateRange(JSONArray dateRange) {
+    public void setDateRange(List<String> dateRange) {
         this.dateRange = dateRange;
     }
 
@@ -83,7 +128,7 @@ public class IterationVo extends BasePageVo {
         if (startDate == null && CollectionUtils.isNotEmpty(dateRange)) {
             SimpleDateFormat sdf = new SimpleDateFormat(TimeUtil.YYYY_MM_DD);
             try {
-                startDate = sdf.parse(dateRange.getString(0));
+                startDate = sdf.parse(dateRange.get(0));
             } catch (Exception ignored) {
 
             }
@@ -95,11 +140,27 @@ public class IterationVo extends BasePageVo {
         this.startDate = startDate;
     }
 
+    public List<String> getStartDateRange() {
+        return startDateRange;
+    }
+
+    public void setStartDateRange(List<String> startDateRange) {
+        this.startDateRange = startDateRange;
+    }
+
+    public List<String> getEndDateRange() {
+        return endDateRange;
+    }
+
+    public void setEndDateRange(List<String> endDateRange) {
+        this.endDateRange = endDateRange;
+    }
+
     public Date getEndDate() {
         if (endDate == null && CollectionUtils.isNotEmpty(dateRange) && dateRange.size() >= 2) {
             SimpleDateFormat sdf = new SimpleDateFormat(TimeUtil.YYYY_MM_DD);
             try {
-                endDate = sdf.parse(dateRange.getString(1));
+                endDate = sdf.parse(dateRange.get(1));
             } catch (Exception ignored) {
 
             }
@@ -109,5 +170,9 @@ public class IterationVo extends BasePageVo {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public static void main(String[] arv) {
+
     }
 }

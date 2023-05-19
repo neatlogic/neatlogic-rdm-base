@@ -45,6 +45,8 @@ public class AppVo {
     private String color;
     @EntityField(name = "属性列表", type = ApiParamType.JSONARRAY)
     private List<AppAttrVo> attrList;
+    @EntityField(name = "是否包含任务", type = ApiParamType.BOOLEAN)
+    private Boolean hasIssue;
 
     @JSONField(serialize = false)
     public String getTableName() {
@@ -81,6 +83,12 @@ public class AppVo {
         return color;
     }
 
+    public Boolean getHasIssue() {
+        if (hasIssue == null && StringUtils.isNotBlank(type)) {
+            hasIssue = AppType.getHasIssue(type);
+        }
+        return hasIssue;
+    }
 
     public void setColor(String color) {
         this.color = color;
