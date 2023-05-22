@@ -19,6 +19,7 @@ package neatlogic.framework.rdm.dto;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BasePageVo;
+import neatlogic.framework.rdm.enums.AppType;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import neatlogic.framework.util.TimeUtil;
@@ -43,6 +44,10 @@ public class IterationVo extends BasePageVo {
     private int doneIssueCount;
     @EntityField(name = "是否开启", type = ApiParamType.INTEGER)
     private int isOpen;
+    @EntityField(name = "应用配型", type = ApiParamType.STRING)
+    private String appType = AppType.ITERATION.getName();
+    @EntityField(name = "应用颜色", type = ApiParamType.STRING)
+    private String appColor = AppType.ITERATION.getColor();
     @JSONField(serialize = false)
     private List<String> dateRange;
 
@@ -167,6 +172,16 @@ public class IterationVo extends BasePageVo {
         }
         return endDate;
     }
+
+    public String getAppType() {
+        return appType;
+    }
+
+
+    public String getAppColor() {
+        return appColor;
+    }
+
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
