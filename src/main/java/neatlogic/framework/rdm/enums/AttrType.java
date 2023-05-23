@@ -37,8 +37,8 @@ public enum AttrType implements IEnum<JSONObject> {
     TAG("tag", "tagList", new I18n("enum.rdm.attrtype.tag"), true, true, null),
     WORKER("worker", "userIdList", new I18n("enum.rdm.attrtype.worker"), true, true, null),
     CATALOG("catalog", "catalog", new I18n("enum.rdm.attrtype.catalog"), true, false, null),
-    ITERATION("iteration", "iteration", "迭代", true, false, "iteration");
-
+    ITERATION("iteration", "iteration", "迭代", true, false, "iteration"),
+    DEADLINE("deadline", "deadline", "截止日期", true, false, null);
     private final String name;
     //private final String label;
     private final String type;

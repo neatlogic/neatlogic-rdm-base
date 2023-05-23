@@ -25,22 +25,23 @@ import java.util.List;
 
 public enum AppType implements IEnum<JSONObject> {
     ITERATION("iteration", "迭代", "#1670f0", null, false),
-    STORY("story", new I18n("enum.rdm.objecttype.request"), "#1670f0", new PrivateAttr[]{PrivateAttr.ITERATION, PrivateAttr.CATALOG, PrivateAttr.WORKER, PrivateAttr.TAG, PrivateAttr.PRIORITY}, true),
-    TASK("task", new I18n("enum.rdm.objecttype.task"), "#25b864", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY, PrivateAttr.WORKER}, true),
-    BUG("bug", new I18n("enum.rdm.objecttype.bug"), "#f33b3b", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY, PrivateAttr.WORKER}, true),
-    TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), "", new PrivateAttr[]{PrivateAttr.TAG, PrivateAttr.PRIORITY}, false),
-    TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), "", new PrivateAttr[]{}, false);
+    STORY("story", new I18n("enum.rdm.objecttype.request"), "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.DEADLINE}, true),
+    TASK("task", new I18n("enum.rdm.objecttype.task"), "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.DEADLINE}, true),
+    BUG("bug", new I18n("enum.rdm.objecttype.bug"), "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.DEADLINE}, true),
+    TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), "", new AttrType[]{AttrType.TAG, AttrType.PRIORITY}, false),
+    TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), "", new AttrType[]{}, false);
+
 
     private final String name;
     private I18n label = null;
     private String labelText;
     private final String color;
-    private final PrivateAttr[] attrList;
+    private final AttrType[] attrList;
 
     private final boolean hasIssue;
 
 
-    AppType(String name, String label, String color, PrivateAttr[] attrList, Boolean hasIssue) {
+    AppType(String name, String label, String color, AttrType[] attrList, Boolean hasIssue) {
         this.name = name;
         this.labelText = label;
         this.color = color;
@@ -48,7 +49,7 @@ public enum AppType implements IEnum<JSONObject> {
         this.hasIssue = hasIssue;
     }
 
-    AppType(String name, I18n label, String color, PrivateAttr[] attrList, Boolean hasIssue) {
+    AppType(String name, I18n label, String color, AttrType[] attrList, Boolean hasIssue) {
         this.name = name;
         this.label = label;
         this.color = color;
@@ -72,11 +73,11 @@ public enum AppType implements IEnum<JSONObject> {
         return color;
     }
 
-    public PrivateAttr[] getAttrList() {
+    public AttrType[] getAttrList() {
         return attrList;
     }
 
-    public static PrivateAttr[] getAttrList(String name) {
+    public static AttrType[] getAttrList(String name) {
         for (AppType s : AppType.values()) {
             if (s.getName().equals(name)) {
                 return s.getAttrList();
@@ -116,11 +117,11 @@ public enum AppType implements IEnum<JSONObject> {
     @Override
     public List<JSONObject> getValueTextList() {
         List<JSONObject> array = new ArrayList<>();
-        for (AppType objectType : AppType.values()) {
+        for (AppType appType : AppType.values()) {
             array.add(new JSONObject() {
                 {
-                    this.put("value", objectType.getName());
-                    this.put("text", objectType.getLabel());
+                    this.put("value", appType.getName());
+                    this.put("text", appType.getLabel());
                 }
             });
         }
