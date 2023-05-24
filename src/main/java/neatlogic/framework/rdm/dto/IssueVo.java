@@ -95,6 +95,10 @@ public class IssueVo extends BasePageVo {
     private String comment;
     @EntityField(name = "子任务数量", type = ApiParamType.INTEGER)
     private int childrenCount;
+    @EntityField(name = "预计开始", type = ApiParamType.STRING)
+    private String startDate;
+    @EntityField(name = "预计结束", type = ApiParamType.STRING)
+    private String endDate;
 
     @EntityField(name = "状态名称", type = ApiParamType.STRING)
     private String statusLabel;
@@ -113,6 +117,7 @@ public class IssueVo extends BasePageVo {
     private List<AppAttrVo> appAttrList;//搜索时生成字段
     @JSONField(serialize = false)//自定义属性搜索条件
     private List<IssueAttrVo> attrFilterList;
+
     private HashMap<Long, ?> attrMap;
     @EntityField(name = "附件列表", type = ApiParamType.JSONARRAY)
     private List<FileVo> fileList;
@@ -138,6 +143,14 @@ public class IssueVo extends BasePageVo {
         return fromId;
     }
 
+    public void formatAttr() {
+        if (CollectionUtils.isNotEmpty(attrList)) {
+            for (IssueAttrVo attr : attrList) {
+                attr.format();
+            }
+        }
+    }
+
     public void setFromId(Long fromId) {
         this.fromId = fromId;
     }
@@ -157,6 +170,23 @@ public class IssueVo extends BasePageVo {
         return appColor;
     }
 
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     public Long getToId() {
         return toId;

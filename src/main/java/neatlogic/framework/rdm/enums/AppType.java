@@ -25,9 +25,9 @@ import java.util.List;
 
 public enum AppType implements IEnum<JSONObject> {
     ITERATION("iteration", "迭代", "#1670f0", null, false),
-    STORY("story", new I18n("enum.rdm.objecttype.request"), "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.DEADLINE}, true),
-    TASK("task", new I18n("enum.rdm.objecttype.task"), "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.DEADLINE}, true),
-    BUG("bug", new I18n("enum.rdm.objecttype.bug"), "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.DEADLINE}, true),
+    STORY("story", new I18n("enum.rdm.objecttype.request"), "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.STARTDATE, AttrType.ENDDATE}, true),
+    TASK("task", new I18n("enum.rdm.objecttype.task"), "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
+    BUG("bug", new I18n("enum.rdm.objecttype.bug"), "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
     TESTPLAN("testplan", new I18n("enum.rdm.objecttype.testplan"), "", new AttrType[]{AttrType.TAG, AttrType.PRIORITY}, false),
     TESTCASE("testcase", new I18n("enum.rdm.objecttype.testcase"), "", new AttrType[]{}, false);
 

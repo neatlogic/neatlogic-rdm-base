@@ -26,6 +26,7 @@ import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,9 +39,10 @@ public class IssueAttrVo {
     @EntityField(name = "任务id", type = ApiParamType.LONG)
     private Long issueId;
     @EntityField(name = "属性值", type = ApiParamType.JSONARRAY)
-    private JSONArray valueList;
+    private List<Object> valueList;
     @EntityField(name = "配置", type = ApiParamType.JSONOBJECT)
     private JSONObject config;
+    private boolean isFormat = false;
 
     @Override
     public boolean equals(Object other) {
@@ -226,11 +228,25 @@ public class IssueAttrVo {
         this.issueId = issueId;
     }
 
-    public JSONArray getValueList() {
+    public List<Object> getValueList() {
         return valueList;
     }
 
-    public void setValueList(JSONArray valueList) {
+    public void format() {
+        if (!this.isFormat && StringUtils.isNotBlank(this.attrType)) {
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(this.attrType);
+            if (handler != null) {
+                List<Object> newValueList = new ArrayList<>();
+                for (Object o : valueList) {
+                    newValueList.add(handler.format(o, this.config));
+                }
+                this.valueList = newValueList;
+                this.isFormat = true;
+            }
+        }
+    }
+
+    public void setValueList(List<Object> valueList) {
         this.valueList = valueList;
     }
 }
