@@ -53,6 +53,7 @@ public enum AttrType implements IEnum<JSONObject> {
 
     private final String belong;
 
+
     AttrType(String type, String name, I18n text, Boolean isPrivate, Boolean isArray, String belong) {
         this.type = type;
         this.name = name;
