@@ -22,6 +22,15 @@ public class IssueConditionVo extends IssueVo {
     private List<String> startDate;
     private List<String> endDate;
 
+    private List<Long> status;
+
+    public List<Long> getStatusList() {
+        return status;
+    }
+
+    public void setStatus(List<Long> status) {
+        this.status = status;
+    }
 
     public List<String> getStartDateRange() {
         return startDate;
