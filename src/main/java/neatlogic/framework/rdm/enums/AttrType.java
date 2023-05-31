@@ -25,11 +25,11 @@ import java.util.List;
 
 public enum AttrType implements IEnum<JSONObject> {
     NUMBER("number", "number", new I18n("enum.rdm.attrtype.number"), false, false, null),
-    TEXT("text", "text", new I18n("enum.rdm.attrtype.text"), false, false, null),
+    TEXT("text", "text", new I18n("enum.rdm.attrtype.text.a"), false, false, null),
     TEXTAREA("textarea", "textarea", new I18n("enum.rdm.attrtype.textarea"), false, false, null),
     SELECT("select", "select", new I18n("enum.rdm.attrtype.select"), false, true, null),
-    DATE("date", "date", new I18n("enum.rdm.attrtype.date"), false, false, null),
-    DATETIME("datetime", "datetime", new I18n("enum.rdm.attrtype.datetime"), false, false, null),
+    DATE("date", "date", new I18n("enum.rdm.attrtype.date.a"), false, false, null),
+    DATETIME("datetime", "datetime", new I18n("enum.rdm.attrtype.datetime.a"), false, false, null),
     TIME("time", "time", new I18n("enum.rdm.attrtype.time"), false, false, null),
     FILE("file", "file", new I18n("enum.rdm.attrtype.file"), false, true, null),
     PRIORITY("priority", "priority", new I18n("enum.rdm.attrtype.priority"), true, false, null),
