@@ -21,12 +21,12 @@ import neatlogic.framework.auth.core.AuthBase;
 public class RDM_BASE extends AuthBase {
     @Override
     public String getAuthDisplayName() {
-        return "auth.rdm.rdmbase.name";
+        return "研发管理基础权限";
     }
 
     @Override
     public String getAuthIntroduction() {
-        return "auth.rdm.rdmbase.introduction";
+        return "使用研发管理普通功能";
     }
 
     @Override

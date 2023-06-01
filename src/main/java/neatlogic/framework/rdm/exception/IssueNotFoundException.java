@@ -21,6 +21,6 @@ import neatlogic.framework.exception.core.ApiRuntimeException;
 public class IssueNotFoundException extends ApiRuntimeException {
 
     public IssueNotFoundException(Long id) {
-        super("exception.rdm.issuenotfoundexception", id);
+        super("任务“{0}”不存在", id);
     }
 }

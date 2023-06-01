@@ -21,6 +21,6 @@ import neatlogic.framework.exception.core.ApiRuntimeException;
 public class ProjectTemplateNotFoundException extends ApiRuntimeException {
 
     public ProjectTemplateNotFoundException(Long templateId) {
-        super("exception.rdm.projecttemplatenotfoundexception", templateId);
+        super("项目模板“{0}”不存在", templateId);
     }
 }
