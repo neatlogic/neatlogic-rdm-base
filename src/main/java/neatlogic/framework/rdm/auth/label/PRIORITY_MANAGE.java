@@ -17,16 +17,17 @@
 package neatlogic.framework.rdm.auth.label;
 
 import neatlogic.framework.auth.core.AuthBase;
+import neatlogic.framework.util.$;
 
 public class PRIORITY_MANAGE extends AuthBase {
     @Override
     public String getAuthDisplayName() {
-        return "auth.rdm.rdmbase.name";
+        return $.t("nfral.prioritymanage.getauthdisplayname");
     }
 
     @Override
     public String getAuthIntroduction() {
-        return "auth.rdm.rdmbase.introduction";
+        return $.t("对优先级进行新增、编辑和删除");
     }
 
     @Override
