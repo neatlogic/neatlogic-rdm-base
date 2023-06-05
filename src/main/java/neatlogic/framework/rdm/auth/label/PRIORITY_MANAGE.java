@@ -22,12 +22,12 @@ import neatlogic.framework.util.$;
 public class PRIORITY_MANAGE extends AuthBase {
     @Override
     public String getAuthDisplayName() {
-        return $.t("nfral.prioritymanage.getauthdisplayname");
+        return $.t("nfral.priority_manage.getauthdisplayname");
     }
 
     @Override
     public String getAuthIntroduction() {
-        return $.t("对优先级进行新增、编辑和删除");
+        return $.t("nfral.priority_manage.getauthintroduction");
     }
 
     @Override
