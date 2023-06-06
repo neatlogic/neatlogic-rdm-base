@@ -24,6 +24,16 @@ public class IssueConditionVo extends IssueVo {
 
     private List<Long> status;
 
+    private Integer isEnd;
+
+    public Integer getIsEnd() {
+        return isEnd;
+    }
+
+    public void setIsEnd(Integer isEnd) {
+        this.isEnd = isEnd;
+    }
+
     public List<Long> getStatusList() {
         return status;
     }

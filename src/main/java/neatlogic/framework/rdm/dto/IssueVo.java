@@ -406,7 +406,11 @@ public class IssueVo extends BasePageVo {
 
     @JSONField(serialize = false)
     public String getTableName() {
-        return TenantContext.get().getDataDbName() + ".`rdm_app_" + this.getAppId() + "`";
+        if (this.getAppId() != null) {
+            return TenantContext.get().getDataDbName() + ".`rdm_app_" + this.getAppId() + "`";
+        } else {
+            return null;
+        }
     }
 
     public void setId(Long id) {

@@ -18,18 +18,22 @@ package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.SnowflakeUtil;
 
 public class PriorityVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.name", type = ApiParamType.STRING)
     private String name;
-    @EntityField(name = "颜色", type = ApiParamType.STRING)
+    @EntityField(name = "common.color", type = ApiParamType.STRING)
     private String color;
-    @EntityField(name = "排序", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.sort", type = ApiParamType.INTEGER)
     private Integer sort;
 
     public Long getId() {
+        if (id == null) {
+            id = SnowflakeUtil.uniqueLong();
+        }
         return id;
     }
 
