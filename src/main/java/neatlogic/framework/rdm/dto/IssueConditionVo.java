@@ -24,15 +24,7 @@ public class IssueConditionVo extends IssueVo {
 
     private List<Long> status;
 
-    private Integer isEnd;
-
-    public Integer getIsEnd() {
-        return isEnd;
-    }
-
-    public void setIsEnd(Integer isEnd) {
-        this.isEnd = isEnd;
-    }
+    private Integer isMine;
 
     public List<Long> getStatusList() {
         return status;
@@ -58,4 +50,11 @@ public class IssueConditionVo extends IssueVo {
         this.endDate = endDate;
     }
 
+    public Integer getIsMine() {
+        return isMine;
+    }
+
+    public void setIsMine(Integer isMine) {
+        this.isMine = isMine;
+    }
 }

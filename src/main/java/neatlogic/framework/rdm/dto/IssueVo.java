@@ -38,20 +38,20 @@ public class IssueVo extends BasePageVo {
     private List<Long> idList;
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "来源任务id", type = ApiParamType.LONG)
+    @EntityField(name = "nmrai.searchissueapi.input.param.desc.fromid", type = ApiParamType.LONG)
     private Long fromId;
-    @EntityField(name = "目标任务id", type = ApiParamType.LONG)
+    @EntityField(name = "nmrai.searchissueapi.input.param.desc.toid", type = ApiParamType.LONG)
     private Long toId;
-    @EntityField(name = "父任务id", type = ApiParamType.LONG)
+    @EntityField(name = "term.rdm.parenttaskid", type = ApiParamType.LONG)
     private Long parentId;
-    @EntityField(name = "名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.name", type = ApiParamType.STRING)
     private String name;
-    @EntityField(name = "目录id", type = ApiParamType.LONG)
+    @EntityField(name = "common.catalogid", type = ApiParamType.LONG)
     private Long catalog;
-    @EntityField(name = "迭代id", type = ApiParamType.LONG)
+    @EntityField(name = "term.rdm.iterationid", type = ApiParamType.LONG)
     private Long iteration;
 
-    @EntityField(name = "迭代名称", type = ApiParamType.STRING)
+    @EntityField(name = "term.rdm.iterationname", type = ApiParamType.STRING)
     private String iterationName;
     @JSONField(serialize = false)//搜索条件专用，显示模式
     private String mode;
@@ -59,59 +59,62 @@ public class IssueVo extends BasePageVo {
     private Integer catalogLft;
     @JSONField(serialize = false)
     private Integer catalogRht;
-    @EntityField(name = "目录名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.catalogname", type = ApiParamType.STRING)
     private String catalogName;
-    @EntityField(name = "应用id", type = ApiParamType.LONG)
+    @EntityField(name = "nmraa.getappapi.input.param.desc", type = ApiParamType.LONG)
     private Long appId;
 
-    @EntityField(name = "应用类型", type = ApiParamType.LONG)
+    @EntityField(name = "term.rdm.apptype", type = ApiParamType.LONG)
     private String appType;
 
-    @EntityField(name = "应用颜色", type = ApiParamType.LONG)
+    @EntityField(name = "term.rdm.appcolor", type = ApiParamType.LONG)
     private String appColor;
-    @EntityField(name = "项目id", type = ApiParamType.LONG)
+    @EntityField(name = "term.rdm.projectid", type = ApiParamType.LONG)
     private Long projectId;
-    @EntityField(name = "创建者", type = ApiParamType.STRING)
+    @EntityField(name = "common.createuser", type = ApiParamType.STRING)
     private String createUser;
-    @EntityField(name = "创建者名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.createusername", type = ApiParamType.STRING)
     private String createUserName;
-    @EntityField(name = "创建日期", type = ApiParamType.LONG)
+    @EntityField(name = "common.createdate", type = ApiParamType.LONG)
     private Date createDate;
-    @EntityField(name = "优先级", type = ApiParamType.LONG)
+    @EntityField(name = "common.priority", type = ApiParamType.LONG)
     private Long priority;
 
-    @EntityField(name = "优先级名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.priorityname", type = ApiParamType.STRING)
     private String priorityName;
-    @EntityField(name = "评论数量", type = ApiParamType.INTEGER)
+
+    @EntityField(name = "common.prioritycolor", type = ApiParamType.STRING)
+    private String priorityColor;
+    @EntityField(name = "common.commentcount", type = ApiParamType.INTEGER)
     private int commentCount;
 
-    @EntityField(name = "状态", type = ApiParamType.LONG)
+    @EntityField(name = "common.status", type = ApiParamType.LONG)
     private Long status;
-    @EntityField(name = "状态颜色", type = ApiParamType.STRING)
+    @EntityField(name = "common.statuscolor", type = ApiParamType.STRING)
     private String statusColor;
-    @EntityField(name = "状态唯一标识", type = ApiParamType.STRING)
+    @EntityField(name = "common.statusuniquename", type = ApiParamType.STRING)
     private String statusName;
-    @EntityField(name = "评论", type = ApiParamType.STRING)
+    @EntityField(name = "common.comment", type = ApiParamType.STRING)
     private String comment;
-    @EntityField(name = "子任务数量", type = ApiParamType.INTEGER)
+    @EntityField(name = "term.rdm.childrentaskcount", type = ApiParamType.INTEGER)
     private int childrenCount;
-    @EntityField(name = "预计开始", type = ApiParamType.STRING)
+    @EntityField(name = "term.rdm.startdate", type = ApiParamType.STRING)
     private String startDate;
-    @EntityField(name = "预计结束", type = ApiParamType.STRING)
+    @EntityField(name = "term.rdm.enddate", type = ApiParamType.STRING)
     private String endDate;
 
-    @EntityField(name = "状态名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.statusname", type = ApiParamType.STRING)
     private String statusLabel;
-    @EntityField(name = "内容", type = ApiParamType.STRING)
+    @EntityField(name = "common.content", type = ApiParamType.STRING)
     private String content;
-    @EntityField(name = "用户id列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "common.useridlist", type = ApiParamType.JSONARRAY)
     private List<String> userIdList;
-    @EntityField(name = "用户信息列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "common.userinfolist", type = ApiParamType.JSONARRAY)
     private List<UserVo> userList;
-    @EntityField(name = "标签列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "common.taglist", type = ApiParamType.JSONARRAY)
     private List<String> tagList;
 
-    @EntityField(name = "属性列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "common.attributelist", type = ApiParamType.JSONARRAY)
     private List<IssueAttrVo> attrList;
     @JSONField(serialize = false)
     private List<AppAttrVo> appAttrList;//搜索时生成字段
@@ -119,17 +122,20 @@ public class IssueVo extends BasePageVo {
     private List<IssueAttrVo> attrFilterList;
 
     private HashMap<Long, ?> attrMap;
-    @EntityField(name = "附件列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "common.filelist", type = ApiParamType.JSONARRAY)
     private List<FileVo> fileList;
 
     @JSONField(serialize = false)
     private List<String> startTimeRange;
     @JSONField(serialize = false)
     private List<String> endTimeRange;
-    @EntityField(name = "关联任务列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "term.rdm.relativetasklist", type = ApiParamType.JSONARRAY)
     private List<IssueRelVo> issueRelList;
-    @EntityField(name = "修改历史数量", type = ApiParamType.INTEGER)
+    @EntityField(name = "term.rdm.auditcount", type = ApiParamType.INTEGER)
     private int auditCount;
+
+    @EntityField(name = "term.rdm.isend", type = ApiParamType.INTEGER)
+    private Integer isEnd;
 
     public String getMode() {
         return mode;
@@ -248,6 +254,15 @@ public class IssueVo extends BasePageVo {
         this.appAttrList = appAttrList;
     }
 
+
+    public Integer getIsEnd() {
+        return isEnd;
+    }
+
+    public void setIsEnd(Integer isEnd) {
+        this.isEnd = isEnd;
+    }
+
     public String getComment() {
         return comment;
     }
@@ -276,6 +291,14 @@ public class IssueVo extends BasePageVo {
             return attrList.contains(attrVo);
         }
         return false;
+    }
+
+    public String getPriorityColor() {
+        return priorityColor;
+    }
+
+    public void setPriorityColor(String priorityColor) {
+        this.priorityColor = priorityColor;
     }
 
     public Integer getCatalogLft() {
