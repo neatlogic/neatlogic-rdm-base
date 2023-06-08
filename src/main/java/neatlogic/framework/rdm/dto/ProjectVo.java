@@ -33,36 +33,40 @@ import java.util.List;
 public class ProjectVo extends BaseEditorVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "名称", type = ApiParamType.STRING)
+
+
+    @EntityField(name = "common.name", type = ApiParamType.STRING)
     private String name;
-    @EntityField(name = "颜色标识", type = ApiParamType.STRING)
+    @EntityField(name = "common.color", type = ApiParamType.STRING)
     private String color;
-    @EntityField(name = "模板id", type = ApiParamType.LONG)
+    @EntityField(name = "common.templateid", type = ApiParamType.LONG)
     private Long templateId;
-    @EntityField(name = "项目类型", type = ApiParamType.STRING)
+    @EntityField(name = "term.rdm.projecttype", type = ApiParamType.STRING)
     private String type;
-    @EntityField(name = "说明", type = ApiParamType.STRING)
+    @EntityField(name = "common.description", type = ApiParamType.STRING)
     private String description;
-    @EntityField(name = "开始日期", type = ApiParamType.LONG)
+    @EntityField(name = "common.startdate", type = ApiParamType.LONG)
     private Date startDate;
-    @EntityField(name = "开始日期", type = ApiParamType.LONG)
+    @EntityField(name = "common.enddate", type = ApiParamType.LONG)
     private Date endDate;
-    @EntityField(name = "进度", type = ApiParamType.INTEGER)
+    @EntityField(name = "commom.progress", type = ApiParamType.INTEGER)
     private Integer progress;
-    @EntityField(name = "用户列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "common.userlist", type = ApiParamType.JSONARRAY)
     private List<ProjectUserVo> userList;
-    @EntityField(name = "应用列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "term.rdm.applist", type = ApiParamType.JSONARRAY)
     private List<AppVo> appList;
-    @EntityField(name = "开始日期-结束日期", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "term.rdm.startenddate", type = ApiParamType.JSONARRAY)
     private List<String> dateRange;
     @JSONField(serialize = false)
     private List<String> startDateRange;
     @JSONField(serialize = false)
     private List<String> endDateRange;
-    @EntityField(name = "项目成员用户id列表", type = ApiParamType.JSONARRAY)
-    private List<String> memberIdList;
-    @EntityField(name = "项目负责人id列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "term.rdm.project.useridlist", type = ApiParamType.JSONARRAY)
+    private List<String> userIdList;
+    @EntityField(name = "term.rdm.project.manageridlist", type = ApiParamType.JSONARRAY)
     private List<String> leaderIdList;
+    @EntityField(name = "page.isclose", type = ApiParamType.INTEGER)
+    private Integer isClose;
 
 
     public Long getId() {
@@ -76,16 +80,24 @@ public class ProjectVo extends BaseEditorVo {
         this.id = id;
     }
 
-    public List<String> getMemberIdList() {
-        if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(memberIdList)) {
-            memberIdList = new ArrayList<>();
+    public List<String> getUserIdList() {
+        if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(userIdList)) {
+            userIdList = new ArrayList<>();
             for (ProjectUserVo userVo : userList) {
                 if (userVo.getUserType().equals(ProjectUserType.MEMBER.getValue())) {
-                    memberIdList.add("user#" + userVo.getUserId());
+                    userIdList.add("user#" + userVo.getUserId());
                 }
             }
         }
-        return memberIdList;
+        return userIdList;
+    }
+
+    public Integer getIsClose() {
+        return isClose;
+    }
+
+    public void setIsClose(Integer isClose) {
+        this.isClose = isClose;
     }
 
     public List<String> getLeaderIdList() {
@@ -101,8 +113,8 @@ public class ProjectVo extends BaseEditorVo {
     }
 
 
-    public void setMemberIdList(List<String> memberIdList) {
-        this.memberIdList = memberIdList;
+    public void setUserIdList(List<String> userIdList) {
+        this.userIdList = userIdList;
     }
 
     public String getType() {

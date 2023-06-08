@@ -19,8 +19,10 @@ package neatlogic.framework.rdm.enums;
 import neatlogic.framework.util.$;
 
 public enum ProjectUserType {
-    MEMBER("member", "项目成员"),
-    LEADER("leader", "项目负责人");
+    OWNER("owner", "term.rdm.projectowner"),
+    MEMBER("member", "term.rdm.projectmember"),
+    LEADER("leader", "term.rdm.projectleader");
+
 
     private final String value;
     private final String text;

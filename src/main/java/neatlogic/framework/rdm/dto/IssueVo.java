@@ -27,9 +27,11 @@ import neatlogic.framework.fulltextindex.utils.FullTextIndexUtil;
 import neatlogic.framework.rdm.enums.AppType;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
+import neatlogic.framework.util.TimeUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -136,6 +138,8 @@ public class IssueVo extends BasePageVo {
 
     @EntityField(name = "term.rdm.isend", type = ApiParamType.INTEGER)
     private Integer isEnd;
+    @EntityField(name = "common.isexpired", type = ApiParamType.INTEGER)
+    private Integer isExpired;
 
     public String getMode() {
         return mode;
@@ -184,6 +188,20 @@ public class IssueVo extends BasePageVo {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    public Integer getIsExpired() {
+        if (isExpired == null) {
+            if (StringUtils.isNotBlank(endDate)) {
+                SimpleDateFormat sdf = new SimpleDateFormat(TimeUtil.YYYY_MM_DD);
+                try {
+                    Date d = sdf.parse(endDate);
+                    isExpired = d.before(new Date()) ? 1 : 0;
+                } catch (Exception ignored) {
+                }
+            }
+        }
+        return this.isExpired;
     }
 
     public String getEndDate() {

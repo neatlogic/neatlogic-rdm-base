@@ -18,48 +18,10 @@ package neatlogic.framework.rdm.dto;
 
 import java.util.List;
 
-public class IssueConditionVo extends IssueVo {
-    private List<String> startDate;
-    private List<String> endDate;
-
-    private List<Long> status;
+public class ProjectConditionVo extends ProjectVo {
+    private List<Long> idList;
 
     private Integer isMine;
-
-    private Integer isExpired;
-
-    @Override
-    public Integer getIsExpired() {
-        return isExpired;
-    }
-
-    public void setIsExpired(Integer isExpired) {
-        this.isExpired = isExpired;
-    }
-
-    public List<Long> getStatusList() {
-        return status;
-    }
-
-    public void setStatus(List<Long> status) {
-        this.status = status;
-    }
-
-    public List<String> getStartDateRange() {
-        return startDate;
-    }
-
-    public void setStartDate(List<String> startDate) {
-        this.startDate = startDate;
-    }
-
-    public List<String> getEndDateRange() {
-        return endDate;
-    }
-
-    public void setEndDate(List<String> endDate) {
-        this.endDate = endDate;
-    }
 
     public Integer getIsMine() {
         return isMine;
@@ -67,5 +29,13 @@ public class IssueConditionVo extends IssueVo {
 
     public void setIsMine(Integer isMine) {
         this.isMine = isMine;
+    }
+
+    public List<Long> getIdList() {
+        return idList;
+    }
+
+    public void setIdList(List<Long> idList) {
+        this.idList = idList;
     }
 }
