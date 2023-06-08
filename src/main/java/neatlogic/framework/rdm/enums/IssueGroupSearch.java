@@ -16,7 +16,7 @@
 
 package neatlogic.framework.rdm.enums;
 
-import neatlogic.framework.util.I18nUtils;
+import neatlogic.framework.util.$;
 
 public enum IssueGroupSearch {
 	ISSUEUSERTYPE("issueUserType", "工单干系人类型");
@@ -38,6 +38,6 @@ public enum IssueGroupSearch {
 	}
 
 	public String getText() {
-		return I18nUtils.getMessage(text);
+		return $.t(text);
 	}
 }

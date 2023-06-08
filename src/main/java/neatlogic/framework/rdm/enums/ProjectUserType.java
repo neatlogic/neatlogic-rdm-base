@@ -16,7 +16,7 @@
 
 package neatlogic.framework.rdm.enums;
 
-import neatlogic.framework.util.I18nUtils;
+import neatlogic.framework.util.$;
 
 public enum ProjectUserType {
     MEMBER("member", "项目成员"),
@@ -35,7 +35,7 @@ public enum ProjectUserType {
     }
 
     public String getText() {
-        return I18nUtils.getMessage(text);
+        return $.t(text);
     }
 
 
