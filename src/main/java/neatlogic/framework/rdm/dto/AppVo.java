@@ -47,6 +47,8 @@ public class AppVo {
     private List<AppAttrVo> attrList;
     @EntityField(name = "是否包含任务", type = ApiParamType.BOOLEAN)
     private Boolean hasIssue;
+    @EntityField(name = "任务数量", type = ApiParamType.INTEGER)
+    private Integer issueCount;
 
     @JSONField(serialize = false)
     public String getTableName() {
@@ -132,5 +134,13 @@ public class AppVo {
 
     public void setSort(int sort) {
         this.sort = sort;
+    }
+
+    public Integer getIssueCount() {
+        return issueCount;
+    }
+
+    public void setIssueCount(Integer issueCount) {
+        this.issueCount = issueCount;
     }
 }
