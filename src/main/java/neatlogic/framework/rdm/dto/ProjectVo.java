@@ -49,7 +49,7 @@ public class ProjectVo extends BaseEditorVo {
     private Date startDate;
     @EntityField(name = "common.enddate", type = ApiParamType.LONG)
     private Date endDate;
-    @EntityField(name = "commom.progress", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.progress", type = ApiParamType.INTEGER)
     private Integer progress;
     @EntityField(name = "common.userlist", type = ApiParamType.JSONARRAY)
     private List<ProjectUserVo> userList;
