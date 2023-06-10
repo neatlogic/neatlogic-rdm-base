@@ -26,7 +26,17 @@ public class IssueConditionVo extends IssueVo {
 
     private Integer isMine;
 
+    private Integer isMyCreated;
+
     private Integer isExpired;
+
+    public Integer getIsMyCreated() {
+        return isMyCreated;
+    }
+
+    public void setIsMyCreated(Integer isMyCreated) {
+        this.isMyCreated = isMyCreated;
+    }
 
     @Override
     public Integer getIsExpired() {

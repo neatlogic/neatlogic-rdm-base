@@ -67,6 +67,8 @@ public class ProjectVo extends BaseEditorVo {
     private List<String> leaderIdList;
     @EntityField(name = "page.isclose", type = ApiParamType.INTEGER)
     private Integer isClose;
+    @EntityField(name = "term.rdm.issuecount", type = ApiParamType.INTEGER)
+    private Integer issueCount;
 
 
     public Long getId() {
@@ -90,6 +92,14 @@ public class ProjectVo extends BaseEditorVo {
             }
         }
         return userIdList;
+    }
+
+    public Integer getIssueCount() {
+        return issueCount;
+    }
+
+    public void setIssueCount(Integer issueCount) {
+        this.issueCount = issueCount;
     }
 
     public Integer getIsClose() {
