@@ -16,6 +16,8 @@
 
 package neatlogic.framework.rdm.dto;
 
+import neatlogic.framework.asynchronization.threadlocal.UserContext;
+
 import java.util.List;
 
 public class IssueConditionVo extends IssueVo {
@@ -29,6 +31,8 @@ public class IssueConditionVo extends IssueVo {
     private Integer isMyCreated;
 
     private Integer isExpired;
+
+    private String currentUser;
 
     public Integer getIsMyCreated() {
         return isMyCreated;
@@ -49,6 +53,10 @@ public class IssueConditionVo extends IssueVo {
 
     public List<Long> getStatusList() {
         return status;
+    }
+
+    public String getCurrentUser() {
+        return UserContext.get().getUserUuid(true);
     }
 
     public void setStatus(List<Long> status) {

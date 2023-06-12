@@ -140,6 +140,8 @@ public class IssueVo extends BasePageVo {
     private Integer isEnd;
     @EntityField(name = "common.isexpired", type = ApiParamType.INTEGER)
     private Integer isExpired;
+    @EntityField(name = "是否收藏", type = ApiParamType.INTEGER)
+    private Integer isFavorite;
 
     public String getMode() {
         return mode;
@@ -163,6 +165,14 @@ public class IssueVo extends BasePageVo {
 
     public void setFromId(Long fromId) {
         this.fromId = fromId;
+    }
+
+    public Integer getIsFavorite() {
+        return isFavorite;
+    }
+
+    public void setIsFavorite(Integer isFavorite) {
+        this.isFavorite = isFavorite;
     }
 
     public String getAppType() {
