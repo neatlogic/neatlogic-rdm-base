@@ -18,34 +18,32 @@ package neatlogic.framework.rdm.enums;
 
 import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.common.constvalue.IEnum;
-import neatlogic.framework.util.I18n;
+import neatlogic.framework.util.$;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public enum AttrType implements IEnum<JSONObject> {
-    NUMBER("number", "number", new I18n("数字"), false, false, null),
-    TEXT("text", "text", new I18n("文本"), false, false, null),
-    TEXTAREA("textarea", "textarea", new I18n("文本框"), false, false, null),
-    SELECT("select", "select", new I18n("下拉选择"), false, true, null),
-    DATE("date", "date", new I18n("日期"), false, false, null),
-    DATETIME("datetime", "datetime", new I18n("日期时间"), false, false, null),
-    TIME("time", "time", new I18n("时间"), false, false, null),
-    FILE("file", "file", new I18n("附件"), false, true, null),
-    PRIORITY("priority", "priority", new I18n("优先级"), true, false, null),
-    UESR("user", "user", new I18n("用户"), false, true, null),
-    TAG("tag", "tagList", new I18n("标签"), true, true, null),
-    WORKER("worker", "userIdList", new I18n("处理人"), true, true, null),
-    CATALOG("catalog", "catalog", new I18n("目录"), true, false, null),
-    ITERATION("iteration", "iteration", "迭代", true, false, "iteration"),
-    ENDDATE("enddate", "endDate", "预计结束", true, false, null),
-    STARTDATE("startdate", "startDate", "预计开始", true, false, null);
+    NUMBER("number", "number", "common.number", false, false, null),
+    TEXT("text", "text", "common.text", false, false, null),
+    TEXTAREA("textarea", "textarea", "common.textbox", false, false, null),
+    SELECT("select", "select", "common.dropdownlist", false, true, null),
+    DATE("date", "date", "common.date", false, false, null),
+    DATETIME("datetime", "datetime", "common.datetime", false, false, null),
+    TIME("time", "time", "common.time", false, false, null),
+    FILE("file", "file", "common.attachment", false, true, null),
+    PRIORITY("priority", "priority", "common.priority", true, false, null),
+    UESR("user", "user", "common.user", false, true, null),
+    TAG("tag", "tagList", "common.tag", true, true, null),
+    WORKER("worker", "userIdList", "common.worker", true, true, null),
+    CATALOG("catalog", "catalog", "common.catalog", true, false, null),
+    ITERATION("iteration", "iteration", "common.iteration", true, false, "iteration"),
+    ENDDATE("enddate", "endDate", "term.rdm.enddate", true, false, null),
+    STARTDATE("startdate", "startDate", "term.rdm.startdate", true, false, null);
     private final String name;
     //private final String label;
     private final String type;
-    private final I18n label;
-
-    private final String labelText;
+    private final String label;
 
     private final boolean isPrivate;
 
@@ -54,25 +52,15 @@ public enum AttrType implements IEnum<JSONObject> {
     private final String belong;
 
 
-    AttrType(String type, String name, I18n text, Boolean isPrivate, Boolean isArray, String belong) {
+    AttrType(String type, String name, String label, Boolean isPrivate, Boolean isArray, String belong) {
         this.type = type;
         this.name = name;
-        this.label = text;
+        this.label = label;
         this.isPrivate = isPrivate;
         this.isArray = isArray;
-        this.labelText = null;
         this.belong = belong;
     }
 
-    AttrType(String type, String name, String text, Boolean isPrivate, Boolean isArray, String belong) {
-        this.type = type;
-        this.name = name;
-        this.labelText = text;
-        this.isPrivate = isPrivate;
-        this.isArray = isArray;
-        this.label = null;
-        this.belong = belong;
-    }
 
     public String getType() {
         return type;
@@ -87,7 +75,7 @@ public enum AttrType implements IEnum<JSONObject> {
     }
 
     public String getLabel() {
-        return label != null ? label.toString() : labelText;
+        return $.t(label);
     }
 
     public boolean isArray() {

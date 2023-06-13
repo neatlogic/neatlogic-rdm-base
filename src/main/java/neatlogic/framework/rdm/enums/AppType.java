@@ -18,23 +18,22 @@ package neatlogic.framework.rdm.enums;
 
 import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.common.constvalue.IEnum;
-import neatlogic.framework.util.I18n;
+import neatlogic.framework.util.$;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public enum AppType implements IEnum<JSONObject> {
-    ITERATION("iteration", "迭代", "#1670f0", null, false),
-    STORY("story", new I18n("需求"), "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.STARTDATE, AttrType.ENDDATE}, true),
-    TASK("task", new I18n("任务"), "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
-    BUG("bug", new I18n("缺陷"), "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
-    TESTPLAN("testplan", new I18n("测试计划"), "", new AttrType[]{AttrType.TAG, AttrType.PRIORITY}, false),
-    TESTCASE("testcase", new I18n("测试用例"), "", new AttrType[]{}, false);
+    ITERATION("iteration", "common.iteration", "#87CEEB", null, false),
+    STORY("story", "common.request", "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.STARTDATE, AttrType.ENDDATE}, true),
+    TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
+    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
+    TESTPLAN("testplan", "common.testplan", "#FFA500", new AttrType[]{AttrType.TAG, AttrType.PRIORITY}, false),
+    TESTCASE("testcase", "common.testcase", "#4B0082", new AttrType[]{}, false);
 
 
     private final String name;
-    private I18n label = null;
-    private String labelText;
+    private final String label;
     private final String color;
     private final AttrType[] attrList;
 
@@ -43,19 +42,12 @@ public enum AppType implements IEnum<JSONObject> {
 
     AppType(String name, String label, String color, AttrType[] attrList, Boolean hasIssue) {
         this.name = name;
-        this.labelText = label;
-        this.color = color;
-        this.attrList = attrList;
-        this.hasIssue = hasIssue;
-    }
-
-    AppType(String name, I18n label, String color, AttrType[] attrList, Boolean hasIssue) {
-        this.name = name;
         this.label = label;
         this.color = color;
         this.attrList = attrList;
         this.hasIssue = hasIssue;
     }
+
 
     public String getName() {
         return name;
@@ -66,7 +58,7 @@ public enum AppType implements IEnum<JSONObject> {
     }
 
     public String getLabel() {
-        return label != null ? label.toString() : labelText;
+        return $.t(label);
     }
 
     public String getColor() {
