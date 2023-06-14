@@ -163,6 +163,7 @@ public class IssueVo extends BasePageVo {
         }
     }
 
+
     public void setFromId(Long fromId) {
         this.fromId = fromId;
     }
