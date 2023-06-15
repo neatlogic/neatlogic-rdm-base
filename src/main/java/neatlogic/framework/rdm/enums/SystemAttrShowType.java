@@ -23,17 +23,15 @@ import neatlogic.framework.util.$;
 
 import java.util.List;
 
-public enum ShowType implements IEnum {
+public enum SystemAttrShowType implements IEnum {
 
     ALL("all", "全展示"),
-    LIST("list", "仅列表"),
-    DETAIL("detail", "仅明细"),
-    NONE("none", "不展示");
+    DETAIL("detail", "仅明细");
 
     private final String value;
     private final String text;
 
-    ShowType(String _value, String _text) {
+    SystemAttrShowType(String _value, String _text) {
         this.value = _value;
         this.text = _text;
     }
@@ -47,7 +45,7 @@ public enum ShowType implements IEnum {
     }
 
     public static String getValue(String _status) {
-        for (ShowType s : ShowType.values()) {
+        for (SystemAttrShowType s : SystemAttrShowType.values()) {
             if (s.getValue().equals(_status)) {
                 return s.getValue();
             }
@@ -56,7 +54,7 @@ public enum ShowType implements IEnum {
     }
 
     public static String getText(String name) {
-        for (ShowType s : ShowType.values()) {
+        for (SystemAttrShowType s : SystemAttrShowType.values()) {
             if (s.getValue().equals(name)) {
                 return s.getText();
             }
@@ -68,7 +66,7 @@ public enum ShowType implements IEnum {
     @Override
     public List getValueTextList() {
         JSONArray array = new JSONArray();
-        for (ShowType type : ShowType.values()) {
+        for (SystemAttrShowType type : SystemAttrShowType.values()) {
             array.add(new JSONObject() {
                 {
                     this.put("value", type.getValue());

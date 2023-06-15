@@ -24,6 +24,8 @@ public class IssueConditionVo extends IssueVo {
     private List<String> startDate;
     private List<String> endDate;
 
+    private List<String> createDate;
+
     private List<Long> status;
 
     private Integer isMine;
@@ -69,6 +71,14 @@ public class IssueConditionVo extends IssueVo {
 
     public void setStartDate(List<String> startDate) {
         this.startDate = startDate;
+    }
+
+    public List<String> getCreateDateRange() {
+        return createDate;
+    }
+
+    public void setCreateDate(List<String> createDate) {
+        this.createDate = createDate;
     }
 
     public List<String> getEndDateRange() {
