@@ -18,6 +18,7 @@ package neatlogic.framework.rdm.enums;
 
 import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.common.constvalue.IEnum;
+import neatlogic.framework.rdm.dto.AppAttrVo;
 import neatlogic.framework.util.$;
 
 import java.util.ArrayList;
@@ -33,6 +34,21 @@ public enum SystemAttrType implements IEnum<JSONObject> {
     private final String label;
 
     private final String typeText;
+
+    public static List<AppAttrVo> getSystemAttrList(Long appId) {
+        List<AppAttrVo> systemAttrList = new ArrayList<>();
+        for (SystemAttrType attrType : SystemAttrType.values()) {
+            AppAttrVo systemAttrVo = new AppAttrVo();
+            systemAttrVo.setAppId(appId);
+            systemAttrVo.setId(0L);//避免自动分配id
+            systemAttrVo.setType(attrType.getType());
+            systemAttrVo.setName(attrType.getName());
+            systemAttrVo.setLabel(attrType.getLabel());
+            systemAttrVo.setTypeText(attrType.getTypeText());
+            systemAttrList.add(systemAttrVo);
+        }
+        return systemAttrList;
+    }
 
 
     SystemAttrType(String type, String name, String label, String typeText) {

@@ -29,7 +29,7 @@ public enum AppType implements IEnum<JSONObject> {
     TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
     BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
     TESTPLAN("testplan", "common.testplan", "#FFA500", new AttrType[]{AttrType.TAG, AttrType.PRIORITY}, false),
-    TESTCASE("testcase", "common.testcase", "#4B0082", new AttrType[]{}, false);
+    TESTCASE("testcase", "common.testcase", "#4B0082", new AttrType[]{AttrType.CATALOG, AttrType.WORKER, AttrType.TAG}, false);
 
 
     private final String name;
