@@ -43,7 +43,7 @@ public class IterationVo extends BasePageVo {
     @EntityField(name = "已完成任务总数", type = ApiParamType.INTEGER)
     private int doneIssueCount;
     @EntityField(name = "是否开启", type = ApiParamType.INTEGER)
-    private int isOpen;
+    private Integer isOpen;
     @EntityField(name = "应用配型", type = ApiParamType.STRING)
     private String appType = AppType.ITERATION.getName();
     @EntityField(name = "应用颜色", type = ApiParamType.STRING)
@@ -66,11 +66,11 @@ public class IterationVo extends BasePageVo {
         return issueCount;
     }
 
-    public int getIsOpen() {
+    public Integer getIsOpen() {
         return isOpen;
     }
 
-    public void setIsOpen(int isOpen) {
+    public void setIsOpen(Integer isOpen) {
         this.isOpen = isOpen;
     }
 
