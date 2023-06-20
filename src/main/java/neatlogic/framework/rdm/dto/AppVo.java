@@ -49,6 +49,8 @@ public class AppVo {
     private Boolean hasIssue;
     @EntityField(name = "任务数量", type = ApiParamType.INTEGER)
     private Integer issueCount;
+    @EntityField(name = "是否激活", type = ApiParamType.INTEGER)
+    private Integer isActive;
 
     @JSONField(serialize = false)
     public String getTableName() {
@@ -142,5 +144,13 @@ public class AppVo {
 
     public void setIssueCount(Integer issueCount) {
         this.issueCount = issueCount;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 }

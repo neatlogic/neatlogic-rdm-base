@@ -29,8 +29,8 @@ public enum AppType implements IEnum<JSONObject> {
     TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
     BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
     TESTPLAN("testplan", "common.testplan", "#FFA500", new AttrType[]{AttrType.TAG, AttrType.PRIORITY}, false),
-    TESTCASE("testcase", "common.testcase", "#4B0082", new AttrType[]{AttrType.CATALOG, AttrType.WORKER, AttrType.TAG}, false);
-
+    TESTCASE("testcase", "common.testcase", "#4B0082", new AttrType[]{AttrType.CATALOG, AttrType.WORKER, AttrType.TAG}, false),
+    GITLAB("gitlab", "GitLab", "#ffcc00", null, false);
 
     private final String name;
     private final String label;
@@ -105,6 +105,14 @@ public enum AppType implements IEnum<JSONObject> {
         return "";
     }
 
+    public static AppType get(String name) {
+        for (AppType s : AppType.values()) {
+            if (s.getName().equals(name)) {
+                return s;
+            }
+        }
+        return null;
+    }
 
     @Override
     public List<JSONObject> getValueTextList() {
@@ -120,13 +128,9 @@ public enum AppType implements IEnum<JSONObject> {
         return array;
     }
 
-    @Override
-    public String getValue() {
-        return name;
-    }
 
     @Override
     public String getEnumName() {
-        return "项目对象类型";
+        return "nfre.apptype.getenumname";
     }
 }
