@@ -16,6 +16,7 @@
 
 package neatlogic.framework.rdm.dto;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
@@ -51,6 +52,10 @@ public class AppVo {
     private Integer issueCount;
     @EntityField(name = "是否激活", type = ApiParamType.INTEGER)
     private Integer isActive;
+    @EntityField(name = "配置", type = ApiParamType.JSONOBJECT)
+    private JSONObject config;
+    @JSONField(serialize = false)
+    private String configStr;
 
     @JSONField(serialize = false)
     public String getTableName() {
@@ -152,5 +157,35 @@ public class AppVo {
 
     public void setIsActive(Integer isActive) {
         this.isActive = isActive;
+    }
+
+    public JSONObject getConfig() {
+        if (config == null) {
+            if (StringUtils.isNotBlank(configStr)) {
+                try {
+                    config = JSONObject.parseObject(configStr);
+                } catch (Exception ignored) {
+                    config = new JSONObject();
+                }
+            } else {
+                config = new JSONObject();
+            }
+        }
+        return config;
+    }
+
+    public void setConfig(JSONObject config) {
+        this.config = config;
+    }
+
+    public String getConfigStr() {
+        if (config != null) {
+            configStr = config.toJSONString();
+        }
+        return configStr;
+    }
+
+    public void setConfigStr(String configStr) {
+        this.configStr = configStr;
     }
 }
