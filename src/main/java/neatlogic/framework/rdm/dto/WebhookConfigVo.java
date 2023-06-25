@@ -19,13 +19,14 @@ package neatlogic.framework.rdm.dto;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
 
-public class WebhookVo {
-    @EntityField(name = "应用id", type = ApiParamType.LONG)
+public class WebhookConfigVo {
+    @EntityField(name = "nmraa.getappapi.input.param.desc", type = ApiParamType.LONG)
     private Long appId;
     @EntityField(name = "Web URL", type = ApiParamType.STRING)
     private String webhookUrl;
     @EntityField(name = "Secret Token", type = ApiParamType.STRING)
     private String secretToken;
+
 
     public Long getAppId() {
         return appId;
