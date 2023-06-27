@@ -19,10 +19,12 @@ package neatlogic.framework.rdm.webhook;
 import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.rdm.dto.WebhookConfigVo;
 import neatlogic.framework.rdm.dto.WebhookDataVo;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface IWebhookHandler {
     String getName();
 
+    @Transactional
     WebhookDataVo makeup(JSONObject paramObj, WebhookConfigVo webhookConfigVo);
 
 }

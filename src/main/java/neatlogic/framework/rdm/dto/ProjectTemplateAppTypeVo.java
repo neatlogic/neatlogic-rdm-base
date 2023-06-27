@@ -17,7 +17,7 @@
 package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
-import neatlogic.framework.rdm.enums.AppType;
+import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,7 +31,7 @@ public class ProjectTemplateAppTypeVo {
 
     public String getLabel() {
         if (StringUtils.isBlank(label) && StringUtils.isNotBlank(name)) {
-            label = AppType.getLabel(name);
+            label = AppTypeManager.getLabel(name);
         }
         return label;
     }

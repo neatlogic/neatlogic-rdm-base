@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
-import neatlogic.framework.rdm.enums.AppType;
+import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -80,21 +80,21 @@ public class AppVo {
 
     public String getName() {
         if (StringUtils.isBlank(name) && StringUtils.isNotBlank(type)) {
-            name = AppType.getLabel(type);
+            name = AppTypeManager.getLabel(type);
         }
         return name;
     }
 
     public String getColor() {
         if (StringUtils.isBlank(color) && StringUtils.isNotBlank(type)) {
-            color = AppType.getColor(type);
+            color = AppTypeManager.getColor(type);
         }
         return color;
     }
 
     public Boolean getHasIssue() {
         if (hasIssue == null && StringUtils.isNotBlank(type)) {
-            hasIssue = AppType.getHasIssue(type);
+            hasIssue = AppTypeManager.getHasIssue(type);
         }
         return hasIssue;
     }

@@ -16,21 +16,14 @@
 
 package neatlogic.framework.rdm.enums;
 
-import com.alibaba.fastjson.JSONObject;
-import neatlogic.framework.common.constvalue.IEnum;
+import neatlogic.framework.rdm.enums.core.IAppType;
 import neatlogic.framework.util.$;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public enum AppType implements IEnum<JSONObject> {
+public enum AppType implements IAppType {
     ITERATION("iteration", "common.iteration", "#87CEEB", null, false),
     STORY("story", "common.request", "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.STARTDATE, AttrType.ENDDATE}, true),
     TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
-    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
-    TESTPLAN("testplan", "common.testplan", "#FFA500", new AttrType[]{AttrType.TAG, AttrType.PRIORITY}, false),
-    TESTCASE("testcase", "common.testcase", "#4B0082", new AttrType[]{AttrType.CATALOG, AttrType.WORKER, AttrType.TAG}, false),
-    GITLAB("gitlab", "GitLab", "#ffcc00", null, false);
+    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true);
 
     private final String name;
     private final String label;
@@ -69,68 +62,9 @@ public enum AppType implements IEnum<JSONObject> {
         return attrList;
     }
 
-    public static AttrType[] getAttrList(String name) {
-        for (AppType s : AppType.values()) {
-            if (s.getName().equals(name)) {
-                return s.getAttrList();
-            }
-        }
-        return null;
-    }
-
-    public static String getLabel(String name) {
-        for (AppType s : AppType.values()) {
-            if (s.getName().equals(name)) {
-                return s.getLabel();
-            }
-        }
-        return "";
-    }
-
-    public static boolean getHasIssue(String name) {
-        for (AppType s : AppType.values()) {
-            if (s.getName().equals(name)) {
-                return s.getHasIssue();
-            }
-        }
-        return false;
-    }
-
-    public static String getColor(String name) {
-        for (AppType s : AppType.values()) {
-            if (s.getName().equals(name)) {
-                return s.getColor();
-            }
-        }
-        return "";
-    }
-
-    public static AppType get(String name) {
-        for (AppType s : AppType.values()) {
-            if (s.getName().equals(name)) {
-                return s;
-            }
-        }
-        return null;
-    }
-
     @Override
-    public List<JSONObject> getValueTextList() {
-        List<JSONObject> array = new ArrayList<>();
-        for (AppType appType : AppType.values()) {
-            array.add(new JSONObject() {
-                {
-                    this.put("value", appType.getName());
-                    this.put("text", appType.getLabel());
-                }
-            });
-        }
-        return array;
+    public IAppType[] getAppType() {
+        return AppType.values();
     }
 
-
-    @Override
-    public String getEnumName() {
-        return "nfre.apptype.getenumname";
-    }
 }

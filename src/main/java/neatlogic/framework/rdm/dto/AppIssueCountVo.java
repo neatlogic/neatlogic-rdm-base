@@ -17,7 +17,7 @@
 package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
-import neatlogic.framework.rdm.enums.AppType;
+import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.lang3.StringUtils;
 
@@ -55,7 +55,7 @@ public class AppIssueCountVo {
 
     public String getAppTypeName() {
         if (StringUtils.isBlank(appTypeName) && StringUtils.isNotBlank(this.appType)) {
-            appTypeName = AppType.getLabel(this.appType);
+            appTypeName = AppTypeManager.getLabel(this.appType);
         }
         return appTypeName;
     }
@@ -63,7 +63,7 @@ public class AppIssueCountVo {
 
     public String getAppTypeColor() {
         if (StringUtils.isBlank(appTypeColor) && StringUtils.isNotBlank(this.appType)) {
-            appTypeColor = AppType.getColor(this.appType);
+            appTypeColor = AppTypeManager.getColor(this.appType);
         }
         return appTypeColor;
     }
@@ -78,7 +78,7 @@ public class AppIssueCountVo {
 
     public String getAppTypeLabel() {
         if (StringUtils.isBlank(appTypeLabel) && StringUtils.isNotBlank(this.appType)) {
-            appTypeLabel = AppType.getLabel(this.appType);
+            appTypeLabel = AppTypeManager.getLabel(this.appType);
         }
         return appTypeLabel;
     }

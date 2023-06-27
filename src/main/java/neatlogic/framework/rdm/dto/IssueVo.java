@@ -24,7 +24,7 @@ import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.dto.UserVo;
 import neatlogic.framework.file.dto.FileVo;
 import neatlogic.framework.fulltextindex.utils.FullTextIndexUtil;
-import neatlogic.framework.rdm.enums.AppType;
+import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import neatlogic.framework.util.TimeUtil;
@@ -186,7 +186,7 @@ public class IssueVo extends BasePageVo {
 
     public String getAppColor() {
         if (StringUtils.isBlank(appColor) && StringUtils.isNotBlank(appType)) {
-            appColor = AppType.getColor(appType);
+            appColor = AppTypeManager.getColor(appType);
         }
         return appColor;
     }
