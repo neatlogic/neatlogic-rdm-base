@@ -109,6 +109,8 @@ public class IssueVo extends BasePageVo {
     private String statusLabel;
     @EntityField(name = "common.content", type = ApiParamType.STRING)
     private String content;
+    @EntityField(name = "nfrd.issuevo.entityfield.name", type = ApiParamType.JSONOBJECT)
+    private List<IssueWebhookVo> webhookList;
     @EntityField(name = "common.useridlist", type = ApiParamType.JSONARRAY)
     private List<String> userIdList;
     @EntityField(name = "common.userinfolist", type = ApiParamType.JSONARRAY)
@@ -170,6 +172,14 @@ public class IssueVo extends BasePageVo {
 
     public Integer getIsFavorite() {
         return isFavorite;
+    }
+
+    public List<IssueWebhookVo> getWebhookList() {
+        return webhookList;
+    }
+
+    public void setWebhookList(List<IssueWebhookVo> webhookList) {
+        this.webhookList = webhookList;
     }
 
     public void setIsFavorite(Integer isFavorite) {
