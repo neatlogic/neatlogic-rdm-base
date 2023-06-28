@@ -19,6 +19,7 @@ package neatlogic.framework.rdm.dto;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BaseEditorVo;
 import neatlogic.framework.rdm.enums.ProjectUserType;
+import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import com.alibaba.fastjson.annotation.JSONField;
@@ -136,6 +137,9 @@ public class ProjectVo extends BaseEditorVo {
     }
 
     public List<AppVo> getAppList() {
+        if (CollectionUtils.isNotEmpty(appList)) {
+            appList.removeIf(d -> !AppTypeManager.isContain(d.getType()));
+        }
         return appList;
     }
 

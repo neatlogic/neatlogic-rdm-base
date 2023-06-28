@@ -17,7 +17,9 @@
 package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
+import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
@@ -56,6 +58,9 @@ public class ProjectTemplateVo {
     }
 
     public List<ProjectTemplateAppTypeVo> getAppTypeList() {
+        if (CollectionUtils.isNotEmpty(appTypeList)) {
+            appTypeList.removeIf(d -> !AppTypeManager.isContain(d.getName()));
+        }
         return appTypeList;
     }
 

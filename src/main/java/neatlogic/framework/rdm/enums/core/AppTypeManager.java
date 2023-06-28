@@ -37,6 +37,15 @@ public class AppTypeManager {
         return new ArrayList<>(appTypeSet);
     }
 
+    public static boolean isContain(String appType) {
+        for (IAppType s : appTypeSet) {
+            if (s.getName().equals(appType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static AttrType[] getAttrList(String name) {
         for (IAppType s : appTypeSet) {
             if (s.getName().equals(name)) {
