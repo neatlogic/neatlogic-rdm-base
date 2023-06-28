@@ -33,25 +33,25 @@ import java.util.List;
 public class IssueAuditVo extends BasePageVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "任务id", type = ApiParamType.LONG)
+    @EntityField(name = "term.rdm.issueid", type = ApiParamType.LONG)
     private Long issueId;
-    @EntityField(name = "属性名", type = ApiParamType.STRING)
+    @EntityField(name = "common.attrname", type = ApiParamType.STRING)
     private String attrName;
-    @EntityField(name = "属性id", type = ApiParamType.LONG)
+    @EntityField(name = "nmcaa.getattrapi.input.param.desc.id", type = ApiParamType.LONG)
     private Long attrId;
-    @EntityField(name = "旧值", type = ApiParamType.STRING)
+    @EntityField(name = "common.oldvalue", type = ApiParamType.STRING)
     private JSONArray oldValue;
-    @EntityField(name = "新值", type = ApiParamType.STRING)
+    @EntityField(name = "common.newvalue", type = ApiParamType.STRING)
     private JSONArray newValue;
-    @EntityField(name = "更新方式", type = ApiParamType.ENUM, member = InputFrom.class)
+    @EntityField(name = "common.inputfrom", type = ApiParamType.ENUM, member = InputFrom.class)
     private String inputFrom;
-    @EntityField(name = "操作时间", type = ApiParamType.LONG)
+    @EntityField(name = "common.actiontime", type = ApiParamType.LONG)
     private Date inputTime;
-    @EntityField(name = "操作人", type = ApiParamType.STRING)
+    @EntityField(name = "common.actionuser", type = ApiParamType.STRING)
     private String inputUser;
-    @EntityField(name = "应用属性", type = ApiParamType.JSONOBJECT)
+    @EntityField(name = "term.rdm.appattr", type = ApiParamType.JSONOBJECT)
     private AppAttrVo appAttr;
-    @EntityField(name = "变更方式名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.inputfromname", type = ApiParamType.STRING)
     private String inputFromName;
     @JSONField(serialize = false)
     private String newValueStr;

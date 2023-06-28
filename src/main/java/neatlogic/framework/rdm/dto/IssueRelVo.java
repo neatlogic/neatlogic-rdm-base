@@ -21,11 +21,17 @@ import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.rdm.enums.IssueRelDirection;
 import neatlogic.framework.restful.annotation.EntityField;
 
+import java.util.Objects;
+
 public class IssueRelVo extends BasePageVo {
     @EntityField(name = "来源应用id", type = ApiParamType.LONG)
     private Long fromAppId;
     @EntityField(name = "来源任务id", type = ApiParamType.LONG)
     private Long fromIssueId;
+    @EntityField(name = "来源任务名称", type = ApiParamType.STRING)
+    private String fromIssueName;
+    @EntityField(name = "目标任务名称", type = ApiParamType.STRING)
+    private String toIssueName;
     @EntityField(name = "目标应用id", type = ApiParamType.LONG)
     private Long toAppId;
     @EntityField(name = "目标任务id", type = ApiParamType.LONG)
@@ -39,6 +45,19 @@ public class IssueRelVo extends BasePageVo {
     @EntityField(name = "关联类型", type = ApiParamType.STRING)
     private String relType;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IssueRelVo that = (IssueRelVo) o;
+        return Objects.equals(fromIssueId, that.fromIssueId) && Objects.equals(toIssueId, that.toIssueId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fromIssueId, toIssueId);
+    }
+
     public IssueRelVo() {
 
     }
@@ -49,6 +68,22 @@ public class IssueRelVo extends BasePageVo {
         this.toAppId = toAppId;
         this.toIssueId = toIssueId;
         this.relType = relType;
+    }
+
+    public String getFromIssueName() {
+        return fromIssueName;
+    }
+
+    public void setFromIssueName(String fromIssueName) {
+        this.fromIssueName = fromIssueName;
+    }
+
+    public String getToIssueName() {
+        return toIssueName;
+    }
+
+    public void setToIssueName(String toIssueName) {
+        this.toIssueName = toIssueName;
     }
 
     public Long getFromAppId() {
