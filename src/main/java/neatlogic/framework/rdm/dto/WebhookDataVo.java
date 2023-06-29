@@ -19,13 +19,22 @@ package neatlogic.framework.rdm.dto;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
+import neatlogic.framework.common.dto.BasePageVo;
+import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import org.apache.commons.lang3.StringUtils;
 
-public class WebhookDataVo {
+import java.util.Date;
+
+public class WebhookDataVo extends BasePageVo {
+
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
+    @EntityField(name = "term.rdm.projectid", type = ApiParamType.LONG)
+    private Long projectId;
+    @EntityField(name = "nmraa.getappapi.input.param.desc", type = ApiParamType.LONG)
+    private Long issueAppId;
     @JSONField(serialize = false)
     private String dataStr;
 
@@ -42,13 +51,38 @@ public class WebhookDataVo {
     private String userName;
     @EntityField(name = "nfrd.webhookdatavo.entityfield.name", type = ApiParamType.STRING)
     private String email;
-
+    @EntityField(name = "term.rdm.issueid", type = ApiParamType.LONG)
+    private Long issueId;
+    @EntityField(name = "nmrai.saveissueapi.input.param.desc.name", type = ApiParamType.STRING)
+    private String issueName;
+    @EntityField(name = "term.rdm.apptype", type = ApiParamType.STRING)
+    private String issueAppType;
+    @EntityField(name = "term.rdm.appcolor", type = ApiParamType.STRING)
+    private String issueAppColor;
+    @EntityField(name = "common.createtime", type = ApiParamType.LONG)
+    private Date createTime;
 
     public Long getId() {
         if (id == null) {
             id = SnowflakeUtil.uniqueLong();
         }
         return id;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public Long getIssueAppId() {
+        return issueAppId;
+    }
+
+    public void setIssueAppId(Long issueAppId) {
+        this.issueAppId = issueAppId;
     }
 
     public void setId(Long id) {
@@ -119,5 +153,44 @@ public class WebhookDataVo {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getIssueId() {
+        return issueId;
+    }
+
+    public String getIssueAppType() {
+        return issueAppType;
+    }
+
+    public String getIssueAppColor() {
+        if (StringUtils.isBlank(issueAppColor) && StringUtils.isNotBlank(issueAppType)) {
+            issueAppColor = AppTypeManager.getColor(issueAppType);
+        }
+        return issueAppColor;
+    }
+
+    public void setIssueAppType(String issueAppType) {
+        this.issueAppType = issueAppType;
+    }
+
+    public void setIssueId(Long issueId) {
+        this.issueId = issueId;
+    }
+
+    public String getIssueName() {
+        return issueName;
+    }
+
+    public void setIssueName(String issueName) {
+        this.issueName = issueName;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
