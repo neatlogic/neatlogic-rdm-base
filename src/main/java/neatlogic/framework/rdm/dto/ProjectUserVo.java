@@ -19,16 +19,27 @@ package neatlogic.framework.rdm.dto;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.rdm.enums.ProjectUserType;
 import neatlogic.framework.restful.annotation.EntityField;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 
 public class ProjectUserVo {
-    @EntityField(name = "用户id", type = ApiParamType.STRING)
+    @EntityField(name = "common.userid", type = ApiParamType.STRING)
     private String userId;
-    @EntityField(name = "用户名", type = ApiParamType.STRING)
+    @EntityField(name = "common.username", type = ApiParamType.STRING)
     private String userName;
-    @EntityField(name = "用户类型", type = ApiParamType.ENUM, member = ProjectUserType.class)
+    @EntityField(name = "common.usertype", type = ApiParamType.ENUM, member = ProjectUserType.class)
     private String userType;
-    @EntityField(name = "项目id", type = ApiParamType.LONG)
+    @EntityField(name = "common.usertypename", type = ApiParamType.STRING)
+    private String userTypeName;
+    @EntityField(name = "nfrd.projectuservo.entityfield.name", type = ApiParamType.JSONARRAY)
+    private List<ProjectUserTypeVo> userTypeList;
+    @EntityField(name = "term.rdm.projectid", type = ApiParamType.LONG)
     private Long projectId;
+
 
     public String getUserId() {
         return userId;
@@ -60,5 +71,35 @@ public class ProjectUserVo {
 
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
+    }
+
+    public List<ProjectUserTypeVo> getUserTypeList() {
+        if (CollectionUtils.isNotEmpty(userTypeList)) {
+            userTypeList.sort(Comparator.comparing(o -> Objects.requireNonNull(ProjectUserType.get(o.getUserType()))));
+        }
+        return userTypeList;
+    }
+
+
+    public ProjectUserType getMainUserType() {
+        if (CollectionUtils.isNotEmpty(this.getUserTypeList())) {
+            return ProjectUserType.get(this.getUserTypeList().get(0).getUserType());
+        }
+        return ProjectUserType.MEMBER;
+    }
+
+    public void setUserTypeList(List<ProjectUserTypeVo> userTypeList) {
+        this.userTypeList = userTypeList;
+    }
+
+    public String getUserTypeName() {
+        if (StringUtils.isNotBlank(userType) && StringUtils.isBlank(userTypeName)) {
+            userTypeName = ProjectUserType.getText(userType);
+        }
+        return userTypeName;
+    }
+
+    public void setUserTypeName(String userTypeName) {
+        this.userTypeName = userTypeName;
     }
 }

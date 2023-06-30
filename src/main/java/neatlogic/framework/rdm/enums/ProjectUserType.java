@@ -16,12 +16,17 @@
 
 package neatlogic.framework.rdm.enums;
 
+import com.alibaba.fastjson.JSONObject;
+import neatlogic.framework.common.constvalue.IEnum;
 import neatlogic.framework.util.$;
 
-public enum ProjectUserType {
+import java.util.ArrayList;
+import java.util.List;
+
+public enum ProjectUserType implements IEnum<JSONObject> {
     OWNER("owner", "term.rdm.projectowner"),
-    MEMBER("member", "term.rdm.projectmember"),
-    LEADER("leader", "term.rdm.projectleader");
+    LEADER("leader", "term.rdm.projectleader"),
+    MEMBER("member", "term.rdm.projectmember");;
 
 
     private final String value;
@@ -32,12 +37,38 @@ public enum ProjectUserType {
         this.text = _text;
     }
 
+    @Override
+    public List<JSONObject> getValueTextList() {
+        List<JSONObject> resultList = new ArrayList<>();
+        for (ProjectUserType e : values()) {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("value", e.getValue());
+            jsonObj.put("text", e.getText());
+            resultList.add(jsonObj);
+        }
+        return resultList;
+    }
+
     public String getValue() {
         return value;
     }
 
+    @Override
+    public String getEnumName() {
+        return "nfre.projectusertype.getenumname";
+    }
+
     public String getText() {
         return $.t(text);
+    }
+
+    public static ProjectUserType get(String name) {
+        for (ProjectUserType s : ProjectUserType.values()) {
+            if (s.getValue().equals(name)) {
+                return s;
+            }
+        }
+        return null;
     }
 
 

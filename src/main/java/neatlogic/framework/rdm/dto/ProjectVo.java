@@ -16,20 +16,18 @@
 
 package neatlogic.framework.rdm.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BaseEditorVo;
 import neatlogic.framework.rdm.enums.ProjectUserType;
 import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
-import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ProjectVo extends BaseEditorVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
@@ -87,7 +85,7 @@ public class ProjectVo extends BaseEditorVo {
         if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(userIdList)) {
             userIdList = new ArrayList<>();
             for (ProjectUserVo userVo : userList) {
-                if (userVo.getUserType().equals(ProjectUserType.MEMBER.getValue())) {
+                if (userVo.getUserTypeList() != null && userVo.getUserTypeList().stream().anyMatch(d -> d.getUserType().equalsIgnoreCase(ProjectUserType.MEMBER.getValue()))) {
                     userIdList.add("user#" + userVo.getUserId());
                 }
             }
@@ -115,7 +113,7 @@ public class ProjectVo extends BaseEditorVo {
         if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(leaderIdList)) {
             leaderIdList = new ArrayList<>();
             for (ProjectUserVo userVo : userList) {
-                if (userVo.getUserType().equals(ProjectUserType.LEADER.getValue())) {
+                if (userVo.getUserTypeList() != null && userVo.getUserTypeList().stream().anyMatch(d -> d.getUserType().equalsIgnoreCase(ProjectUserType.LEADER.getValue()))) {
                     leaderIdList.add("user#" + userVo.getUserId());
                 }
             }
@@ -254,6 +252,9 @@ public class ProjectVo extends BaseEditorVo {
     }
 
     public List<ProjectUserVo> getUserList() {
+        if (CollectionUtils.isNotEmpty(userList)) {
+            userList.sort(Comparator.comparing(ProjectUserVo::getMainUserType));
+        }
         return userList;
     }
 
