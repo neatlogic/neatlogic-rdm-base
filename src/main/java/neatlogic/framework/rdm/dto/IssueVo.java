@@ -19,7 +19,6 @@ package neatlogic.framework.rdm.dto;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
-import neatlogic.framework.common.constvalue.GroupSearch;
 import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.dto.UserVo;
 import neatlogic.framework.file.dto.FileVo;
@@ -319,7 +318,7 @@ public class IssueVo extends BasePageVo {
         if (userIdList == null && userList != null) {
             userIdList = new ArrayList<>();
             for (UserVo userVo : userList) {
-                userIdList.add(GroupSearch.USER.getValuePlugin() + userVo.getUuid());
+                userIdList.add(userVo.getUuid());
             }
         }
         return userIdList;

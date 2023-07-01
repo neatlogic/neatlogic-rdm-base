@@ -17,6 +17,7 @@
 package neatlogic.framework.rdm.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import neatlogic.framework.asynchronization.threadlocal.UserContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BaseEditorVo;
 import neatlogic.framework.rdm.enums.ProjectUserType;
@@ -60,15 +61,23 @@ public class ProjectVo extends BaseEditorVo {
     private List<String> startDateRange;
     @JSONField(serialize = false)
     private List<String> endDateRange;
-    @EntityField(name = "term.rdm.project.useridlist", type = ApiParamType.JSONARRAY)
-    private List<String> userIdList;
+
+    /*@EntityField(name = "term.rdm.project.useridlist", type = ApiParamType.JSONARRAY)
+    private List<String> memberIdList;
     @EntityField(name = "term.rdm.project.manageridlist", type = ApiParamType.JSONARRAY)
     private List<String> leaderIdList;
+
+    private List<String> ownerIdList;*/
     @EntityField(name = "page.isclose", type = ApiParamType.INTEGER)
     private Integer isClose;
     @EntityField(name = "term.rdm.issuecount", type = ApiParamType.INTEGER)
     private Integer issueCount;
-
+    @EntityField(name = "nfrd.projectvo.entityfield.name.isowner", type = ApiParamType.BOOLEAN)
+    private boolean isOwner;
+    @EntityField(name = "nfrd.projectvo.entityfield.name.isleader", type = ApiParamType.BOOLEAN)
+    private boolean isLeader;
+    @EntityField(name = "nfrd.projectvo.entityfield.name.ismember", type = ApiParamType.BOOLEAN)
+    private boolean isMember;
 
     public Long getId() {
         if (id == null) {
@@ -81,17 +90,47 @@ public class ProjectVo extends BaseEditorVo {
         this.id = id;
     }
 
-    public List<String> getUserIdList() {
-        if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(userIdList)) {
-            userIdList = new ArrayList<>();
+    public boolean getIsOwner() {
+        if (CollectionUtils.isNotEmpty(this.userList)) {
+            return this.userList.stream().anyMatch(d -> d.getUserTypeList().stream()
+                    .anyMatch(dd -> dd.getUserType().equalsIgnoreCase(ProjectUserType.OWNER.getValue())) &&
+                    d.getUserId().equalsIgnoreCase(UserContext.get().getUserUuid(true)));
+        }
+        return false;
+    }
+
+
+    public boolean getIsLeader() {
+        if (CollectionUtils.isNotEmpty(this.userList)) {
+            return this.userList.stream().anyMatch(d -> d.getUserTypeList().stream()
+                    .anyMatch(dd -> dd.getUserType().equalsIgnoreCase(ProjectUserType.LEADER.getValue())) &&
+                    d.getUserId().equalsIgnoreCase(UserContext.get().getUserUuid(true)));
+        }
+        return false;
+    }
+
+
+    public boolean getIsMember() {
+        if (CollectionUtils.isNotEmpty(this.userList)) {
+            return this.userList.stream().anyMatch(d -> d.getUserTypeList().stream()
+                    .anyMatch(dd -> dd.getUserType().equalsIgnoreCase(ProjectUserType.MEMBER.getValue())) &&
+                    d.getUserId().equalsIgnoreCase(UserContext.get().getUserUuid(true)));
+        }
+        return false;
+    }
+
+
+    /*public List<String> getMemberIdList() {
+        if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(memberIdList)) {
+            memberIdList = new ArrayList<>();
             for (ProjectUserVo userVo : userList) {
                 if (userVo.getUserTypeList() != null && userVo.getUserTypeList().stream().anyMatch(d -> d.getUserType().equalsIgnoreCase(ProjectUserType.MEMBER.getValue()))) {
-                    userIdList.add("user#" + userVo.getUserId());
+                    memberIdList.add("user#" + userVo.getUserId());
                 }
             }
         }
-        return userIdList;
-    }
+        return memberIdList;
+    }*/
 
     public Integer getIssueCount() {
         return issueCount;
@@ -109,7 +148,15 @@ public class ProjectVo extends BaseEditorVo {
         this.isClose = isClose;
     }
 
-    public List<String> getLeaderIdList() {
+    /*public List<String> getOwnerIdList() {
+        return ownerIdList;
+    }
+
+    public void setOwnerIdList(List<String> ownerIdList) {
+        this.ownerIdList = ownerIdList;
+    }*/
+
+    /*public List<String> getLeaderIdList() {
         if (CollectionUtils.isNotEmpty(userList) && CollectionUtils.isEmpty(leaderIdList)) {
             leaderIdList = new ArrayList<>();
             for (ProjectUserVo userVo : userList) {
@@ -119,12 +166,12 @@ public class ProjectVo extends BaseEditorVo {
             }
         }
         return leaderIdList;
-    }
+    }*/
 
 
-    public void setUserIdList(List<String> userIdList) {
-        this.userIdList = userIdList;
-    }
+    /*public void setMemberIdList(List<String> memberIdList) {
+        this.memberIdList = memberIdList;
+    }*/
 
     public String getType() {
         return type;
@@ -261,4 +308,6 @@ public class ProjectVo extends BaseEditorVo {
     public void setUserList(List<ProjectUserVo> userList) {
         this.userList = userList;
     }
+
+
 }

@@ -23,6 +23,9 @@ public class ProjectConditionVo extends ProjectVo {
 
     private Integer isMine;
 
+    private List<String> userIdList;
+
+
     public Integer getIsMine() {
         return isMine;
     }
@@ -37,5 +40,13 @@ public class ProjectConditionVo extends ProjectVo {
 
     public void setIdList(List<Long> idList) {
         this.idList = idList;
+    }
+
+    public List<String> getUserIdList() {
+        return userIdList;
+    }
+
+    public void setUserIdList(List<String> userIdList) {
+        this.userIdList = userIdList;
     }
 }

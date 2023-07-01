@@ -16,6 +16,7 @@
 
 package neatlogic.framework.rdm.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.rdm.enums.ProjectUserType;
 import neatlogic.framework.restful.annotation.EntityField;
@@ -31,9 +32,10 @@ public class ProjectUserVo {
     private String userId;
     @EntityField(name = "common.username", type = ApiParamType.STRING)
     private String userName;
-    @EntityField(name = "common.usertype", type = ApiParamType.ENUM, member = ProjectUserType.class)
+
+    @JSONField(serialize = false)
     private String userType;
-    @EntityField(name = "common.usertypename", type = ApiParamType.STRING)
+    @JSONField(serialize = false)
     private String userTypeName;
     @EntityField(name = "nfrd.projectuservo.entityfield.name", type = ApiParamType.JSONARRAY)
     private List<ProjectUserTypeVo> userTypeList;
