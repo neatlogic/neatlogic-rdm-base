@@ -22,8 +22,8 @@ import neatlogic.framework.util.$;
 public enum AppType implements IAppType {
     ITERATION("iteration", "common.iteration", "#87CEEB", null, false),
     STORY("story", "common.request", "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.STARTDATE, AttrType.ENDDATE}, true),
-    TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
-    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true);
+    TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true),
+    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true);
 
     private final String name;
     private final String label;

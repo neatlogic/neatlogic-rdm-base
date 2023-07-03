@@ -20,12 +20,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
+import neatlogic.framework.rdm.enums.AttrType;
 import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -34,25 +36,27 @@ issue包括需求、任务、测试计划、测试用例、缺陷等
 public class AppVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "项目id", type = ApiParamType.LONG)
+    @EntityField(name = "term.rdm.projectid", type = ApiParamType.LONG)
     private Long projectId;
-    @EntityField(name = "类型", type = ApiParamType.ENUM, member = AppVo.class)
+    @EntityField(name = "common.type", type = ApiParamType.ENUM, member = AppVo.class)
     private String type;
-    @EntityField(name = "排序", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.sort", type = ApiParamType.INTEGER)
     private int sort;
-    @EntityField(name = "名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.name", type = ApiParamType.STRING)
     private String name;
-    @EntityField(name = "颜色", type = ApiParamType.STRING)
+    @EntityField(name = "common.color", type = ApiParamType.STRING)
     private String color;
-    @EntityField(name = "属性列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "common.attributelist", type = ApiParamType.JSONARRAY)
     private List<AppAttrVo> attrList;
-    @EntityField(name = "是否包含任务", type = ApiParamType.BOOLEAN)
+    @EntityField(name = "nfrd.appvo.entityfield.name.hasissue", type = ApiParamType.BOOLEAN)
     private Boolean hasIssue;
-    @EntityField(name = "任务数量", type = ApiParamType.INTEGER)
+    @EntityField(name = "nfrd.appvo.entityfield.name.hasiteration", type = ApiParamType.BOOLEAN)
+    private Boolean hasIteration;
+    @EntityField(name = "term.rdm.issuecount", type = ApiParamType.INTEGER)
     private Integer issueCount;
-    @EntityField(name = "是否激活", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.isactive", type = ApiParamType.INTEGER)
     private Integer isActive;
-    @EntityField(name = "配置", type = ApiParamType.JSONOBJECT)
+    @EntityField(name = "common.config", type = ApiParamType.JSONOBJECT)
     private JSONObject config;
     @JSONField(serialize = false)
     private String configStr;
@@ -97,6 +101,20 @@ public class AppVo {
             hasIssue = AppTypeManager.getHasIssue(type);
         }
         return hasIssue;
+    }
+
+    public Boolean getHasIteration() {
+        if (hasIteration == null && StringUtils.isNotBlank(type)) {
+            AttrType[] attrTypeList = AppTypeManager.getAttrList(type);
+            if (attrTypeList != null) {
+                hasIteration = Arrays.stream(attrTypeList).anyMatch(d -> d == AttrType.ITERATION);
+            } else {
+                hasIteration = false;
+            }
+        } else {
+            hasIteration = false;
+        }
+        return hasIteration;
     }
 
     public void setColor(String color) {
