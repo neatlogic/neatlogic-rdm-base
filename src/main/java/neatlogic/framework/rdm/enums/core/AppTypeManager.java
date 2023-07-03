@@ -29,7 +29,14 @@ public class AppTypeManager {
         Reflections reflections = ReflectionManager.getInstance();
         Set<Class<? extends IAppType>> appTypeClass = reflections.getSubTypesOf(IAppType.class);
         for (Class<? extends IAppType> c : appTypeClass) {
-            Collections.addAll(appTypeSet, c.getEnumConstants());
+            IAppType[] appTypes = c.getEnumConstants();
+            boolean isValid = false;
+            for (IAppType appType : appTypes) {
+                isValid = appType.isValid();
+            }
+            if (isValid) {
+                Collections.addAll(appTypeSet, c.getEnumConstants());
+            }
         }
     }
 

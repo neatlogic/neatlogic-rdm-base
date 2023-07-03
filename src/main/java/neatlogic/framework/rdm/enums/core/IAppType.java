@@ -40,6 +40,10 @@ public interface IAppType extends IEnum<JSONObject> {
         return this.getName();
     }
 
+    default boolean isValid() {
+        return true;
+    }
+
     @Override
     default List<JSONObject> getValueTextList() {
         List<JSONObject> array = new ArrayList<>();
