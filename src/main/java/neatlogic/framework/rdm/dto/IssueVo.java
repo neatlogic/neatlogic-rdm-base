@@ -108,7 +108,7 @@ public class IssueVo extends BasePageVo {
     private String statusLabel;
     @EntityField(name = "common.content", type = ApiParamType.STRING)
     private String content;
-    @EntityField(name = "nfrd.issuevo.entityfield.name", type = ApiParamType.JSONOBJECT)
+    @EntityField(name = "nfrd.issuevo.entityfield.name.webhooklist", type = ApiParamType.JSONOBJECT)
     private List<IssueWebhookVo> webhookList;
     @EntityField(name = "common.useridlist", type = ApiParamType.JSONARRAY)
     private List<String> userIdList;
@@ -141,8 +141,38 @@ public class IssueVo extends BasePageVo {
     private Integer isEnd;
     @EntityField(name = "common.isexpired", type = ApiParamType.INTEGER)
     private Integer isExpired;
-    @EntityField(name = "是否收藏", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.isfavoried", type = ApiParamType.INTEGER)
     private Integer isFavorite;
+    @EntityField(name = "nfrd.issuevo.entityfield.name.isowner", type = ApiParamType.BOOLEAN)
+    private boolean isProjectOwner;
+    @EntityField(name = "nfrd.issuevo.entityfield.name.isleader", type = ApiParamType.BOOLEAN)
+    private boolean isProjectLeader;
+    @EntityField(name = "nfrd.issuevo.entityfield.name.ismember", type = ApiParamType.BOOLEAN)
+    private boolean isProjectMember;
+
+    public boolean getIsProjectOwner() {
+        return isProjectOwner;
+    }
+
+    public void setIsProjectOwner(boolean projectOwner) {
+        isProjectOwner = projectOwner;
+    }
+
+    public boolean getIsProjectLeader() {
+        return isProjectLeader;
+    }
+
+    public void setIsProjectLeader(boolean projectLeader) {
+        isProjectLeader = projectLeader;
+    }
+
+    public boolean getIsProjectMember() {
+        return isProjectMember;
+    }
+
+    public void setIsProjectMember(boolean projectMember) {
+        isProjectMember = projectMember;
+    }
 
     public String getMode() {
         return mode;
