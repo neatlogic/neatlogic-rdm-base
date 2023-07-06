@@ -16,33 +16,38 @@
 
 package neatlogic.framework.rdm.dto;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
-import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.lang3.StringUtils;
 
 public class ProjectTemplateAppTypeVo {
-    @EntityField(name = "名称", type = ApiParamType.STRING)
-    private String label;
-    @EntityField(name = "唯一标识", type = ApiParamType.STRING)
-    private String name;
-    @EntityField(name = "排序", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.templateid", type = ApiParamType.LONG)
+    private Long templateId;
+    @EntityField(name = "term.rdm.apptype", type = ApiParamType.STRING)
+    private String appType;
+    @EntityField(name = "common.sort", type = ApiParamType.INTEGER)
     private Integer sort;
+    @EntityField(name = "common.config", type = ApiParamType.JSONOBJECT)
+    private JSONObject config;
+    @JSONField(serialize = false)
+    private String configStr;
 
-    public String getLabel() {
-        if (StringUtils.isBlank(label) && StringUtils.isNotBlank(name)) {
-            label = AppTypeManager.getLabel(name);
-        }
-        return label;
+    public Long getTemplateId() {
+        return templateId;
     }
 
-
-    public String getName() {
-        return name;
+    public void setTemplateId(Long templateId) {
+        this.templateId = templateId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAppType() {
+        return appType;
+    }
+
+    public void setAppType(String appType) {
+        this.appType = appType;
     }
 
     public Integer getSort() {
@@ -51,5 +56,31 @@ public class ProjectTemplateAppTypeVo {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public JSONObject getConfig() {
+        if (config == null && StringUtils.isNotBlank(configStr)) {
+            try {
+                config = JSONObject.parseObject(configStr);
+            } catch (Exception ignored) {
+
+            }
+        }
+        return config;
+    }
+
+    public void setConfig(JSONObject config) {
+        this.config = config;
+    }
+
+    public String getConfigStr() {
+        if (config != null) {
+            configStr = config.toJSONString();
+        }
+        return configStr;
+    }
+
+    public void setConfigStr(String configStr) {
+        this.configStr = configStr;
     }
 }

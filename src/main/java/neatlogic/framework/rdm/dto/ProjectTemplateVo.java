@@ -26,11 +26,11 @@ import java.util.List;
 public class ProjectTemplateVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.name", type = ApiParamType.STRING)
     private String name;
-    @EntityField(name = "是否激活", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.isactive", type = ApiParamType.INTEGER)
     private Integer isActive;
-    @EntityField(name = "应用类型列表", type = ApiParamType.JSONARRAY)
+    @EntityField(name = "nfrd.projecttemplatevo.entityfield.name.apptypelist", type = ApiParamType.JSONARRAY)
     private List<ProjectTemplateAppTypeVo> appTypeList;
 
     public Long getId() {
@@ -59,7 +59,7 @@ public class ProjectTemplateVo {
 
     public List<ProjectTemplateAppTypeVo> getAppTypeList() {
         if (CollectionUtils.isNotEmpty(appTypeList)) {
-            appTypeList.removeIf(d -> !AppTypeManager.isContain(d.getName()));
+            appTypeList.removeIf(d -> !AppTypeManager.isContain(d.getAppType()));
         }
         return appTypeList;
     }
