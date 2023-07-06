@@ -23,4 +23,8 @@ public class ProjectNotFoundException extends ApiRuntimeException {
     public ProjectNotFoundException(Long projectId) {
         super("nfre.projectnotfoundexception.projectnotfoundexception", projectId);
     }
+
+    public ProjectNotFoundException() {
+        super("nfre.projectnotfoundexception.theprojectnotfoundexception");
+    }
 }
