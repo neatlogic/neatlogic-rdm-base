@@ -19,14 +19,19 @@ package neatlogic.framework.rdm.dto;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
+import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 public class ProjectTemplateAppTypeVo {
     @EntityField(name = "common.templateid", type = ApiParamType.LONG)
     private Long templateId;
     @EntityField(name = "term.rdm.apptype", type = ApiParamType.STRING)
     private String appType;
+    @EntityField(name = "nfrd.projecttemplateapptypevo.entityfield.name.apptypename", type = ApiParamType.STRING)
+    private String appTypeName;
     @EntityField(name = "common.sort", type = ApiParamType.INTEGER)
     private Integer sort;
     @EntityField(name = "common.config", type = ApiParamType.JSONOBJECT)
@@ -48,6 +53,17 @@ public class ProjectTemplateAppTypeVo {
 
     public void setAppType(String appType) {
         this.appType = appType;
+    }
+
+    public String getAppTypeName() {
+        if (StringUtils.isBlank(appTypeName) && StringUtils.isNotBlank(appType)) {
+            appTypeName = Objects.requireNonNull(AppTypeManager.get(appType)).getLabel();
+        }
+        return appTypeName;
+    }
+
+    public void setAppTypeName(String appTypeName) {
+        this.appTypeName = appTypeName;
     }
 
     public Integer getSort() {

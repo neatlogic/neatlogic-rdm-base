@@ -19,6 +19,7 @@ package neatlogic.framework.rdm.dto;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.SnowflakeUtil;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
@@ -34,6 +35,9 @@ public class ProjectTemplateVo {
     private List<ProjectTemplateAppTypeVo> appTypeList;
 
     public Long getId() {
+        if (id == null) {
+            id = SnowflakeUtil.uniqueLong();
+        }
         return id;
     }
 
