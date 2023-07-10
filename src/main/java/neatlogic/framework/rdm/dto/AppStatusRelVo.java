@@ -20,7 +20,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.Md5Util;
 import neatlogic.framework.util.SnowflakeUtil;
+import neatlogic.framework.util.UuidUtil;
 import org.apache.commons.lang3.StringUtils;
 
 public class AppStatusRelVo {
@@ -28,6 +30,12 @@ public class AppStatusRelVo {
     private Long id;
     @EntityField(name = "来源状态id", type = ApiParamType.LONG)
     private Long fromStatusId;
+
+    @EntityField(name = "来源状态uuid", type = ApiParamType.STRING)
+    private String fromStatusUuid;
+
+    @EntityField(name = "目标状态uuid", type = ApiParamType.STRING)
+    private String toStatusUuid;
     @EntityField(name = "来源状态唯一标识", type = ApiParamType.STRING)
     private String fromStatusName;
 
@@ -50,12 +58,49 @@ public class AppStatusRelVo {
     @JSONField(serialize = false)
     private String configStr;
 
+    @EntityField(name = "随机生成的uuid", type = ApiParamType.STRING)
+    private String uuid;
+
+    public String getUuid() {
+        if (StringUtils.isBlank(uuid)) {
+            if (id != null) {
+                uuid = Md5Util.encryptMD5(id.toString());
+            } else {
+                uuid = UuidUtil.randomUuid();
+            }
+        }
+        return uuid;
+    }
 
     public Long getId() {
         if (id == null) {
             id = SnowflakeUtil.uniqueLong();
         }
         return id;
+    }
+
+    public String getFromStatusUuid() {
+        //通过来源id得到来源uuid
+        if (StringUtils.isBlank(fromStatusUuid) && fromStatusId != null) {
+            fromStatusUuid = Md5Util.encryptMD5(fromStatusId.toString());
+        }
+        return fromStatusUuid;
+    }
+
+    public void setFromStatusUuid(String fromStatusUuid) {
+        this.fromStatusUuid = fromStatusUuid;
+    }
+
+    public String getToStatusUuid() {
+        //通过目标id得到目标uuid
+        if (StringUtils.isBlank(toStatusUuid) && toStatusId != null) {
+            toStatusUuid = Md5Util.encryptMD5(toStatusId.toString());
+        }
+        return toStatusUuid;
+    }
+
+    public void setToStatusUuid(String toStatusUuid) {
+        this.toStatusUuid = toStatusUuid;
     }
 
     public void setId(Long id) {

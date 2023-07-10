@@ -18,7 +18,10 @@ package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.Md5Util;
 import neatlogic.framework.util.SnowflakeUtil;
+import neatlogic.framework.util.UuidUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -41,6 +44,8 @@ public class AppStatusVo {
     private String color;
     @EntityField(name = "说明", type = ApiParamType.STRING)
     private String description;
+    @EntityField(name = "随机生成的uuid", type = ApiParamType.STRING)
+    private String uuid;
 
     public Long getId() {
         if (id == null) {
@@ -81,6 +86,18 @@ public class AppStatusVo {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getUuid() {
+        if (StringUtils.isBlank(uuid)) {
+            if (id != null) {
+                uuid = Md5Util.encryptMD5(id.toString());
+            } else {
+                uuid = UuidUtil.randomUuid();
+            }
+        }
+        return uuid;
+    }
+
 
     public String getLabel() {
         return label;

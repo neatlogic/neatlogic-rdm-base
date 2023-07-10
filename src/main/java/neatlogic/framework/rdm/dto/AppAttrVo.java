@@ -22,7 +22,9 @@ import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.rdm.enums.AttrType;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.Md5Util;
 import neatlogic.framework.util.SnowflakeUtil;
+import neatlogic.framework.util.UuidUtil;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -57,6 +59,8 @@ public class AppAttrVo {
     private String configStr;
     @EntityField(name = "属性所属应用类型", type = ApiParamType.STRING)
     private String appType;
+    @EntityField(name = "随机生成的uuid", type = ApiParamType.STRING)
+    private String uuid;
 
     @JSONField(serialize = false)
     public String getTableName() {
@@ -94,6 +98,18 @@ public class AppAttrVo {
     public void setAppId(Long appId) {
         this.appId = appId;
     }
+
+    public String getUuid() {
+        if (StringUtils.isBlank(uuid)) {
+            if (id != null) {
+                uuid = Md5Util.encryptMD5(id.toString());
+            } else {
+                uuid = UuidUtil.randomUuid();
+            }
+        }
+        return uuid;
+    }
+
 
     public String getType() {
         return type;
