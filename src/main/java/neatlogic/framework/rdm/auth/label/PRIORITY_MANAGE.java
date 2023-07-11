@@ -37,6 +37,6 @@ public class PRIORITY_MANAGE extends AuthBase {
 
     @Override
     public Integer getSort() {
-        return 2;
+        return 3;
     }
 }

@@ -36,6 +36,8 @@ public interface IAppType extends IEnum<JSONObject> {
 
     IAppType[] getAppType();
 
+    int getSort();
+
     default String getValue() {
         return this.getName();
     }

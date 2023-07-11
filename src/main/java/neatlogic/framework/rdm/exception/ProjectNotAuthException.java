@@ -23,4 +23,5 @@ public class ProjectNotAuthException extends ApiRuntimeException {
     public ProjectNotAuthException(String projectName) {
         super("nfre.projectnotauthexception.projectnotauthexception", projectName);
     }
+
 }

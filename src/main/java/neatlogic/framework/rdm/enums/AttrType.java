@@ -84,7 +84,7 @@ public enum AttrType implements IEnum<JSONObject> {
 
     public static String getLabel(String name) {
         for (AttrType s : AttrType.values()) {
-            if (s.getType().equals(name)) {
+            if (s.getType().equalsIgnoreCase(name)) {
                 return s.getLabel();
             }
         }
@@ -93,11 +93,20 @@ public enum AttrType implements IEnum<JSONObject> {
 
     public static boolean getIsArray(String name) {
         for (AttrType s : AttrType.values()) {
-            if (s.getType().equals(name)) {
+            if (s.getType().equalsIgnoreCase(name)) {
                 return s.isArray();
             }
         }
         return false;
+    }
+
+    public static AttrType get(String name) {
+        for (AttrType s : AttrType.values()) {
+            if (s.getType().equalsIgnoreCase(name)) {
+                return s;
+            }
+        }
+        return null;
     }
 
     @Override

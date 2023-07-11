@@ -41,12 +41,14 @@ public class AppTypeManager {
     }
 
     public static List<IAppType> getAppTypeList() {
-        return new ArrayList<>(appTypeSet);
+        List<IAppType> appTypeList = new ArrayList<>(appTypeSet);
+        appTypeList.sort(Comparator.comparingInt(IAppType::getSort));
+        return appTypeList;
     }
 
     public static boolean isContain(String appType) {
         for (IAppType s : appTypeSet) {
-            if (s.getName().equals(appType)) {
+            if (s.getName().equalsIgnoreCase(appType)) {
                 return true;
             }
         }

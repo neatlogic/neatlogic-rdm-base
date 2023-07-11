@@ -17,16 +17,17 @@
 package neatlogic.framework.rdm.auth.label;
 
 import neatlogic.framework.auth.core.AuthBase;
+import neatlogic.framework.util.$;
 
-public class PROJECT_TEMPLATE_MANAGE extends AuthBase {
+public class PROJECT_MANAGE extends AuthBase {
     @Override
     public String getAuthDisplayName() {
-        return "项目模板管理权限";
+        return $.t("nfral.project_manage.getauthdisplayname");
     }
 
     @Override
     public String getAuthIntroduction() {
-        return "对项目模板进行添加、修改、删除操作，把项目另存为项目模板。";
+        return $.t("nfral.project_manage.getauthintroduction");
     }
 
     @Override
@@ -36,6 +37,6 @@ public class PROJECT_TEMPLATE_MANAGE extends AuthBase {
 
     @Override
     public Integer getSort() {
-        return 4;
+        return 2;
     }
 }

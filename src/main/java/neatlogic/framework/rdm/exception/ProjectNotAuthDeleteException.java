@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-package neatlogic.framework.rdm.auth.label;
+package neatlogic.framework.rdm.exception;
 
-import neatlogic.framework.auth.core.AuthBase;
+import neatlogic.framework.exception.core.ApiRuntimeException;
 
-public class PROJECT_TEMPLATE_MANAGE extends AuthBase {
-    @Override
-    public String getAuthDisplayName() {
-        return "项目模板管理权限";
+public class ProjectNotAuthDeleteException extends ApiRuntimeException {
+
+    public ProjectNotAuthDeleteException(String projectName) {
+        super("nfre.projectnotauthdeleteexception.projectnotauthdeleteexception", projectName);
     }
 
-    @Override
-    public String getAuthIntroduction() {
-        return "对项目模板进行添加、修改、删除操作，把项目另存为项目模板。";
-    }
-
-    @Override
-    public String getAuthGroup() {
-        return "rdm";
-    }
-
-    @Override
-    public Integer getSort() {
-        return 4;
-    }
 }
