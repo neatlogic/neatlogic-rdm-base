@@ -149,6 +149,16 @@ public class IssueVo extends BasePageVo {
     private boolean isProjectLeader;
     @EntityField(name = "nfrd.issuevo.entityfield.name.ismember", type = ApiParamType.BOOLEAN)
     private boolean isProjectMember;
+    @JSONField(serialize = false)
+    private Integer needIssueCount;
+
+    public Integer getNeedIssueCount() {
+        return needIssueCount;
+    }
+
+    public void setNeedIssueCount(Integer needIssueCount) {
+        this.needIssueCount = needIssueCount;
+    }
 
     public boolean getIsProjectOwner() {
         return isProjectOwner;

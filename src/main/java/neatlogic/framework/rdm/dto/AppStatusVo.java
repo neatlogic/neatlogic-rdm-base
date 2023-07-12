@@ -30,25 +30,27 @@ import java.util.Objects;
 public class AppStatusVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "应用id", type = ApiParamType.LONG)
+    @EntityField(name = "nmraa.getappapi.input.param.desc", type = ApiParamType.LONG)
     private Long appId;
-    @EntityField(name = "唯一标识", type = ApiParamType.STRING)
+    @EntityField(name = "common.uniquename", type = ApiParamType.STRING)
     private String name;
-    @EntityField(name = "名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.name", type = ApiParamType.STRING)
     private String label;
-    @EntityField(name = "是否开始", type = ApiParamType.INTEGER)
+    @EntityField(name = "nfrd.appstatusvo.entityfield.name.isstart", type = ApiParamType.INTEGER)
     private Integer isStart;
-    @EntityField(name = "是否结束", type = ApiParamType.INTEGER)
+    @EntityField(name = "term.rdm.isend", type = ApiParamType.INTEGER)
     private Integer isEnd;
-    @EntityField(name = "排序", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.sort", type = ApiParamType.INTEGER)
     private int sort;
-    @EntityField(name = "颜色", type = ApiParamType.STRING)
+    @EntityField(name = "common.color", type = ApiParamType.STRING)
     private String color;
-    @EntityField(name = "说明", type = ApiParamType.STRING)
+    @EntityField(name = "common.description", type = ApiParamType.STRING)
     private String description;
-    @EntityField(name = "随机生成的uuid", type = ApiParamType.STRING)
+    @EntityField(name = "uuid", type = ApiParamType.STRING)
     private String uuid;
-    @EntityField(name = "配置", type = ApiParamType.JSONOBJECT)
+    @EntityField(name = "term.rdm.issuecount", type = ApiParamType.INTEGER)
+    private int issueCount;
+    @EntityField(name = "common.config", type = ApiParamType.JSONOBJECT)
     private JSONObject config;
     @JSONField(serialize = false)
     private String configStr;
@@ -69,6 +71,14 @@ public class AppStatusVo {
             }
         }
         return config;
+    }
+
+    public int getIssueCount() {
+        return issueCount;
+    }
+
+    public void setIssueCount(int issueCount) {
+        this.issueCount = issueCount;
     }
 
     public void setConfig(JSONObject config) {

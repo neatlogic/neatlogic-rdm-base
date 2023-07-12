@@ -27,6 +27,8 @@ public class IssueCountVo {
     private Long objectId;
     @JSONField(serialize = false)
     private String groupBy;
+    @EntityField(name = "类型", type = ApiParamType.STRING)
+    private String type;
     @EntityField(name = "任务数量", type = ApiParamType.INTEGER)
     private int count;
     @EntityField(name = "日期", type = ApiParamType.STRING)
@@ -40,6 +42,13 @@ public class IssueCountVo {
         return count;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Long getProjectId() {
         return projectId;

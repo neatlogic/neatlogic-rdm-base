@@ -36,6 +36,7 @@ public class IssueConditionVo extends IssueVo {
 
     private String currentUser;
 
+
     public Integer getIsMyCreated() {
         return isMyCreated;
     }
@@ -60,6 +61,7 @@ public class IssueConditionVo extends IssueVo {
     public String getCurrentUser() {
         return UserContext.get().getUserUuid(true);
     }
+
 
     public void setStatus(List<Long> status) {
         this.status = status;
