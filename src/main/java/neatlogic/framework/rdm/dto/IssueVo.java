@@ -70,6 +70,8 @@ public class IssueVo extends BasePageVo {
 
     @EntityField(name = "term.rdm.appcolor", type = ApiParamType.LONG)
     private String appColor;
+    @EntityField(name = "nfrd.issuevo.entityfield.name", type = ApiParamType.STRING)
+    private String appName;
     @EntityField(name = "term.rdm.projectid", type = ApiParamType.LONG)
     private Long projectId;
     @EntityField(name = "common.createuser", type = ApiParamType.STRING)
@@ -160,6 +162,10 @@ public class IssueVo extends BasePageVo {
         this.needIssueCount = needIssueCount;
     }
 
+    public void setAppColor(String appColor) {
+        this.appColor = appColor;
+    }
+
     public boolean getIsProjectOwner() {
         return isProjectOwner;
     }
@@ -240,6 +246,12 @@ public class IssueVo extends BasePageVo {
         return appColor;
     }
 
+    public String getAppName() {
+        if (StringUtils.isBlank(appName) && StringUtils.isNotBlank(appType)) {
+            appName = AppTypeManager.getLabel(appType);
+        }
+        return appName;
+    }
 
     public String getStartDate() {
         return startDate;
