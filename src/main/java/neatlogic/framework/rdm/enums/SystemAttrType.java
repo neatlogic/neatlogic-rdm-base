@@ -28,6 +28,7 @@ public enum SystemAttrType implements IEnum<JSONObject> {
     //系统属性只是为了用户设置字段排序时使用，不想再增加标记属性，用_开头代表是系统属性
     NAME("_name", "name", "common.name", "nfre.systemattrtype"),
     STATUS("_status", "status", "common.status", "nfre.systemattrtype"),
+    CREATE_USER("_createuser", "createuser", "common.createuser", "nfre.systemattrtype"),
     CREATE_DATE("_createdate", "createdate", "common.createdate", "nfre.systemattrtype");
     private final String name;
     private final String type;
