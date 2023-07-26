@@ -16,10 +16,12 @@
 
 package neatlogic.framework.rdm.dto;
 
+import neatlogic.framework.asynchronization.threadlocal.UserContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BaseEditorVo;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
+import org.apache.commons.lang3.StringUtils;
 
 public class CommentVo extends BaseEditorVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
@@ -34,6 +36,8 @@ public class CommentVo extends BaseEditorVo {
     private Long parentId;
     @EntityField(name = "子评论数量", type = ApiParamType.INTEGER)
     private int childCount;
+    @EntityField(name = "是否作者", type = ApiParamType.BOOLEAN)
+    private boolean isEditor;
 
     public Long getId() {
         if (id == null) {
@@ -74,6 +78,12 @@ public class CommentVo extends BaseEditorVo {
     public Long getParentId() {
         return parentId;
     }
+
+    public boolean getIsEditor() {
+        isEditor = StringUtils.isNotBlank(this.getFcu()) && this.getFcu().equalsIgnoreCase(UserContext.get().getUserUuid());
+        return isEditor;
+    }
+
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
