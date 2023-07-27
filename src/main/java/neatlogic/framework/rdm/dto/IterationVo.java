@@ -26,6 +26,7 @@ import neatlogic.framework.util.TimeUtil;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class IterationVo extends BasePageVo {
     private String appType = AppType.ITERATION.getName();
     @EntityField(name = "应用颜色", type = ApiParamType.STRING)
     private String appColor = AppType.ITERATION.getColor();
-    @JSONField(serialize = false)
+    @EntityField(name = "时间范围", type = ApiParamType.JSONARRAY)
     private List<String> dateRange;
 
     @JSONField(serialize = false)//搜索专用
@@ -110,6 +111,13 @@ public class IterationVo extends BasePageVo {
     }
 
     public List<String> getDateRange() {
+        if (dateRange == null && startDate != null && endDate != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat(TimeUtil.YYYY_MM_DD);
+            dateRange = new ArrayList<String>() {{
+                this.add(sdf.format(startDate));
+                this.add(sdf.format(endDate));
+            }};
+        }
         return dateRange;
     }
 
