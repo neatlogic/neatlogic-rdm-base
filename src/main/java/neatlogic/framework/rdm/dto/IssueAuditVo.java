@@ -66,19 +66,23 @@ public class IssueAuditVo extends BasePageVo {
         this.issueId = issueId;
         this.attrName = attrName;
         this.inputUser = UserContext.get().getUserUuid();
-        if (!(oldValue instanceof List)) {
-            this.oldValue = new JSONArray() {{
-                this.add(oldValue);
-            }};
-        } else {
-            this.oldValue = JSONArray.parseArray(JSONArray.toJSONString(oldValue));
+        if (oldValue != null) {
+            if (!(oldValue instanceof List)) {
+                this.oldValue = new JSONArray() {{
+                    this.add(oldValue);
+                }};
+            } else {
+                this.oldValue = JSONArray.parseArray(JSONArray.toJSONString(oldValue));
+            }
         }
-        if (!(newValue instanceof List)) {
-            this.newValue = new JSONArray() {{
-                this.add(newValue);
-            }};
-        } else {
-            this.newValue = JSONArray.parseArray(JSONArray.toJSONString(newValue));
+        if (newValue != null) {
+            if (!(newValue instanceof List)) {
+                this.newValue = new JSONArray() {{
+                    this.add(newValue);
+                }};
+            } else {
+                this.newValue = JSONArray.parseArray(JSONArray.toJSONString(newValue));
+            }
         }
         if (InputFromContext.get() != null) {
             this.inputFrom = InputFromContext.get().getInputFrom();
