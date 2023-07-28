@@ -129,6 +129,10 @@ public class AppStatusVo {
         this.name = name;
     }
 
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
     public String getUuid() {
         if (StringUtils.isBlank(uuid)) {
             if (id != null) {
