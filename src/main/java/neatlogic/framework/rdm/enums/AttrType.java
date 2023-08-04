@@ -39,7 +39,10 @@ public enum AttrType implements IEnum<JSONObject> {
     CATALOG("catalog", "catalog", "common.catalog", true, false, null),
     ITERATION("iteration", "iteration", "common.iteration", true, false, "iteration"),
     ENDDATE("enddate", "endDate", "term.rdm.enddate", true, false, null),
-    STARTDATE("startdate", "startDate", "term.rdm.startdate", true, false, null);
+    STARTDATE("startdate", "startDate", "term.rdm.startdate", true, false, null),
+
+    TIMECOST("timecost", "timecost", "term.rdm.plantimecost", true, false, null);
+
     private final String name;
     //private final String label;
     private final String type;

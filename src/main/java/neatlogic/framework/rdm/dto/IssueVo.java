@@ -83,6 +83,9 @@ public class IssueVo extends BasePageVo {
     @EntityField(name = "common.priority", type = ApiParamType.LONG)
     private Long priority;
 
+    @EntityField(name = "term.rdm.plantimecost", type = ApiParamType.INTEGER)
+    private Integer timecost;
+
     @EntityField(name = "common.priorityname", type = ApiParamType.STRING)
     private String priorityName;
 
@@ -121,6 +124,9 @@ public class IssueVo extends BasePageVo {
 
     @EntityField(name = "common.attributelist", type = ApiParamType.JSONARRAY)
     private List<IssueAttrVo> attrList;
+
+    @EntityField(name = "term.rdm.costlist", type = ApiParamType.JSONARRAY)
+    private List<IssueCostVo> costList;
     @JSONField(serialize = false)
     private List<AppAttrVo> appAttrList;//搜索时生成字段
     @JSONField(serialize = false)//自定义属性搜索条件
@@ -166,6 +172,14 @@ public class IssueVo extends BasePageVo {
         this.appColor = appColor;
     }
 
+    public Integer getTimecost() {
+        return timecost;
+    }
+
+    public void setTimecost(Integer timecost) {
+        this.timecost = timecost;
+    }
+
     public boolean getIsProjectOwner() {
         return isProjectOwner;
     }
@@ -200,6 +214,14 @@ public class IssueVo extends BasePageVo {
 
     public Long getFromId() {
         return fromId;
+    }
+
+    public List<IssueCostVo> getCostList() {
+        return costList;
+    }
+
+    public void setCostList(List<IssueCostVo> costList) {
+        this.costList = costList;
     }
 
     public void formatAttr() {

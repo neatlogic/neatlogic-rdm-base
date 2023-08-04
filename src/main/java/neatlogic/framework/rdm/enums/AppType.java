@@ -21,9 +21,9 @@ import neatlogic.framework.util.$;
 
 public enum AppType implements IAppType {
     ITERATION("iteration", "common.iteration", "#87CEEB", null, false, 1),
-    STORY("story", "common.request", "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.STARTDATE, AttrType.ENDDATE}, true, 2),
-    TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true, 3),
-    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.STARTDATE, AttrType.ENDDATE}, true, 4);
+    STORY("story", "common.request", "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, true, 2),
+    TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, true, 3),
+    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, true, 4);
 
     private final String name;
     private final String label;
