@@ -18,6 +18,7 @@ package neatlogic.framework.rdm.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
+import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.rdm.enums.ProjectUserType;
 import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.collections4.CollectionUtils;
@@ -27,7 +28,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class ProjectUserVo {
+public class ProjectUserVo extends BasePageVo {
     @EntityField(name = "common.userid", type = ApiParamType.STRING)
     private String userId;
     @EntityField(name = "common.username", type = ApiParamType.STRING)
@@ -41,6 +42,8 @@ public class ProjectUserVo {
     private List<ProjectUserTypeVo> userTypeList;
     @EntityField(name = "term.rdm.projectid", type = ApiParamType.LONG)
     private Long projectId;
+    @JSONField(serialize = false)
+    private List<String> userIdList;
 
 
     public String getUserId() {
@@ -50,6 +53,15 @@ public class ProjectUserVo {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public List<String> getUserIdList() {
+        return userIdList;
+    }
+
+    public void setUserIdList(List<String> userIdList) {
+        this.userIdList = userIdList;
+    }
+
 
     public String getUserName() {
         return userName;

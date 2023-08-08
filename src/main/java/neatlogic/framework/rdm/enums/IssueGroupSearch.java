@@ -19,25 +19,25 @@ package neatlogic.framework.rdm.enums;
 import neatlogic.framework.util.$;
 
 public enum IssueGroupSearch {
-	ISSUEUSERTYPE("issueUserType", "工单干系人类型");
+    PROJECTUSERTYPE("rdm.project", "项目干系人类型");
 
-	private final String value;
-	private final String text;
+    private final String value;
+    private final String text;
 
-	private IssueGroupSearch(String value, String text) {
-		this.value = value;
-		this.text = text;
-	}
+    private IssueGroupSearch(String value, String text) {
+        this.value = value;
+        this.text = text;
+    }
 
-	public String getValue() {
-		return value;
-	}
+    public String getValue() {
+        return value;
+    }
 
-	public String getValuePlugin() {
-		return value + "#";
-	}
+    public String getValuePlugin() {
+        return value + "#";
+    }
 
-	public String getText() {
-		return $.t(text);
-	}
+    public String getText() {
+        return $.t(text);
+    }
 }
