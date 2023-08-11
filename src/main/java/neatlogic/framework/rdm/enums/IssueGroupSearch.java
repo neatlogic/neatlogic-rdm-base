@@ -19,7 +19,7 @@ package neatlogic.framework.rdm.enums;
 import neatlogic.framework.util.$;
 
 public enum IssueGroupSearch {
-    PROJECTUSERTYPE("rdm.project", "项目干系人类型");
+    PROJECTUSERTYPE("rdm.project", "nfre.issuegroupsearch.projectusertype");
 
     private final String value;
     private final String text;
