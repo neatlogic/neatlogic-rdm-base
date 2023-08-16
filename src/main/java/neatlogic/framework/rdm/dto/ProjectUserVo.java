@@ -33,6 +33,8 @@ public class ProjectUserVo extends BasePageVo {
     private String userId;
     @EntityField(name = "common.username", type = ApiParamType.STRING)
     private String userName;
+    @EntityField(name = "common.userenname", type = ApiParamType.STRING)
+    private String userEnName;
 
     @JSONField(serialize = false)
     private String userType;
@@ -94,6 +96,13 @@ public class ProjectUserVo extends BasePageVo {
         return userTypeList;
     }
 
+    public String getUserEnName() {
+        return userEnName;
+    }
+
+    public void setUserEnName(String userEnName) {
+        this.userEnName = userEnName;
+    }
 
     public ProjectUserType getMainUserType() {
         if (CollectionUtils.isNotEmpty(this.getUserTypeList())) {
