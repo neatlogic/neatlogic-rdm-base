@@ -48,6 +48,9 @@ public class AppVo {
     private String color;
     @EntityField(name = "common.attributelist", type = ApiParamType.JSONARRAY)
     private List<AppAttrVo> attrList;
+
+    @EntityField(name = "common.statuslist", type = ApiParamType.JSONARRAY)
+    private List<AppStatusVo> statusList;
     @EntityField(name = "nfrd.appvo.entityfield.name.hasissue", type = ApiParamType.BOOLEAN)
     private Boolean hasIssue;
     @EntityField(name = "nfrd.appvo.entityfield.name.hasiteration", type = ApiParamType.BOOLEAN)
@@ -73,6 +76,14 @@ public class AppVo {
         if (!this.attrList.contains(appAttrVo)) {
             this.attrList.add(appAttrVo);
         }
+    }
+
+    public List<AppStatusVo> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<AppStatusVo> statusList) {
+        this.statusList = statusList;
     }
 
     public Long getId() {
