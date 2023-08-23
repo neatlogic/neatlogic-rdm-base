@@ -17,6 +17,7 @@
 package neatlogic.framework.rdm.dto;
 
 import neatlogic.framework.asynchronization.threadlocal.UserContext;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class IssueConditionVo extends IssueVo {
     private Integer isMyCreated;
 
     private Integer isExpired;
+
+    private List<String> userIdList;
 
     private String currentUser;
 
@@ -97,5 +100,24 @@ public class IssueConditionVo extends IssueVo {
 
     public void setIsMine(Integer isMine) {
         this.isMine = isMine;
+    }
+
+    @Override
+    public void setUserIdList(List<String> userIdList) {
+        this.userIdList = userIdList;
+    }
+
+    public List<String> getUserIdList() {
+        if (CollectionUtils.isNotEmpty(userIdList)) {
+            for (int i = 0; i < userIdList.size(); i++) {
+                String userId = userIdList.get(i);
+                if (userId.equals("common#loginuser")) {
+                    userIdList.set(i, UserContext.get().getUserUuid());
+                } else if (userId.contains("#")) {
+                    userIdList.set(i, userId.substring(userId.indexOf("#") + 1));
+                }
+            }
+        }
+        return userIdList;
     }
 }
