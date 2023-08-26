@@ -37,6 +37,8 @@ public class IssueConditionVo extends IssueVo {
 
     private List<String> userIdList;
 
+    private List<IssueSortVo> sortList;
+
     private String currentUser;
 
 
@@ -105,6 +107,14 @@ public class IssueConditionVo extends IssueVo {
     @Override
     public void setUserIdList(List<String> userIdList) {
         this.userIdList = userIdList;
+    }
+
+    public List<IssueSortVo> getSortList() {
+        return sortList;
+    }
+
+    public void setSortList(List<IssueSortVo> sortList) {
+        this.sortList = sortList;
     }
 
     public List<String> getUserIdList() {
