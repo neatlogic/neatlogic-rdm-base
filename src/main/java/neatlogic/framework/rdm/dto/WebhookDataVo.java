@@ -26,6 +26,7 @@ import neatlogic.framework.util.SnowflakeUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
+import java.util.List;
 
 public class WebhookDataVo extends BasePageVo {
 
@@ -51,6 +52,8 @@ public class WebhookDataVo extends BasePageVo {
     private String userName;
     @EntityField(name = "nfrd.webhookdatavo.entityfield.name", type = ApiParamType.STRING)
     private String email;
+    @EntityField(name = "term.rdm.relativetasklist", type = ApiParamType.JSONARRAY)
+    private List<IssueVo> issueList;
     @EntityField(name = "term.rdm.issueid", type = ApiParamType.LONG)
     private Long issueId;
     @EntityField(name = "nmrai.saveissueapi.input.param.desc.name", type = ApiParamType.STRING)
@@ -67,6 +70,14 @@ public class WebhookDataVo extends BasePageVo {
             id = SnowflakeUtil.uniqueLong();
         }
         return id;
+    }
+
+    public List<IssueVo> getIssueList() {
+        return issueList;
+    }
+
+    public void setIssueList(List<IssueVo> issueList) {
+        this.issueList = issueList;
     }
 
     public Long getProjectId() {

@@ -33,35 +33,40 @@ import java.util.Objects;
 public class AppAttrVo {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
-    @EntityField(name = "应用id", type = ApiParamType.LONG)
+    @EntityField(name = "nmraa.getappapi.input.param.desc", type = ApiParamType.LONG)
     private Long appId;
-    @EntityField(name = "类型", type = ApiParamType.STRING)
+    @EntityField(name = "common.type", type = ApiParamType.STRING)
     private String type;
-    @EntityField(name = "类型名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.typename", type = ApiParamType.STRING)
     private String typeText;
-    @EntityField(name = "唯一标识", type = ApiParamType.STRING)
+    @EntityField(name = "common.uniquename", type = ApiParamType.STRING)
     private String name;
-    @EntityField(name = "名称", type = ApiParamType.STRING)
+    @EntityField(name = "common.name", type = ApiParamType.STRING)
     private String label;
-    @EntityField(name = "说明", type = ApiParamType.STRING)
+    @EntityField(name = "common.description", type = ApiParamType.STRING)
     private String description;
-    @EntityField(name = "是否必填", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.isrequired", type = ApiParamType.INTEGER)
     private Integer isRequired;
-    @EntityField(name = "排序", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.sort", type = ApiParamType.INTEGER)
     private int sort;
-    @EntityField(name = "是否私有属性", type = ApiParamType.INTEGER)
+    @EntityField(name = "term.rdm.isprivateattr", type = ApiParamType.INTEGER)
     private Integer isPrivate;
-    @EntityField(name = "配置", type = ApiParamType.JSONOBJECT)
+    @EntityField(name = "common.config", type = ApiParamType.JSONOBJECT)
     private JSONObject config;
-    @EntityField(name = "是否激活", type = ApiParamType.INTEGER)
+    @EntityField(name = "common.isactive", type = ApiParamType.INTEGER)
     private Integer isActive;
     @JSONField(serialize = false)
     private String configStr;
-    @EntityField(name = "属性所属应用类型", type = ApiParamType.STRING)
+    @EntityField(name = "term.rdm.attrbelong", type = ApiParamType.STRING)
     private String appType;
-    @EntityField(name = "随机生成的uuid", type = ApiParamType.STRING)
+    @EntityField(name = "uuid", type = ApiParamType.STRING)
     private String uuid;
-
+    @EntityField(name = "term.rdm.allowimport", type = ApiParamType.BOOLEAN)
+    private boolean allowImport;
+    @EntityField(name = "term.rdm.allowsearch", type = ApiParamType.BOOLEAN)
+    private boolean allowSearch;
+    @EntityField(name = "term.rdm.allowsort", type = ApiParamType.BOOLEAN)
+    private boolean allowSort;
     @JSONField(serialize = false)
     public String getTableName() {
         return TenantContext.get().getDataDbName() + ".`rdm_app_" + this.getAppId() + "`";
@@ -140,6 +145,35 @@ public class AppAttrVo {
             typeText = AttrType.getLabel(type);
         }
         return typeText;
+    }
+
+    public String getImportHelp() {
+        if (StringUtils.isNotBlank(type)) {
+            return AttrType.getImportHelp(type);
+        }
+        return null;
+    }
+
+    public boolean getAllowSearch() {
+        if (StringUtils.isNotBlank(type)) {
+            return AttrType.getAllowSearch(type);
+        }
+        return false;
+    }
+
+    public boolean getAllowSort() {
+        if (StringUtils.isNotBlank(type)) {
+            return AttrType.getAllowSort(type);
+        }
+        return false;
+    }
+
+
+    public boolean getAllowImport() {
+        if (StringUtils.isNotBlank(type)) {
+            return AttrType.getAllowImport(type);
+        }
+        return false;
     }
 
     public String getAppType() {

@@ -111,7 +111,7 @@ public class IssueSortVo {
                 } else if (this.type.equalsIgnoreCase(AttrType.ITERATION.getType())) {
                     return "ri.`iteration`";
                 } else if (this.type.equalsIgnoreCase(AttrType.WORKER.getType())) {
-                    return "riu.`user_id`";
+                    return "u.`user_name`";
                 } else if (this.type.equalsIgnoreCase(AttrType.TAG.getType())) {
                     return "rt.`name`";
                 } else if (this.type.equalsIgnoreCase(AttrType.STARTDATE.getType())) {
