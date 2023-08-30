@@ -43,6 +43,10 @@ public class IssueVo extends BasePageVo {
     private Long fromId;
     @EntityField(name = "nmrai.searchissueapi.input.param.desc.toid", type = ApiParamType.LONG)
     private Long toId;
+
+    @EntityField(name = "common.reltype", type = ApiParamType.STRING)
+    private String relType;
+
     @EntityField(name = "term.rdm.parenttaskid", type = ApiParamType.LONG)
     private Long parentId;
     @EntityField(name = "common.name", type = ApiParamType.STRING)
@@ -159,6 +163,8 @@ public class IssueVo extends BasePageVo {
     private boolean isProjectMember;
     @JSONField(serialize = false)
     private Integer needIssueCount;
+    @JSONField(serialize = false)
+    private Boolean isNew;
 
     public Integer getNeedIssueCount() {
         return needIssueCount;
@@ -166,6 +172,14 @@ public class IssueVo extends BasePageVo {
 
     public void setNeedIssueCount(Integer needIssueCount) {
         this.needIssueCount = needIssueCount;
+    }
+
+    public String getRelType() {
+        return relType;
+    }
+
+    public void setRelType(String relType) {
+        this.relType = relType;
     }
 
     public void setAppColor(String appColor) {
@@ -535,9 +549,18 @@ public class IssueVo extends BasePageVo {
     public Long getId() {
         if (id == null) {
             id = SnowflakeUtil.uniqueLong();
+            this.isNew = true;
         }
         return id;
     }
+
+    public Boolean getIsNew() {
+        if (isNew == null) {
+            isNew = this.id == null;
+        }
+        return isNew;
+    }
+
 
     @JSONField(serialize = false)
     public String getTableName() {
@@ -550,6 +573,7 @@ public class IssueVo extends BasePageVo {
 
     public void setId(Long id) {
         this.id = id;
+        this.isNew = false;
     }
 
     public String getName() {
