@@ -18,9 +18,13 @@ package neatlogic.framework.rdm.dto;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.nacos.client.naming.utils.CollectionUtils;
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
-import neatlogic.framework.rdm.enums.AttrType;
+import neatlogic.framework.common.dto.ValueTextVo;
+import neatlogic.framework.matrix.constvalue.SearchExpression;
+import neatlogic.framework.rdm.attrhandler.code.AttrHandlerFactory;
+import neatlogic.framework.rdm.attrhandler.code.IAttrValueHandler;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.Md5Util;
 import neatlogic.framework.util.SnowflakeUtil;
@@ -28,6 +32,8 @@ import neatlogic.framework.util.UuidUtil;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class AppAttrVo {
@@ -67,6 +73,9 @@ public class AppAttrVo {
     private boolean allowSearch;
     @EntityField(name = "term.rdm.allowsort", type = ApiParamType.BOOLEAN)
     private boolean allowSort;
+    @EntityField(name = "nfrd.appattrvo.entityfield.expressionlist", type = ApiParamType.JSONARRAY)
+    private List<ValueTextVo> expressionList;
+
     @JSONField(serialize = false)
     public String getTableName() {
         return TenantContext.get().getDataDbName() + ".`rdm_app_" + this.getAppId() + "`";
@@ -78,6 +87,20 @@ public class AppAttrVo {
         if (o == null || getClass() != o.getClass()) return false;
         AppAttrVo that = (AppAttrVo) o;
         return getId().equals(that.getId());
+    }
+
+
+    public List<ValueTextVo> getExpressionList() {
+        if (CollectionUtils.isEmpty(this.expressionList) && StringUtils.isNotBlank(this.type)) {
+            expressionList = new ArrayList<>();
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(type);
+            if (handler != null) {
+                for (SearchExpression expression : handler.getSupportExpression()) {
+                    expressionList.add(new ValueTextVo(expression.getExpression(), expression.getText()));
+                }
+            }
+        }
+        return expressionList;
     }
 
     @Override
@@ -142,28 +165,40 @@ public class AppAttrVo {
 
     public String getTypeText() {
         if (StringUtils.isNotBlank(type) && StringUtils.isBlank(typeText)) {
-            typeText = AttrType.getLabel(type);
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(type);
+            if (handler != null) {
+                typeText = handler.getLabel();
+            }
         }
         return typeText;
     }
 
     public String getImportHelp() {
         if (StringUtils.isNotBlank(type)) {
-            return AttrType.getImportHelp(type);
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(type);
+            if (handler != null) {
+                return handler.getImportHelp();
+            }
         }
         return null;
     }
 
     public boolean getAllowSearch() {
         if (StringUtils.isNotBlank(type)) {
-            return AttrType.getAllowSearch(type);
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(type);
+            if (handler != null) {
+                return handler.getAllowSearch();
+            }
         }
         return false;
     }
 
     public boolean getAllowSort() {
         if (StringUtils.isNotBlank(type)) {
-            return AttrType.getAllowSort(type);
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(type);
+            if (handler != null) {
+                return handler.getAllowSort();
+            }
         }
         return false;
     }
@@ -171,14 +206,20 @@ public class AppAttrVo {
 
     public boolean getAllowImport() {
         if (StringUtils.isNotBlank(type)) {
-            return AttrType.getAllowImport(type);
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(type);
+            if (handler != null) {
+                return handler.getAllowImport();
+            }
         }
         return false;
     }
 
     public String getAppType() {
         if (StringUtils.isNotBlank(type) && StringUtils.isBlank(appType)) {
-            appType = AttrType.getBelong(type);
+            IAttrValueHandler handler = AttrHandlerFactory.getHandler(type);
+            if (handler != null) {
+                appType = handler.getBelong();
+            }
         }
         return appType;
     }

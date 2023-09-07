@@ -17,9 +17,45 @@
 package neatlogic.framework.rdm.attrhandler.code;
 
 import com.alibaba.fastjson.JSONObject;
+import neatlogic.framework.matrix.constvalue.SearchExpression;
 
 public interface IAttrValueHandler {
     String getName();
 
-    Object format(Object value, JSONObject config);
+    String getLabel();
+
+    String getType();
+
+    String getImportHelp();
+
+    default boolean getAllowImport() {
+        return true;
+    }
+
+    SearchExpression[] getSupportExpression();
+
+    default boolean getAllowSearch() {
+        return true;
+    }
+
+    default boolean getIsSystem() {
+        return false;
+    }
+
+
+    default boolean getAllowSort() {
+        return true;
+    }
+
+    boolean getIsPrivate();
+
+    boolean getIsArray();
+
+    default String getBelong() {
+        return null;
+    }
+
+    default Object format(Object value, JSONObject config) {
+        return value;
+    }
 }

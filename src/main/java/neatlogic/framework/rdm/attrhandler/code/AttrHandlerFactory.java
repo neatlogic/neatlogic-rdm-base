@@ -35,7 +35,7 @@ public class AttrHandlerFactory extends ModuleInitializedListenerBase {
     protected void onInitialized(NeatLogicWebApplicationContext context) {
         Map<String, IAttrValueHandler> map = context.getBeansOfType(IAttrValueHandler.class);
         for (Map.Entry<String, IAttrValueHandler> entry : map.entrySet()) {
-            componentMap.put(entry.getValue().getName(), entry.getValue());
+            componentMap.put(entry.getValue().getType(), entry.getValue());
         }
     }
 

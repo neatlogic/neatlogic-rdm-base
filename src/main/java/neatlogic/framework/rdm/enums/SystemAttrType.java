@@ -48,6 +48,7 @@ public enum SystemAttrType implements IEnum<JSONObject> {
             systemAttrVo.setTypeText(attrType.getTypeText());
             systemAttrList.add(systemAttrVo);
         }
+
         return systemAttrList;
     }
 

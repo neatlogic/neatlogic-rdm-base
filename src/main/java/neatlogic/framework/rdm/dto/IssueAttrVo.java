@@ -21,7 +21,6 @@ import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.rdm.attrhandler.code.AttrHandlerFactory;
 import neatlogic.framework.rdm.attrhandler.code.IAttrValueHandler;
-import neatlogic.framework.rdm.enums.AttrType;
 import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -198,16 +197,17 @@ public class IssueAttrVo {
                     Object newValue = handler.format(value, this.config);
                     newValueList.set(i, newValue);
                 }
-            }
-            if (AttrType.getIsArray(attrType)) {
-                return newValueList.toString();
-            } else {
-                if (newValueList.size() > 1) {
+                if (handler.getIsArray()) {
                     return newValueList.toString();
-                } else if (newValueList.size() == 1) {
-                    return newValueList.getString(0);
+                } else {
+                    if (newValueList.size() > 1) {
+                        return newValueList.toString();
+                    } else if (newValueList.size() == 1) {
+                        return newValueList.getString(0);
+                    }
                 }
             }
+
         }
         return null;
     }
