@@ -35,12 +35,21 @@ public class IssueConditionVo extends IssueVo {
 
     private Integer isExpired;
 
+    private Integer isProcessed;//曾经处理过
+
     private List<String> userIdList;
 
     private List<IssueSortVo> sortList;
 
     private String currentUser;
 
+    public Integer getIsProcessed() {
+        return isProcessed;
+    }
+
+    public void setIsProcessed(Integer isProcessed) {
+        this.isProcessed = isProcessed;
+    }
 
     public Integer getIsMyCreated() {
         return isMyCreated;
@@ -49,6 +58,7 @@ public class IssueConditionVo extends IssueVo {
     public void setIsMyCreated(Integer isMyCreated) {
         this.isMyCreated = isMyCreated;
     }
+
 
     @Override
     public Integer getIsExpired() {
