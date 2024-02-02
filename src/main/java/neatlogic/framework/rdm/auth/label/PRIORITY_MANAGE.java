@@ -19,6 +19,9 @@ package neatlogic.framework.rdm.auth.label;
 import neatlogic.framework.auth.core.AuthBase;
 import neatlogic.framework.util.$;
 
+import java.util.Collections;
+import java.util.List;
+
 public class PRIORITY_MANAGE extends AuthBase {
     @Override
     public String getAuthDisplayName() {
@@ -38,5 +41,10 @@ public class PRIORITY_MANAGE extends AuthBase {
     @Override
     public Integer getSort() {
         return 3;
+    }
+
+    @Override
+    public List<Class<? extends AuthBase>> getIncludeAuths() {
+        return Collections.singletonList(RDM_BASE.class);
     }
 }

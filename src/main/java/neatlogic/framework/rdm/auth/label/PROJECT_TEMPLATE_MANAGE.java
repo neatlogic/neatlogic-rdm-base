@@ -18,6 +18,9 @@ package neatlogic.framework.rdm.auth.label;
 
 import neatlogic.framework.auth.core.AuthBase;
 
+import java.util.Collections;
+import java.util.List;
+
 public class PROJECT_TEMPLATE_MANAGE extends AuthBase {
     @Override
     public String getAuthDisplayName() {
@@ -37,5 +40,10 @@ public class PROJECT_TEMPLATE_MANAGE extends AuthBase {
     @Override
     public Integer getSort() {
         return 4;
+    }
+
+    @Override
+    public List<Class<? extends AuthBase>> getIncludeAuths() {
+        return Collections.singletonList(RDM_BASE.class);
     }
 }
