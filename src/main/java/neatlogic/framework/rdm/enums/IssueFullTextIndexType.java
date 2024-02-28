@@ -17,6 +17,7 @@
 package neatlogic.framework.rdm.enums;
 
 import neatlogic.framework.fulltextindex.core.IFullTextIndexType;
+import neatlogic.framework.util.$;
 
 public enum IssueFullTextIndexType implements IFullTextIndexType {
     ISSUE("issue", "enum.rdm.fullindextype.issue");
@@ -35,7 +36,7 @@ public enum IssueFullTextIndexType implements IFullTextIndexType {
 
     @Override
     public String getTypeName() {
-        return typeName;
+        return $.t(typeName);
     }
 
     @Override
