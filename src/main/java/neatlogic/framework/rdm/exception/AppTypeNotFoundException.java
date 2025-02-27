@@ -17,13 +17,9 @@ package neatlogic.framework.rdm.exception;
 
 import neatlogic.framework.exception.core.ApiRuntimeException;
 
-public class AppAttrNotFoundException extends ApiRuntimeException {
+public class AppTypeNotFoundException extends ApiRuntimeException {
 
-    public AppAttrNotFoundException(Long id) {
-        super("属性“{0}”不存在", id);
-    }
-
-    public AppAttrNotFoundException(String id) {
-        super("属性“{0}”不存在", id);
+    public AppTypeNotFoundException(String appType) {
+        super("应用类型“{0}”不存在", appType);
     }
 }
