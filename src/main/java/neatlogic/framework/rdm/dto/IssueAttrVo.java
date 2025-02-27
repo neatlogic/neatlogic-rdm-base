@@ -24,14 +24,17 @@ import neatlogic.framework.restful.annotation.EntityField;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class IssueAttrVo {
+public class IssueAttrVo implements Serializable {
     @EntityField(name = "属性id", type = ApiParamType.LONG)
     private Long attrId;
+    @EntityField(name = "属性唯一标识", type = ApiParamType.STRING)
+    private String attrName;
     @EntityField(name = "属性类型", type = ApiParamType.STRING)
     private String attrType;
     @EntityField(name = "任务id", type = ApiParamType.LONG)
@@ -168,6 +171,13 @@ public class IssueAttrVo {
         return this;
     }
 
+    public String getAttrName() {
+        return attrName;
+    }
+
+    public void setAttrName(String attrName) {
+        this.attrName = attrName;
+    }
 
     public IssueAttrVo(Long attrId, Long issueId, String attrType, JSONObject config) {
         this.attrId = attrId;

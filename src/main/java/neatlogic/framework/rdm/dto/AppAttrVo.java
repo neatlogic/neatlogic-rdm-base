@@ -31,11 +31,12 @@ import neatlogic.framework.util.UuidUtil;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AppAttrVo {
+public class AppAttrVo implements Serializable {
     @EntityField(name = "id", type = ApiParamType.LONG)
     private Long id;
     @EntityField(name = "nmraa.getappapi.input.param.desc", type = ApiParamType.LONG)
