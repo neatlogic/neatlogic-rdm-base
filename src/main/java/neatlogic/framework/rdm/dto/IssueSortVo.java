@@ -18,7 +18,9 @@ package neatlogic.framework.rdm.dto;
 import neatlogic.framework.rdm.enums.AttrType;
 import org.apache.commons.lang3.StringUtils;
 
-public class IssueSortVo {
+import java.io.Serializable;
+
+public class IssueSortVo implements Serializable {
 
     //属性名称
     private String attr;
@@ -106,7 +108,7 @@ public class IssueSortVo {
                 if (this.type.equalsIgnoreCase(AttrType.CATALOG.getType())) {
                     return "rac.`name`";
                 } else if (this.type.equalsIgnoreCase(AttrType.PRIORITY.getType())) {
-                    return "ri.`priority`";
+                    return "rp.`sort`";
                 } else if (this.type.equalsIgnoreCase(AttrType.ITERATION.getType())) {
                     return "ri.`iteration`";
                 } else if (this.type.equalsIgnoreCase(AttrType.WORKER.getType())) {
