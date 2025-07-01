@@ -108,6 +108,6 @@ public enum SystemAttrType implements IEnum<JSONObject> {
 
     @Override
     public String getEnumName() {
-        return "nfre.systemattrtype.getenumname";
+        return "nfre.systemattrtypea.getenumname";
     }
 }
