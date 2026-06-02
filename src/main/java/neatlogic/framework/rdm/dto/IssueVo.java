@@ -45,6 +45,8 @@ public class IssueVo extends BasePageVo {
 
     @EntityField(name = "term.rdm.parenttaskid", type = ApiParamType.LONG)
     private Long parentId;
+    @EntityField(name = "term.rdm.sourceissueid", type = ApiParamType.LONG)
+    private Long sourceIssueId;
     @EntityField(name = "common.name", type = ApiParamType.STRING)
     private String name;
     @EntityField(name = "common.catalogid", type = ApiParamType.LONG)
@@ -476,6 +478,14 @@ public class IssueVo extends BasePageVo {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public Long getSourceIssueId() {
+        return sourceIssueId;
+    }
+
+    public void setSourceIssueId(Long sourceIssueId) {
+        this.sourceIssueId = sourceIssueId;
     }
 
     public IssueAttrVo getAttr(Long attrId) {

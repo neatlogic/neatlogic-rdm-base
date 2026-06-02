@@ -35,6 +35,8 @@ public class IssueConditionVo extends IssueVo {
 
     private Integer isProcessed;//曾经处理过
 
+    private Integer isCopy;
+
     private List<String> userIdList;
 
     private List<IssueSortVo> sortList;
@@ -47,6 +49,14 @@ public class IssueConditionVo extends IssueVo {
 
     public void setIsProcessed(Integer isProcessed) {
         this.isProcessed = isProcessed;
+    }
+
+    public Integer getIsCopy() {
+        return isCopy;
+    }
+
+    public void setIsCopy(Integer isCopy) {
+        this.isCopy = isCopy;
     }
 
     public Integer getIsMyCreated() {
