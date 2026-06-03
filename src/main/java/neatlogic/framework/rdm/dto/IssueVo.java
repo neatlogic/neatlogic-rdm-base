@@ -133,6 +133,10 @@ public class IssueVo extends BasePageVo {
     private List<AppAttrVo> appAttrList;//搜索时生成字段
     @JSONField(serialize = false)//自定义属性搜索条件
     private List<IssueAttrVo> attrFilterList;
+    @JSONField(serialize = false)//本次保存提交的字段，用于局部保存时控制副本同步范围
+    private List<String> submittedFieldList;
+    @JSONField(serialize = false)//需要同步的副本 issue id 列表
+    private List<Long> copyIssueIdList;
 
     private HashMap<Long, ?> attrMap;
     @EntityField(name = "common.filelist", type = ApiParamType.JSONARRAY)
@@ -340,6 +344,26 @@ public class IssueVo extends BasePageVo {
 
     public void setAttrFilterList(List<IssueAttrVo> attrFilterList) {
         this.attrFilterList = attrFilterList;
+    }
+
+    public List<String> getSubmittedFieldList() {
+        return submittedFieldList;
+    }
+
+    public void setSubmittedFieldList(List<String> submittedFieldList) {
+        this.submittedFieldList = submittedFieldList;
+    }
+
+    public boolean hasSubmittedField(String field) {
+        return CollectionUtils.isNotEmpty(submittedFieldList) && submittedFieldList.contains(field);
+    }
+
+    public List<Long> getCopyIssueIdList() {
+        return copyIssueIdList;
+    }
+
+    public void setCopyIssueIdList(List<Long> copyIssueIdList) {
+        this.copyIssueIdList = copyIssueIdList;
     }
 
     public List<FileVo> getFileList() {

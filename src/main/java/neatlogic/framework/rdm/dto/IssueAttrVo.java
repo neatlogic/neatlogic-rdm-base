@@ -195,6 +195,10 @@ public class IssueAttrVo implements Serializable {
     public String getValue() {
         if (CollectionUtils.isNotEmpty(valueList) && StringUtils.isNotBlank(attrType)) {
             JSONArray newValueList = JSONArray.parseArray(JSONArray.toJSONString(valueList));
+            newValueList.removeIf(o -> o == null || StringUtils.isBlank(o.toString()));
+            if (newValueList.isEmpty()) {
+                return null;
+            }
             newValueList.sort(Comparator.comparing(Object::toString));
             IAttrValueHandler handler = AttrHandlerFactory.getHandler(attrType);
             if (handler != null) {
@@ -243,8 +247,12 @@ public class IssueAttrVo implements Serializable {
             IAttrValueHandler handler = AttrHandlerFactory.getHandler(this.attrType);
             if (handler != null) {
                 List<Object> newValueList = new ArrayList<>();
-                for (Object o : valueList) {
-                    newValueList.add(handler.format(o, this.config));
+                if (CollectionUtils.isNotEmpty(valueList)) {
+                    for (Object o : valueList) {
+                        if (o != null && StringUtils.isNotBlank(o.toString())) {
+                            newValueList.add(handler.format(o, this.config));
+                        }
+                    }
                 }
                 this.valueList = newValueList;
                 this.isFormat = true;

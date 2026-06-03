@@ -78,6 +78,15 @@ public class AppTypeManager {
         return false;
     }
 
+    public static boolean getNeedCopyOnRel(String name) {
+        for (IAppType s : appTypeSet) {
+            if (s.getName().equals(name)) {
+                return s.getNeedCopyOnRel();
+            }
+        }
+        return false;
+    }
+
     public static String getColor(String name) {
         for (IAppType s : appTypeSet) {
             if (s.getName().equals(name)) {

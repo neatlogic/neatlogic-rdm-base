@@ -42,6 +42,10 @@ public interface IAppType extends IEnum<JSONObject> {
         return true;
     }
 
+    default boolean getNeedCopyOnRel() {
+        return false;
+    }
+
     @Override
     default List<JSONObject> getValueTextList() {
         List<JSONObject> array = new ArrayList<>();
