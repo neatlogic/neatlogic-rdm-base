@@ -62,6 +62,8 @@ public class AppAttrVo implements Serializable {
     private String configStr;
     @EntityField(name = "term.rdm.attrbelong", type = ApiParamType.STRING)
     private String appType;
+    @EntityField(name = "term.rdm.statkey", type = ApiParamType.STRING)
+    private String statKey;
     @EntityField(name = "uuid", type = ApiParamType.STRING)
     private String uuid;
     @EntityField(name = "term.rdm.allowimport", type = ApiParamType.BOOLEAN)
@@ -219,6 +221,14 @@ public class AppAttrVo implements Serializable {
             }
         }
         return appType;
+    }
+
+    public String getStatKey() {
+        return statKey;
+    }
+
+    public void setStatKey(String statKey) {
+        this.statKey = statKey;
     }
 
 
