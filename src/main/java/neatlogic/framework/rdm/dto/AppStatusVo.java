@@ -36,6 +36,8 @@ public class AppStatusVo {
     private Integer isStart;
     @EntityField(name = "term.rdm.isend", type = ApiParamType.INTEGER)
     private Integer isEnd;
+    @EntityField(name = "状态作用范围", type = ApiParamType.STRING)
+    private String scope;
     @EntityField(name = "common.sort", type = ApiParamType.INTEGER)
     private int sort;
     @EntityField(name = "common.color", type = ApiParamType.STRING)
@@ -171,6 +173,17 @@ public class AppStatusVo {
 
     public void setIsEnd(Integer isEnd) {
         this.isEnd = isEnd;
+    }
+
+    public String getScope() {
+        if (StringUtils.isBlank(scope)) {
+            scope = "all";
+        }
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
     }
 
     public String getDescription() {

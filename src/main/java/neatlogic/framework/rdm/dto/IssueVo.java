@@ -166,6 +166,8 @@ public class IssueVo extends BasePageVo {
     @JSONField(serialize = false)
     private Integer needIssueCount;
     @JSONField(serialize = false)
+    private String statusScope;
+    @JSONField(serialize = false)
     private Boolean isNew;
 
     public Integer getNeedIssueCount() {
@@ -174,6 +176,14 @@ public class IssueVo extends BasePageVo {
 
     public void setNeedIssueCount(Integer needIssueCount) {
         this.needIssueCount = needIssueCount;
+    }
+
+    public String getStatusScope() {
+        return statusScope;
+    }
+
+    public void setStatusScope(String statusScope) {
+        this.statusScope = statusScope;
     }
 
     public String getRelType() {
