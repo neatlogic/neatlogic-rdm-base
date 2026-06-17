@@ -20,6 +20,10 @@ public class WebhookConfigVo {
     private Long appId;
     @EntityField(name = "Web URL", type = ApiParamType.STRING)
     private String webhookUrl;
+    @EntityField(name = "Webhook URL前缀", type = ApiParamType.STRING)
+    private String webhookUrlPrefix;
+    @EntityField(name = "完整Webhook URL", type = ApiParamType.STRING)
+    private String webhookUrlFull;
     @EntityField(name = "Secret Token", type = ApiParamType.STRING)
     private String secretToken;
 
@@ -38,6 +42,22 @@ public class WebhookConfigVo {
 
     public void setWebhookUrl(String webhookUrl) {
         this.webhookUrl = webhookUrl;
+    }
+
+    public String getWebhookUrlPrefix() {
+        return webhookUrlPrefix;
+    }
+
+    public void setWebhookUrlPrefix(String webhookUrlPrefix) {
+        this.webhookUrlPrefix = webhookUrlPrefix;
+    }
+
+    public String getWebhookUrlFull() {
+        return webhookUrlFull;
+    }
+
+    public void setWebhookUrlFull(String webhookUrlFull) {
+        this.webhookUrlFull = webhookUrlFull;
     }
 
     public String getSecretToken() {
