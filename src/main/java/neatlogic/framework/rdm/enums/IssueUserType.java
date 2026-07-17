@@ -14,19 +14,26 @@ package neatlogic.framework.rdm.enums;
 
 import neatlogic.framework.common.constvalue.IUserType;
 import neatlogic.framework.dto.UserTypeVo;
+import neatlogic.framework.util.I18n;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum IssueUserType implements IUserType {
-    //	AGENT("agent","代办人",true),
-    OWNER("owner", "创建人", true);
+    OWNER("owner", new I18n("创建人"), true),
+    WORKER("worker", new I18n("当前处理人"), true),
+    PROJECT_OWNER("projectowner", new I18n("项目所有人"), true),
+    PROJECT_LEADER("projectleader", new I18n("项目负责人"), true),
+    PROJECT_MEMBER("projectmember", new I18n("项目成员"), true),
+    OPERATOR("operator", new I18n("当前操作人"), true),
+    COMMENTER("commenter", new I18n("当前评论人"), false),
+    REPLY_USER("replyuser", new I18n("被回复评论作者"), false);
 
     private final String status;
-    private final String text;
+    private final I18n text;
     private final boolean isShow;
 
-    private IssueUserType(String _status, String _text, boolean _isShow) {
+    IssueUserType(String _status, I18n _text, boolean _isShow) {
         this.status = _status;
         this.text = _text;
         this.isShow = _isShow;
@@ -37,7 +44,7 @@ public enum IssueUserType implements IUserType {
     }
 
     public String getText() {
-        return text;
+        return text.toString();
     }
 
     public boolean getIsShow() {

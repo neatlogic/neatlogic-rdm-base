@@ -12,6 +12,7 @@
 
 package neatlogic.framework.rdm.dto;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.asynchronization.threadlocal.UserContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
@@ -21,6 +22,7 @@ import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -77,6 +79,10 @@ public class ProjectVo extends BaseEditorVo {
     private boolean isLeader;
     @EntityField(name = "nfrd.projectvo.entityfield.name.ismember", type = ApiParamType.BOOLEAN)
     private boolean isMember;
+    @EntityField(name = "common.config", type = ApiParamType.JSONOBJECT)
+    private JSONObject config;
+    @JSONField(serialize = false)
+    private String configStr;
 
     public Long getId() {
         if (id == null) {
@@ -306,6 +312,36 @@ public class ProjectVo extends BaseEditorVo {
 
     public void setUserList(List<ProjectUserVo> userList) {
         this.userList = userList;
+    }
+
+    public JSONObject getConfig() {
+        if (config == null) {
+            if (StringUtils.isNotBlank(configStr)) {
+                try {
+                    config = JSONObject.parseObject(configStr);
+                } catch (Exception ignored) {
+                    config = new JSONObject();
+                }
+            } else {
+                config = new JSONObject();
+            }
+        }
+        return config;
+    }
+
+    public void setConfig(JSONObject config) {
+        this.config = config;
+    }
+
+    public String getConfigStr() {
+        if (config != null) {
+            configStr = config.toJSONString();
+        }
+        return configStr;
+    }
+
+    public void setConfigStr(String configStr) {
+        this.configStr = configStr;
     }
 
 
