@@ -15,8 +15,9 @@ package neatlogic.framework.rdm.enums;
 import neatlogic.framework.fulltextindex.core.IFullTextIndexType;
 import neatlogic.framework.util.$;
 
+/** Webhook 索引展示名称使用规范大小写，索引标识保持不变。 */
 public enum WebhookDataFullTextIndexType implements IFullTextIndexType {
-    WEBHOOK("webhook", "webhook");
+    WEBHOOK("webhook", "Webhook");
     private final String type;
     private final String typeName;
 
