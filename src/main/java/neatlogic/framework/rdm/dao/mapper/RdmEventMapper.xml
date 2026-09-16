@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ /*
+  ~ Copyright (C) 2025  TechSure Co., Ltd.  All Rights Reserved.
+  ~ This file is part of the NeatLogic software.
+  ~ Licensed under the Sustainable Use License (SUL), Version 4.x – 2025.
+  ~ You may use this file only in compliance with the License.
+  ~ See the LICENSE file distributed with this work for the full license text.
+  ~ Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  */
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="neatlogic.framework.rdm.dao.mapper.RdmEventMapper">
+    <select id="getEventAppById" resultType="neatlogic.framework.rdm.dto.AppVo">
+        select id, project_id as projectId, app_type as type from rdm_app where id = #{value}
+    </select>
+    <resultMap id="handlerResultMap" type="neatlogic.framework.rdm.dto.RdmEventHandlerVo" autoMapping="true">
+        <result column="configStr" property="configStr" typeHandler="neatlogic.framework.dao.plugin.CompressHandler"/>
+    </resultMap>
+    <resultMap id="pluginResultMap" type="neatlogic.framework.rdm.dto.RdmEventPluginVo" autoMapping="true">
+        <result column="configStr" property="configStr" typeHandler="neatlogic.framework.dao.plugin.CompressHandler"/>
+    </resultMap>
+    <resultMap id="auditResultMap" type="neatlogic.framework.rdm.dto.RdmEventAuditVo" autoMapping="true">
+        <result column="configStr" property="configStr" typeHandler="neatlogic.framework.dao.plugin.CompressHandler"/>
+        <result column="resultStr" property="resultStr" typeHandler="neatlogic.framework.dao.plugin.CompressHandler"/>
+        <result column="error" property="error" typeHandler="neatlogic.framework.dao.plugin.CompressHandler"/>
+    </resultMap>
+    <sql id="handlerColumns">
+        id, uuid, parent_id as parentId, project_id as projectId, app_id as appId,
+        name, handler, event, sort, config as configStr, is_active as isActive
+    </sql>
+    <sql id="auditColumns">
+        a.id, a.parent_id as parentId, a.object_type as objectType, a.object_id as objectId, a.project_id as projectId,
+        a.app_id as appId, a.event, a.handler, a.handler_name as handlerName,
+        a.event_handler_id as eventHandlerId, a.start_time as startTime, a.end_time as endTime,
+        a.status, a.error, a.config as configStr, a.result as resultStr, a.server_id as serverId,
+        exists(select 1 from rdm_event_audit child where child.parent_id = a.id) as hasChild
+    </sql>
+    <sql id="rootAuditCondition">
+        a.project_id = #{projectId} and a.app_id = #{appId}
+        and a.object_type = #{objectType} and a.object_id = #{objectId}
+        and (a.parent_id is null or a.parent_id = 0)
+    </sql>
+    <select id="getHandlerByEvent" resultMap="handlerResultMap">
+        select <include refid="handlerColumns"/> from rdm_event_handler where event = #{event} and (parent_id is null or parent_id = 0)
+        and project_id = #{projectId}
+        and app_id = #{appId} order by sort, id
+    </select>
+    <select id="getHandlerByParentId" resultMap="handlerResultMap">
+        select <include refid="handlerColumns"/> from rdm_event_handler where parent_id = #{value} order by sort, id
+    </select>
+    <select id="getHandlerById" resultMap="handlerResultMap">
+        select <include refid="handlerColumns"/> from rdm_event_handler where id = #{value}
+    </select>
+    <select id="getHandlerByUuid" resultMap="handlerResultMap">
+        select <include refid="handlerColumns"/> from rdm_event_handler where uuid = #{value}
+    </select>
+    <select id="getAuditById" resultMap="auditResultMap">
+        select <include refid="auditColumns"/> from rdm_event_audit a where a.id = #{value}
+    </select>
+    <select id="getChildAuditByParentId" resultMap="auditResultMap">
+        select <include refid="auditColumns"/> from rdm_event_audit a where a.parent_id = #{value} order by a.id
+    </select>
+    <select id="searchAudit" resultMap="auditResultMap">
+        select <include refid="auditColumns"/> from rdm_event_audit a where <include refid="rootAuditCondition"/> order by a.id desc limit #{startNum}, #{pageSize}
+    </select>
+    <select id="searchAuditCount" resultType="int">
+        select count(*) from rdm_event_audit a where <include refid="rootAuditCondition"/>
+    </select>
+    <select id="getPluginByName" resultMap="pluginResultMap">
+        select name, config as configStr, is_active as isActive from rdm_event_plugin where name = #{value}
+    </select>
+    <select id="getHandlerListByApp" resultMap="handlerResultMap">
+        select <include refid="handlerColumns"/> from rdm_event_handler
+        where project_id = #{projectId} and app_id = #{appId} order by sort, id
+    </select>
+    <select id="lockEventApp" resultType="java.lang.Long">
+        select id from rdm_app where id = #{appId} and project_id = #{projectId} for update
+    </select>
+    <delete id="deleteHandlerById">
+        delete from rdm_event_handler where id = #{value}
+    </delete>
+    <update id="updateHandlerSort">
+        update rdm_event_handler set sort = #{sort} where id = #{id}
+    </update>
+    <insert id="insertHandler">
+        insert into rdm_event_handler (id, uuid, parent_id, project_id, app_id, name, handler, event, sort, config, is_active)
+        values (#{id}, #{uuid}, #{parentId}, #{projectId}, #{appId}, #{name}, #{handler}, #{event}, #{sort},
+          #{configStr, typeHandler=neatlogic.framework.dao.plugin.CompressHandler}, #{isActive})
+    </insert>
+    <update id="updateHandler">
+        update rdm_event_handler set parent_id = #{parentId}, name = #{name}, sort = #{sort},
+          config = #{configStr, typeHandler=neatlogic.framework.dao.plugin.CompressHandler}, is_active = #{isActive}
+        where id = #{id} and project_id = #{projectId} and app_id = #{appId}
+    </update>
+    <insert id="saveHandler">
+        insert into rdm_event_handler (id, uuid, parent_id, project_id, app_id, name, handler, event, sort, config, is_active)
+        values (#{id}, #{uuid}, #{parentId}, #{projectId}, #{appId}, #{name}, #{handler}, #{event}, #{sort}, #{configStr, typeHandler=neatlogic.framework.dao.plugin.CompressHandler}, #{isActive})
+        on duplicate key update uuid = values(uuid), parent_id = values(parent_id), project_id = values(project_id),
+          app_id = values(app_id), name = values(name), handler = values(handler), event = values(event),
+          sort = values(sort), config = values(config), is_active = values(is_active)
+    </insert>
+    <insert id="savePlugin">
+        insert into rdm_event_plugin (name, config, is_active)
+        values (#{name}, #{configStr, typeHandler=neatlogic.framework.dao.plugin.CompressHandler}, #{isActive})
+        on duplicate key update config = values(config), is_active = values(is_active)
+    </insert>
+    <insert id="insertAudit">
+        insert into rdm_event_audit (id, parent_id, object_type, object_id, project_id, app_id, event, handler,
+          handler_name, event_handler_id, start_time, end_time, status, error, config, result, server_id)
+        values (#{id}, #{parentId}, #{objectType}, #{objectId}, #{projectId}, #{appId}, #{event}, #{handler},
+          #{handlerName}, #{eventHandlerId}, #{startTime}, #{endTime}, #{status},
+          #{error, typeHandler=neatlogic.framework.dao.plugin.CompressHandler},
+          #{configStr, typeHandler=neatlogic.framework.dao.plugin.CompressHandler},
+          #{resultStr, typeHandler=neatlogic.framework.dao.plugin.CompressHandler}, #{serverId})
+    </insert>
+    <update id="updateAudit">
+        update rdm_event_audit set end_time = #{endTime}, status = #{status},
+          error = #{error, typeHandler=neatlogic.framework.dao.plugin.CompressHandler},
+          result = #{resultStr, typeHandler=neatlogic.framework.dao.plugin.CompressHandler}
+        where id = #{id}
+    </update>
+</mapper>

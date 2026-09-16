@@ -586,6 +586,11 @@ public class IssueVo extends BasePageVo {
         this.userList = userList;
     }
 
+    /** 判断是否已设置需求标识，避免校验时触发懒生成标识。 */
+    public boolean hasId() {
+        return id != null;
+    }
+
     public Long getId() {
         if (id == null) {
             id = SnowflakeUtil.uniqueLong();
