@@ -14,7 +14,6 @@ package neatlogic.framework.rdm.dto;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.annotation.JSONField;
-import neatlogic.framework.auth.core.AuthActionChecker;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BaseEditorVo;
 import neatlogic.framework.restful.annotation.EntityField;
@@ -64,11 +63,6 @@ public class DashboardVo extends BaseEditorVo {
     public void setName(String name) {
         this.name = name;
     }
-
-    public boolean getIsAdmin() {
-        return AuthActionChecker.check("DASHBOARD_MODIFY");
-    }
-
 
     public Integer getIsActive() {
         return isActive;
