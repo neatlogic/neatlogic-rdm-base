@@ -1,0 +1,211 @@
+{
+  "auth": {
+    "project_template_manage": {
+      "description": "Add, modify, and delete project templates, and save projects as templates.",
+      "name": "Project Template Management Permission"
+    },
+    "rdm_base": {
+      "description": "Use standard development management features.",
+      "name": "Development Management Access Permission"
+    }
+  },
+  "cmdb": {
+    "attrtype": {
+      "enum": "Enumeration",
+      "expression": "Expression",
+      "hyperlink": "Hyperlink",
+      "set": "Multi-Select Set",
+      "table": "Table"
+    }
+  },
+  "enum": {
+    "rdm": {
+      "fullindextype": {
+        "issue": "R&D Management Tasks"
+      }
+    }
+  },
+  "nfral": {
+    "priority_manage": {
+      "getauthdisplayname": "Priority Management Permission",
+      "getauthintroduction": "Add, edit, and delete priorities."
+    },
+    "project_manage": {
+      "getauthdisplayname": "Project Management Permission",
+      "getauthintroduction": "Reopen projects."
+    },
+    "template_manage": {
+      "getauthdisplayname": "Project Template Management Permissions",
+      "getauthintroduction": "Editing and deleting project templates allows you to save existing projects as templates."
+    }
+  },
+  "nfrd": {
+    "appattrvo": {
+      "entityfield": {
+        "expressionlist": "List of supported search expressions"
+      }
+    },
+    "appstatusvo": {
+      "entityfield": {
+        "name": {
+          "isstart": "Start or not"
+        }
+      }
+    },
+    "appvo": {
+      "entityfield": {
+        "name": {
+          "hasissue": "Does it include tasks",
+          "hasiteration": "Is it associated with iteration"
+        }
+      }
+    },
+    "issuevo": {
+      "entityfield": {
+        "name": "apply name"
+      }
+    },
+    "issuewebhookvo": {
+      "entityfield": {
+        "name": "Data ID"
+      }
+    },
+    "projecttemplateapptypevo": {
+      "entityfield": {
+        "name": {
+          "apptypename": "Application Type Name"
+        }
+      }
+    },
+    "projecttemplatevo": {
+      "entityfield": {
+        "name": {
+          "apptypelist": "Application Type List"
+        }
+      }
+    },
+    "projectuservo": {
+      "entityfield": {
+        "name": "User Type List"
+      }
+    },
+    "projectvo": {
+      "entityfield": {
+        "name": {
+          "isleader": "Is the current user a project administrator",
+          "ismember": "Is the current user a project member",
+          "isowner": "Is the current user the project owner"
+        }
+      }
+    },
+    "webhookdatavo": {
+      "entityfield": {
+        "name": "mail"
+      }
+    }
+  },
+  "nfre": {
+    "apptype": {
+      "getenumname": "Project Object Type"
+    },
+    "apptypeisemptyexception": {
+      "apptypeisemptyexception": "At least one application needs to be included in the project template"
+    },
+    "dashboardnotfoundexception": {
+      "dashboardnotfoundexception": "Dashboard {0} does not exist"
+    },
+    "issuecostnotauthdeleteexception": {
+      "issuecostnotauthdeleteexception": "You do not have permission to delete project expenses"
+    },
+    "issuecostnotauthsaveexception": {
+      "issuecostnotauthsaveexception": "You do not have permission to save the current project expenses"
+    },
+    "issuecostnotauthsearchexception": {
+      "issuecostnotauthsearchexception": "You do not have permission to search for current project expenses"
+    },
+    "issuegroupsearch": {
+      "projectusertype": "Project stakeholders"
+    },
+    "issuenotauthsearchexception": {
+      "issuenotauthsearchexception": "You do not have permission to search for current project tasks"
+    },
+    "issuenotdeleteauthexception": {
+      "issuenotdeleteauthexception": "You do not have permission to delete the current task"
+    },
+    "priorityisinusedexception": {
+      "priorityisinusedexception": "Priority {0} is currently in use"
+    },
+    "prioritynameisexistsexception": {
+      "prioritynameisexistsexception": "Priority {0} already exists"
+    },
+    "projectnotauthcloseexception": {
+      "projectnotauthcloseexception": "You do not have permission to close project {0}"
+    },
+    "projectnotauthdashboardexception": {
+      "projectnotauthdashboardexception": "You are not a member of the current project and do not have permission to operate dashboards"
+    },
+    "projectnotauthdeleteexception": {
+      "projectnotauthdeleteexception": "You do not have permission to delete project {0}"
+    },
+    "projectnotauthexception": {
+      "projectnotauthexception": "You do not have permission to modify project  {0} "
+    },
+    "projectnotauthissueexception": {
+      "projectnotauthissueexception": "You are not a member of the current project and do not have permission to create tasks"
+    },
+    "projectnotfoundexception": {
+      "projectnotfoundexception": "Project  {0}  does not exist",
+      "theprojectnotfoundexception": "Project does not exist"
+    },
+    "projectusertype": {
+      "getenumname": "Project User Type"
+    },
+    "systemattrtype": "System Properties",
+    "systemattrtypea": {
+      "getenumname": "System attribute type"
+    }
+  },
+  "term": {
+    "rdm": {
+      "allowimport": "Allow Import",
+      "allowsearch": "Allow search",
+      "allowsort": "Allow sorting",
+      "appattr": "apply property",
+      "appcolor": "Apply Color",
+      "applist": "Application List",
+      "apptype": "Application Type",
+      "attrbelong": "Application type to which the attribute belongs",
+      "auditcount": "Modify Historical Quantity",
+      "childrentaskcount": "Number of subtasks",
+      "childtaskid": "Subtask ID",
+      "costdate": "Spending date",
+      "costlist": "Spend List",
+      "costtime": "Labor hours spent",
+      "enddate": "Expected end",
+      "isend": "Is it over",
+      "isprivateattr": "Private attribute or not",
+      "issuecount": "Number of tasks",
+      "issueid": "Task ID",
+      "iterationid": "Iteration ID",
+      "iterationname": "Iteration Name",
+      "parenttaskid": "Parent Task ID",
+      "plantimecost": "Estimated time consumption",
+      "project": {
+        "manageridlist": "List of project leader IDs",
+        "useridlist": "List of project member user IDs"
+      },
+      "projectid": "Project ID",
+      "projectleader": "Project leader",
+      "projectmember": "Project members",
+      "projectname": "entry name",
+      "projectowner": "Project Owner",
+      "projecttype": "Project Type",
+      "relapp": "Related applications",
+      "relativetasklist": "Associated Task List",
+      "reldirection": "Relationship direction",
+      "startdate": "Expected start",
+      "startenddate": "Starting and ending dates",
+      "storywall": "Story Wall"
+    }
+  }
+}

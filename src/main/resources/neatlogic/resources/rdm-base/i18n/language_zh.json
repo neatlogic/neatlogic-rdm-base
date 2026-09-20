@@ -1,0 +1,211 @@
+{
+  "auth": {
+    "project_template_manage": {
+      "description": "对项目模板进行添加、修改、删除操作，把项目另存为项目模板。",
+      "name": "项目模板管理权限"
+    },
+    "rdm_base": {
+      "description": "使用研发管理普通功能",
+      "name": "研发管理基础权限"
+    }
+  },
+  "cmdb": {
+    "attrtype": {
+      "enum": "枚举型",
+      "expression": "表达式",
+      "hyperlink": "超链接",
+      "set": "多选集合",
+      "table": "表格"
+    }
+  },
+  "enum": {
+    "rdm": {
+      "fullindextype": {
+        "issue": "研发管理任务"
+      }
+    }
+  },
+  "nfral": {
+    "priority_manage": {
+      "getauthdisplayname": "优先级管理权限",
+      "getauthintroduction": "对优先级进行新增、编辑和删除"
+    },
+    "project_manage": {
+      "getauthdisplayname": "项目管理权限",
+      "getauthintroduction": "重新打开项目"
+    },
+    "template_manage": {
+      "getauthdisplayname": "项目模板管理权限",
+      "getauthintroduction": "对项目模板进行编辑和删除，可以把已有项目另存为模板。"
+    }
+  },
+  "nfrd": {
+    "appattrvo": {
+      "entityfield": {
+        "expressionlist": "支持的搜索表达式列表"
+      }
+    },
+    "appstatusvo": {
+      "entityfield": {
+        "name": {
+          "isstart": "是否开始"
+        }
+      }
+    },
+    "appvo": {
+      "entityfield": {
+        "name": {
+          "hasissue": "是否包含任务",
+          "hasiteration": "是否关联迭代"
+        }
+      }
+    },
+    "issuevo": {
+      "entityfield": {
+        "name": "应用名称"
+      }
+    },
+    "issuewebhookvo": {
+      "entityfield": {
+        "name": "数据id"
+      }
+    },
+    "projecttemplateapptypevo": {
+      "entityfield": {
+        "name": {
+          "apptypename": "应用类型名称"
+        }
+      }
+    },
+    "projecttemplatevo": {
+      "entityfield": {
+        "name": {
+          "apptypelist": "应用类型列表"
+        }
+      }
+    },
+    "projectuservo": {
+      "entityfield": {
+        "name": "用户类型列表"
+      }
+    },
+    "projectvo": {
+      "entityfield": {
+        "name": {
+          "isleader": "当前用户是否项目管理员",
+          "ismember": "当前用户是否项目成员",
+          "isowner": "当前用户是否项目拥有人"
+        }
+      }
+    },
+    "webhookdatavo": {
+      "entityfield": {
+        "name": "邮件"
+      }
+    }
+  },
+  "nfre": {
+    "apptype": {
+      "getenumname": "项目对象类型"
+    },
+    "apptypeisemptyexception": {
+      "apptypeisemptyexception": "项目模板中至少需要包含一个应用"
+    },
+    "dashboardnotfoundexception": {
+      "dashboardnotfoundexception": "仪表板 {0} 不存在"
+    },
+    "issuecostnotauthdeleteexception": {
+      "issuecostnotauthdeleteexception": "您没有删除当前项目花费的权限"
+    },
+    "issuecostnotauthsaveexception": {
+      "issuecostnotauthsaveexception": "您没有保存当前项目花费的权限"
+    },
+    "issuecostnotauthsearchexception": {
+      "issuecostnotauthsearchexception": "您没有搜索当前项目花费的权限"
+    },
+    "issuegroupsearch": {
+      "projectusertype": "项目干系人"
+    },
+    "issuenotauthsearchexception": {
+      "issuenotauthsearchexception": "您没有搜索当前项目任务权限"
+    },
+    "issuenotdeleteauthexception": {
+      "issuenotdeleteauthexception": "您没有删除当前任务的权限"
+    },
+    "priorityisinusedexception": {
+      "priorityisinusedexception": "优先级“{0}”正在使用中"
+    },
+    "prioritynameisexistsexception": {
+      "prioritynameisexistsexception": "优先级“{0}”已存在"
+    },
+    "projectnotauthcloseexception": {
+      "projectnotauthcloseexception": "您没有关闭项目 {0} 的权限"
+    },
+    "projectnotauthdashboardexception": {
+      "projectnotauthdashboardexception": "您不是当前项目的成员，没有操作仪表板的权限"
+    },
+    "projectnotauthdeleteexception": {
+      "projectnotauthdeleteexception": "您没有删除项目 {0} 的权限"
+    },
+    "projectnotauthexception": {
+      "projectnotauthexception": "您没有修改项目“{0}”的权限"
+    },
+    "projectnotauthissueexception": {
+      "projectnotauthissueexception": "您不是当前项目的成员，没有创建任务的权限"
+    },
+    "projectnotfoundexception": {
+      "projectnotfoundexception": "项目“{0}”不存在",
+      "theprojectnotfoundexception": "项目不存在"
+    },
+    "projectusertype": {
+      "getenumname": "项目用户类型"
+    },
+    "systemattrtype": "系统属性",
+    "systemattrtypea": {
+      "getenumname": "系统属性类型"
+    }
+  },
+  "term": {
+    "rdm": {
+      "allowimport": "允许导入",
+      "allowsearch": "允许搜索",
+      "allowsort": "允许排序",
+      "appattr": "应用属性",
+      "appcolor": "应用颜色",
+      "applist": "应用列表",
+      "apptype": "应用类型",
+      "attrbelong": "属性所属应用类型",
+      "auditcount": "修改历史数量",
+      "childrentaskcount": "子任务数量",
+      "childtaskid": "子任务id",
+      "costdate": "花费日期",
+      "costlist": "花费列表",
+      "costtime": "花费工时",
+      "enddate": "预计结束",
+      "isend": "是否结束",
+      "isprivateattr": "是否私有属性",
+      "issuecount": "任务数量",
+      "issueid": "任务id",
+      "iterationid": "迭代id",
+      "iterationname": "迭代名称",
+      "parenttaskid": "父任务id",
+      "plantimecost": "预估工时",
+      "project": {
+        "manageridlist": "项目负责人id列表",
+        "useridlist": "项目成员用户id列表"
+      },
+      "projectid": "项目id",
+      "projectleader": "项目负责人",
+      "projectmember": "项目成员",
+      "projectname": "项目名称",
+      "projectowner": "项目所有人",
+      "projecttype": "项目类型",
+      "relapp": "关联应用",
+      "relativetasklist": "关联任务列表",
+      "reldirection": "关系方向",
+      "startdate": "预计开始",
+      "startenddate": "起止日期",
+      "storywall": "故事墙"
+    }
+  }
+}
