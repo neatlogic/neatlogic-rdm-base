@@ -69,15 +69,6 @@ public class AppTypeManager {
         return "";
     }
 
-    public static boolean getHasIssue(String name) {
-        for (IAppType s : appTypeSet) {
-            if (s.getName().equals(name)) {
-                return s.getHasIssue();
-            }
-        }
-        return false;
-    }
-
     public static boolean getNeedCopyOnRel(String name) {
         for (IAppType s : appTypeSet) {
             if (s.getName().equals(name)) {

@@ -16,10 +16,10 @@ import neatlogic.framework.rdm.enums.core.IAppType;
 import neatlogic.framework.util.$;
 
 public enum AppType implements IAppType {
-    ITERATION("iteration", "common.iteration", "#87CEEB", null, false, 1),
-    STORY("story", "common.request", "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, true, 2),
-    TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, true, 3),
-    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, true, 4);
+    ITERATION("iteration", "common.iteration", "#87CEEB", null, 1),
+    STORY("story", "common.request", "#1670f0", new AttrType[]{AttrType.ITERATION, AttrType.CATALOG, AttrType.WORKER, AttrType.TAG, AttrType.PRIORITY, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, 2),
+    TASK("task", "common.task", "#25b864", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, 3),
+    BUG("bug", "common.bug", "#f33b3b", new AttrType[]{AttrType.ITERATION, AttrType.TAG, AttrType.PRIORITY, AttrType.WORKER, AttrType.TIMECOST, AttrType.STARTDATE, AttrType.ENDDATE}, 4);
 
     //STORYWALL("storywall", "term.rdm.storywall", null, null, false, 5);
 
@@ -30,25 +30,17 @@ public enum AppType implements IAppType {
 
     private final int sort;
 
-    private final boolean hasIssue;
-
-
-    AppType(String name, String label, String color, AttrType[] attrList, Boolean hasIssue, int sort) {
+    AppType(String name, String label, String color, AttrType[] attrList, int sort) {
         this.name = name;
         this.label = label;
         this.color = color;
         this.attrList = attrList;
-        this.hasIssue = hasIssue;
         this.sort = sort;
     }
 
 
     public String getName() {
         return name;
-    }
-
-    public boolean getHasIssue() {
-        return hasIssue;
     }
 
     public String getLabel() {

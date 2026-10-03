@@ -22,8 +22,6 @@ import java.util.List;
 public interface IAppType extends IEnum<JSONObject> {
     String getName();
 
-    boolean getHasIssue();
-
     String getLabel();
 
     String getColor();

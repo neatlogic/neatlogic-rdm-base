@@ -34,6 +34,8 @@ public interface IRdmEventHandler<T> {
     Set<String> supportParentHandler();
     /** 根据配置提取子插件，普通插件无需处理。 */
     default void makeupChildHandler(RdmEventHandlerVo handlerVo) { }
+    /** 读取配置后按插件历史格式归一化内存视图；不得校验外部依赖或直接写库。 */
+    default void normalizeLoadedConfig(RdmEventHandlerVo handlerVo) { }
     /** 声明支持的事件标识。 */
     Set<String> supportEventTypes();
     /** 声明适用应用类型；空集合表示共享插件，仍须满足事件及对象类型约束。 */

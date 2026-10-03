@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.asynchronization.threadlocal.TenantContext;
 import neatlogic.framework.common.constvalue.ApiParamType;
+import neatlogic.framework.rdm.app.RdmAppCapabilityRegistry;
 import neatlogic.framework.rdm.enums.AttrType;
 import neatlogic.framework.rdm.enums.core.AppTypeManager;
 import neatlogic.framework.restful.annotation.EntityField;
@@ -47,8 +48,8 @@ public class AppVo {
 
     @EntityField(name = "common.statuslist", type = ApiParamType.JSONARRAY)
     private List<AppStatusVo> statusList;
-    @EntityField(name = "nfrd.appvo.entityfield.name.hasissue", type = ApiParamType.BOOLEAN)
-    private Boolean hasIssue;
+    @EntityField(name = "应用能力", type = ApiParamType.JSONARRAY)
+    private List<String> capabilities;
     @EntityField(name = "nfrd.appvo.entityfield.name.hasiteration", type = ApiParamType.BOOLEAN)
     private Boolean hasIteration;
     @EntityField(name = "term.rdm.issuecount", type = ApiParamType.INTEGER)
@@ -103,11 +104,9 @@ public class AppVo {
         return color;
     }
 
-    public Boolean getHasIssue() {
-        if (hasIssue == null && StringUtils.isNotBlank(type)) {
-            hasIssue = AppTypeManager.getHasIssue(type);
-        }
-        return hasIssue;
+    /** 返回所属模块显式声明的应用能力。 */
+    public List<String> getCapabilities() {
+        return RdmAppCapabilityRegistry.getNames(type);
     }
 
     public Boolean getHasIteration() {
