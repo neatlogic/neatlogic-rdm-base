@@ -13,6 +13,10 @@
 package neatlogic.framework.rdm.auth.label;
 
 import neatlogic.framework.auth.core.AuthBase;
+import neatlogic.framework.common.constvalue.systemuser.ISystemUser;
+import neatlogic.framework.common.constvalue.systemuser.SystemUser;
+
+import java.util.List;
 
 /** 权限名称与说明使用国际化键，权限标识及校验规则保持不变。 */
 public class RDM_BASE extends AuthBase {
@@ -34,5 +38,10 @@ public class RDM_BASE extends AuthBase {
     @Override
     public Integer getSort() {
         return 1;
+    }
+
+    @Override
+    public List<ISystemUser> getDefaultSystemUserList() {
+        return List.of(SystemUser.ANONYMOUS);
     }
 }
