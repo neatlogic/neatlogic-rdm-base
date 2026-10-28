@@ -43,6 +43,16 @@
         and a.object_type = #{objectType} and a.object_id = #{objectId}
         and (a.parent_id is null or a.parent_id = 0)
     </sql>
+    <sql id="auditSummaryColumns">
+        a.id, a.parent_id as parentId, a.object_type as objectType, a.object_id as objectId,
+        a.project_id as projectId, a.app_id as appId, a.event, a.handler, a.handler_name as handlerName,
+        a.event_handler_id as eventHandlerId, a.start_time as startTime, a.end_time as endTime,
+        a.status, a.server_id as serverId,
+        exists(select 1 from rdm_event_audit child where child.parent_id = a.id) as hasChild
+    </sql>
+    <sql id="anchoredRootAuditCondition">
+        <include refid="rootAuditCondition"/> and a.id &lt;= #{anchorId}
+    </sql>
     <select id="getHandlerByEvent" resultMap="handlerResultMap">
         select <include refid="handlerColumns"/> from rdm_event_handler where event = #{event} and (parent_id is null or parent_id = 0)
         and project_id = #{projectId}
@@ -68,6 +78,29 @@
     </select>
     <select id="searchAuditCount" resultType="int">
         select count(*) from rdm_event_audit a where <include refid="rootAuditCondition"/>
+    </select>
+    <select id="getRootAuditAnchor" resultType="java.lang.Long">
+        select max(a.id) from rdm_event_audit a where <include refid="rootAuditCondition"/>
+    </select>
+    <select id="searchAuditSummary" resultType="neatlogic.framework.rdm.dto.RdmEventAuditVo">
+        select <include refid="auditSummaryColumns"/> from rdm_event_audit a
+        where <include refid="anchoredRootAuditCondition"/>
+        order by a.id desc limit #{startNum}, #{pageSize}
+    </select>
+    <select id="searchAuditSummaryCount" resultType="int">
+        select count(*) from rdm_event_audit a where <include refid="anchoredRootAuditCondition"/>
+    </select>
+    <select id="getChildAuditByParentIds" resultMap="auditResultMap">
+        select <include refid="auditColumns"/> from rdm_event_audit a
+        where
+        <choose>
+            <when test="parentIdList != null and parentIdList.size > 0">
+                a.parent_id in
+                <foreach collection="parentIdList" item="parentId" open="(" separator="," close=")">#{parentId}</foreach>
+            </when>
+            <otherwise>1 = 0</otherwise>
+        </choose>
+        order by a.parent_id, a.id
     </select>
     <select id="getPluginByName" resultMap="pluginResultMap">
         select name, config as configStr, is_active as isActive from rdm_event_plugin where name = #{value}

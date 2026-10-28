@@ -40,6 +40,15 @@ public interface RdmEventMapper {
     List<RdmEventAuditVo> searchAudit(@Param("projectId") Long projectId, @Param("appId") Long appId, @Param("objectType") String objectType, @Param("objectId") String objectId, @Param("startNum") int startNum, @Param("pageSize") int pageSize);
     /** 查询指定项目、应用及业务对象的根审计数量。 */
     int searchAuditCount(@Param("projectId") Long projectId, @Param("appId") Long appId, @Param("objectType") String objectType, @Param("objectId") String objectId);
+    /** 固定本次浏览的根审计上界，后续分页不受新增执行记录影响。 */
+    Long getRootAuditAnchor(@Param("projectId") Long projectId, @Param("appId") Long appId, @Param("objectType") String objectType, @Param("objectId") String objectId);
+    /** 分页只查询审计摘要，不读取配置、结果或异常大字段。 */
+    List<RdmEventAuditVo> searchAuditSummary(@Param("projectId") Long projectId, @Param("appId") Long appId, @Param("objectType") String objectType, @Param("objectId") String objectId,
+                                           @Param("anchorId") Long anchorId, @Param("startNum") long startNum, @Param("pageSize") int pageSize);
+    /** 摘要总数与列表使用相同范围和固定上界。 */
+    int searchAuditSummaryCount(@Param("projectId") Long projectId, @Param("appId") Long appId, @Param("objectType") String objectType, @Param("objectId") String objectId, @Param("anchorId") Long anchorId);
+    /** 按一批父审计读取完整子记录；调用方必须逐条校验范围，不能静默丢弃错误归属。 */
+    List<RdmEventAuditVo> getChildAuditByParentIds(@Param("parentIdList") List<Long> parentIdList);
     /** 查询插件全局配置。 */
     RdmEventPluginVo getPluginByName(String name);
     /** 查询应用内全部配置，供服务组装树和按事件统计根节点。 */
