@@ -13,11 +13,13 @@
 package neatlogic.framework.rdm.auth.label;
 
 import neatlogic.framework.auth.core.AuthBase;
+import neatlogic.framework.auth.core.AuthModule;
 import neatlogic.framework.util.$;
 
 import java.util.Collections;
 import java.util.List;
 
+@AuthModule("rdm")
 public class PRIORITY_MANAGE extends AuthBase {
     @Override
     public String getAuthDisplayName() {
